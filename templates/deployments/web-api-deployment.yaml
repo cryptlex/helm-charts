@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-web-api
+  labels:
+    app: {{ .Release.Name }}-web-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-web-api
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-web-api
+    spec:
+      containers:
+        - name: web-api
+          image: cryptlex/cryptlex-web-api-enterprise:latest
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-web-api-config
+          env:
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: GOOGLE_CLIENT_ID
+                  name: {{ .Release.Name }}-common-config
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE_URL
+                  name: {{ .Release.Name }}-webapi-secret
+            - name: RSA_PASSPHRASE
+              valueFrom:
+                secretKeyRef:
+                  key: RSA_PASSPHRASE
+                  name: {{ .Release.Name }}-webapi-secret
+            - name: JWT_RSA_PRIVATEKEY
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_RSA_PRIVATEKEY
+                  name: {{ .Release.Name }}-webapi-secret
+            - name: JWT_RSA_PUBLICKEY
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_RSA_PUBLICKEY
+                  name: {{ .Release.Name }}-webapi-secret
+            - name: SMTP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: SMTP_USERNAME
+                  name: {{ .Release.Name }}-webapi-secret
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SMTP_PASSWORD
+                  name: {{ .Release.Name }}-webapi-secret
+      initContainers:
+        - name: init-database
+          image: busybox:1.28
+          command: ['sh', '-c', 'until nslookup {{ .Release.Name }}-database-service; do echo waiting for database; sleep 2; done;']
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-docker-secret

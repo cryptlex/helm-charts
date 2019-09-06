@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-cache
+  labels:
+    app: {{ .Release.Name }}-cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-cache
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-cache
+    spec:
+      containers:
+        - name: cache
+          image: redis:5-alpine
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 6379
+      restartPolicy: Always

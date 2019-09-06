@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-geoip
+  labels:
+    app: {{ .Release.Name }}-geoip
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-geoip
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-geoip
+    spec:
+      containers:
+        - name: geoip
+          image: cryptlex/freegeoip:latest
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always

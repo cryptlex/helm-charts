@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-dashboard
+  labels:
+    app: {{ .Release.Name }}-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-dashboard
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-dashboard
+    spec:
+      containers:
+        - name: dashboard
+          image: cryptlex/cryptlex-web-dashboard:latest
+          ports:
+            - containerPort: 4200
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-dashboard-config
+          env:
+            - name: WEB_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: WEB_API_BASE_URL
+                  name: {{ .Release.Name }}-common-config
+            - name: RELEASE_SERVER_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: RELEASE_SERVER_BASE_URL
+                  name: {{ .Release.Name }}-common-config
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: GOOGLE_CLIENT_ID
+                  name: {{ .Release.Name }}-common-config
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-docker-secret

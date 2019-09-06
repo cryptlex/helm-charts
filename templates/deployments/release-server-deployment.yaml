@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-release-server
+  labels:
+    app: {{ .Release.Name }}-release-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-release-server
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-release-server
+    spec:
+      containers:
+        - name: release-server
+          image: cryptlex/cryptlex-release-server:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-release-server-config
+          env:
+            - name: WEB_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: WEB_API_BASE_URL
+                  name: {{ .Release.Name }}-common-config
+            - name: RELEASE_SERVER_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: RELEASE_SERVER_BASE_URL
+                  name: {{ .Release.Name }}-common-config
+            - name: FILE_STORE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: FILE_STORE_SECRET_KEY
+                  name: {{ .Release.Name }}-filestore-secret
+            - name: FILE_STORE_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: FILE_STORE_ACCESS_KEY
+                  name: {{ .Release.Name }}-filestore-secret
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-docker-secret
