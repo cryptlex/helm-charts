@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-dashboard-service
+  labels:
+    app: {{ .Release.Name }}-dashboard-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 4200
+      targetPort: 4200
+  selector:
+    app: {{ .Release.Name }}-dashboard

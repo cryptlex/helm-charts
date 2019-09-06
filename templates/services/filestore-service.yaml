@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-filestore-service
+  labels:
+    app: {{ .Release.Name }}-filestore-service
+spec:
+  ports:
+    - protocol: TCP
+      port: {{ .Values.filestore.port }}
+      targetPort: {{ .Values.filestore.port }}
+  selector:
+    app: {{ .Release.Name }}-filestore
