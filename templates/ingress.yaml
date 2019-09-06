@@ -1,0 +1,35 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/issuer: {{ .Release.Name }}-letsencrypt-staging
+spec:
+  tls:
+    - hosts:
+        - {{ .Values.ingress.hosts.webApiHost }}
+        - {{ .Values.ingress.hosts.dashboardHost }}
+        - {{ .Values.ingress.hosts.releaseServerHost }}
+      secretName: {{ .Release.Name }}-letsencrypt-tls-secret
+  rules:
+    - host: {{ .Values.ingress.hosts.webApiHost }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-web-api-service
+              servicePort: 5000
+    - host: {{ .Values.ingress.hosts.dashboardHost }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-dashboard-service
+              servicePort: 4200
+    - host: {{ .Values.ingress.hosts.releaseServerHost }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-release-server-service
+              servicePort: 3000
+# {{- end }}
