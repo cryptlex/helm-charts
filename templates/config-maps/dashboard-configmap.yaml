@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-dashboard-config
+data:
+  COMPANY_NAME: {{ .Values.dashboard.companyName }}
+  COMPANY_WEBSITE: {{ .Values.dashboard.companyWebsite }}
+  COMPANY_LOGO_URL: {{ .Values.dashboard.companyLogoUrl }}
+  COMPANY_FAVICON_URL: {{ .Values.dashboard.companyFaviconUrl }}
+  GOOGLE_ANALYTICS_KEY: {{ .Values.dashboard.googleAnalyticsKey }}
