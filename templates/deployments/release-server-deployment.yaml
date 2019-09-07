@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: release-server
-          image: cryptlex/cryptlex-release-server:latest
+          image: cryptlex/cryptlex-release-server:3.2.0
+          imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 3000
           envFrom:
