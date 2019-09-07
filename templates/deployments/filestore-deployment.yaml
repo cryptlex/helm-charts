@@ -41,9 +41,3 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: filestore-volume
-
-
-valueFrom:
-          secretKeyRef:
-            name: mysecret
-            key: username
