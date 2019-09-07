@@ -1,15 +1,15 @@
-{{- if .Values.ingress.enabled -}}
+{{ if .Values.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    {{- if .Values.certmanager.issuer.production -}}
+    {{ if .Values.certmanager.issuer.production }}
     certmanager.k8s.io/issuer: {{ .Release.Name }}-letsencrypt-production
-    {{- else}}
+    {{ else}}
     certmanager.k8s.io/issuer: {{ .Release.Name }}-letsencrypt-staging
-    {{- end }}
+    {{ end }}
 spec:
   tls:
     - hosts:
@@ -36,4 +36,4 @@ spec:
           - backend:
               serviceName: {{ .Release.Name }}-release-server-service
               servicePort: 3000
-{{- end }}
+{{ end }}
