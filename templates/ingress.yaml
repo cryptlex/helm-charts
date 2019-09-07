@@ -5,10 +5,10 @@ metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    {{- if .Values.certmanager.issuer.staging -}}
-    certmanager.k8s.io/issuer: {{ .Release.Name }}-letsencrypt-staging
-    {{- else}}
+    {{- if .Values.certmanager.issuer.production -}}
     certmanager.k8s.io/issuer: {{ .Release.Name }}-letsencrypt-production
+    {{- else}}
+    certmanager.k8s.io/issuer: {{ .Release.Name }}-letsencrypt-staging
     {{- end }}
 spec:
   tls:
