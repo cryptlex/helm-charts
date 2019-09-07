@@ -1,0 +1,135 @@
+# Default values for cryptlex-enterprise.
+
+# Certmanager letsencrypt config
+certmanager:
+  issuer:
+    # Set this to your company email.
+    email: support@mycompany.com
+    # Set this to true once staging certificates are issued successfully.
+    # Otherwise you may run into rate-limiting issues.
+    production: false
+
+# Docker registry credentials
+imageCredentials:
+  registry: https://index.docker.io/v1/
+  username: 
+  password: 
+
+# Ingress config
+ingress:
+  enabled: true
+  hosts:
+    # Hostname of the Cryptlex Web API server.
+    webApiHost: cryptlex-api.mycompany.com
+    # Hostname of the Cryptlex Web Dashboard server.
+    dashboardHost: cryptlex-app.mycompany.com
+    # Hostname of the Cryptlex Release server.
+    releaseServerHost: cryptlex-releases.mycompany.com
+
+# Configure Cryptlex services
+services:
+  database:
+    # Set this to true in case you are using an external database.
+    external: false
+  geoip:
+    # Set this to true in case you are using an external geoip service.
+    external: false
+  filestore:
+    # Set this to false in case you are not using Cryptlex release management feature.
+    enabled: true
+    # Set this to true in case you are using an external filestore like AWS S3, Azure Minio etc.
+    external: false
+  releaseServer:
+    # Set this to false in case you are not using Cryptlex release management feature.
+    enabled: true
+
+# Database config (ignored in case you are using an external database)
+database:
+  db: cryptlex
+  user: postgres
+  password: postgres
+
+# Filestore config
+filestore:
+  accessKey: minio
+  secretKey: minio_secret
+  # Set this to 443 in case you are using an external filestore like AWS S3, Azure Minio etc.
+  port: 9000
+  # Name of the bucket where you want to store all your files.
+  bucket: releases.mycompany.com
+  # This is required in case you are using AWS S3, otherwise leave the default value as such.
+  region: us-east-1
+  # Set this to true in case you are using an external filestore like AWS S3, Azure Minio etc.
+  useSsl: false
+
+# Dashboard config
+dashboard:
+  # Your company name. This shows up in the browser title.
+  companyName: My Company
+  # Your company website.
+  companyWebsite: https://mycompany.com
+  # Logo to be displayed. It must have a transparent background.
+  companyLogoUrl: https://mycompany.com/logo.png
+  # Favicon URL.
+  companyFaviconUrl: https://mycompany.com/favicon.ico
+  # Google analytics key.
+  googleAnalyticsKey: UA-XXXXXXXX-X
+
+# Geo IP config (only required in case you are using an external service like ipstack.com or ipdata.co)
+geoip:
+  # The geo ip server url.
+  serverUrl:
+  # The ipstack access key or ipdata API key.
+  apiKey:
+
+# Web API config
+webApi:
+  # Set this to 3 for production environment.
+  replicaCount: 1
+  # The license key which you get after you purchase the license for the Cryptlex Enterprise (on-premise).
+  serverLicenseKey: PASTE_LICENSE_KEY
+  # The database connection string, only required in case you are using an external database.
+  databaseUrl: postgres://{user}:{password}@{hostname}:{port}/{database-name}
+  # Single line RSA private key.
+  jwtRsaPrivateKey: "PASTE_SINGLE_LINE_RSA_PRIVATE_KEY"
+  # Single line RSA public key.
+  jwtRsaPublicKey: "PASTE_SINGLE_LINE_RSA_PUBLIC_KEY"
+  # The passphrase which was used to encrypt the JWT RSA private key.
+  rsaPassphrase: PASTE_RSA_SECRET
+
+  # Mail settings
+  email:  
+    # From email for password reset email.
+    fromAddress: support@mycompany.com
+    # From name for password reset email.
+    fromName: MyCompany Support
+    # Email signature for password reset email.
+    signature: <p>Thanks,<br>The MyCompany Team</p>
+    # SMTP config for sending emails.
+    smtp:
+      host: ""
+      port: 587
+      enableSsl: true
+      username: 
+      password: 
+    # Mailgun config, in case you are using Mailgun for sending emails.
+    mailgun:
+      apiKey: ""
+      domain: ""
+    # Sendgrid config, in case you are using Sendgrid for sending emails.
+    sendgrid:
+      apiKey: ""
+
+  # Error monitoring
+  bugsnag:
+    apiKey: 
+
+  # App metrics
+  newRelic:
+    licenseKey: 
+
+# SSO config
+sso:
+  google:
+    # Refer to following for enabling Google SSO: https://docs.cryptlex.com/user-management/google-sso
+    clientId: ""
