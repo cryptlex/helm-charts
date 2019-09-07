@@ -4,8 +4,8 @@ metadata:
   name: {{ .Release.Name }}-release-server-config
 data:
   FILE_STORE_ENDPOINT: {{ .Release.Name }}-filestore-service
-  FILE_STORE_PORT: {{ .Values.filestore.port }}
+  FILE_STORE_PORT: {{ .Values.filestore.port | quote}}
   FILE_STORE_BUCKET: {{ .Values.filestore.bucket }}
   FILE_STORE_REGION: {{ .Values.filestore.region }}
-  FILE_STORE_USE_SSL: {{ .Values.filestore.useSsl }}
+  FILE_STORE_USE_SSL: {{ .Values.filestore.useSsl | quote}}
   
