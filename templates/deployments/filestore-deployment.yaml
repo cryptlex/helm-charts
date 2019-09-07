@@ -1,3 +1,4 @@
+{{ if and .Values.services.filestore.enabled (not .Values.services.filestore.external) }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -41,3 +42,4 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: filestore-volume
+{{ end }}

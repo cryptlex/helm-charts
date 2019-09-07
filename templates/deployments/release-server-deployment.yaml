@@ -1,3 +1,4 @@
+{{ if .Values.services.releaseServer.enabled }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -47,3 +48,4 @@ spec:
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret
+{{ end }}

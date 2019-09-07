@@ -59,10 +59,6 @@ spec:
                 secretKeyRef:
                   key: SMTP_PASSWORD
                   name: {{ .Release.Name }}-web-api-secret
-      initContainers:
-        - name: init-database
-          image: busybox:1.28
-          command: ['sh', '-c', 'until nslookup {{ .Release.Name }}-database-service; do echo waiting for database; sleep 2; done;']
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret
