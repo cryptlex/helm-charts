@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: dashboard
-          image: cryptlex/cryptlex-web-dashboard:latest
+          image: cryptlex/cryptlex-web-dashboard:3.8.5
+          imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 4200
           envFrom:
