@@ -8,8 +8,12 @@ data:
   PORT: "5000"
   JWT_AUDIENCE: https://{{ .Values.ingress.hosts.webApiHost }}
   REDIS_URL: redis://{{ .Release.Name }}-cache-service:6379
+  {{- if .Values.services.geoip.external -}}
+  GEOIPSERVER_APIKEY: {{ .Values.geoip.serverUrl }}
+  GEOIPSERVER_APIKEY: {{ .Values.geoip.apiKey }}
+  {{ - else}}
   GEOIPSERVER_URL: http://{{ .Release.Name }}-geoip-service:8080/json
-   
+  {{ -end}}
   # Mail settings
   EMAIL_FROMADDRESS: {{ .Values.webApi.email.fromAddress }}
   EMAIL_FROMNAME: {{ .Values.webApi.email.fromName }}
