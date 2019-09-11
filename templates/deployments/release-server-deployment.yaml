@@ -25,16 +25,6 @@ spec:
             - configMapRef:
                 name: {{ .Release.Name }}-release-server-config
           env:
-            - name: WEB_API_BASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: WEB_API_BASE_URL
-                  name: {{ .Release.Name }}-common-config
-            - name: RELEASE_SERVER_BASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: RELEASE_SERVER_BASE_URL
-                  name: {{ .Release.Name }}-common-config
             - name: FILE_STORE_SECRET_KEY
               valueFrom:
                 secretKeyRef:

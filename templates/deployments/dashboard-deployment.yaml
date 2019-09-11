@@ -23,22 +23,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-dashboard-config
-          env:
-            - name: WEB_API_BASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: WEB_API_BASE_URL
-                  name: {{ .Release.Name }}-common-config
-            - name: RELEASE_SERVER_BASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: RELEASE_SERVER_BASE_URL
-                  name: {{ .Release.Name }}-common-config
-            - name: GOOGLE_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  key: GOOGLE_CLIENT_ID
-                  name: {{ .Release.Name }}-common-config
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret

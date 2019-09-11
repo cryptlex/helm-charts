@@ -24,11 +24,6 @@ spec:
             - configMapRef:
                 name: {{ .Release.Name }}-web-api-config
           env:
-            - name: GOOGLE_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  key: GOOGLE_CLIENT_ID
-                  name: {{ .Release.Name }}-common-config
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
