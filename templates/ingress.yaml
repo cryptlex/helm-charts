@@ -15,7 +15,9 @@ spec:
     - hosts:
         - {{ .Values.ingress.hosts.webApiHost }}
         - {{ .Values.ingress.hosts.dashboardHost }}
+        {{ if .Values.services.filestore.enabled }}
         - {{ .Values.ingress.hosts.releaseServerHost }}
+        {{ end }}
       secretName: {{ .Release.Name }}-letsencrypt-tls-secret
   rules:
     - host: {{ .Values.ingress.hosts.webApiHost }}
@@ -30,10 +32,12 @@ spec:
           - backend:
               serviceName: {{ .Release.Name }}-dashboard-service
               servicePort: 4200
+    {{ if .Values.services.filestore.enabled }}
     - host: {{ .Values.ingress.hosts.releaseServerHost }}
       http:
         paths:
           - backend:
               serviceName: {{ .Release.Name }}-release-server-service
               servicePort: 3000
+    {{ end }}
 {{ end }}
