@@ -1,4 +1,4 @@
-{{ if .Values.services.releaseServer.enabled }}
+{{ if .Values.services.filestore.enabled }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
