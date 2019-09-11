@@ -1,4 +1,4 @@
-{{ if .Values.services.releaseServer.enabled }}
+{{ if .Values.services.filestore.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
