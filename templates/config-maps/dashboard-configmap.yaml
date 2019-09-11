@@ -8,3 +8,6 @@ data:
   COMPANY_LOGO_URL: {{ .Values.dashboard.companyLogoUrl }}
   COMPANY_FAVICON_URL: {{ .Values.dashboard.companyFaviconUrl }}
   GOOGLE_ANALYTICS_KEY: {{ .Values.dashboard.googleAnalyticsKey }}
+  WEB_API_BASE_URL: https://{{ .Values.ingress.hosts.webApiHost }}
+  RELEASE_SERVER_BASE_URL: https://{{ .Values.ingress.hosts.releaseServerHost }}
+  GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId }}

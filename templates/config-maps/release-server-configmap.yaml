@@ -8,4 +8,6 @@ data:
   FILE_STORE_BUCKET: {{ .Values.filestore.bucket }}
   FILE_STORE_REGION: {{ .Values.filestore.region }}
   FILE_STORE_USE_SSL: {{ .Values.filestore.useSsl | quote}}
+  WEB_API_BASE_URL: https://{{ .Values.ingress.hosts.webApiHost }}
+  RELEASE_SERVER_BASE_URL: https://{{ .Values.ingress.hosts.releaseServerHost }}
   
