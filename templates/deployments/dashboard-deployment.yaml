@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-dashboard
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config-maps/dashboard-configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - name: dashboard
