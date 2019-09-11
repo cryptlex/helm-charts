@@ -39,9 +39,6 @@ services:
     enabled: true
     # Set this to true in case you are using an external filestore like AWS S3, Azure Minio etc.
     external: false
-  releaseServer:
-    # Set this to false in case you are not using Cryptlex release management feature.
-    enabled: true
 
 # Database config (ignored in case you are using an external database)
 database:
