@@ -42,7 +42,7 @@ services:
 
 # Database config (ignored in case you are using an external database)
 database:
-  db: cryptlex
+  name: cryptlex
   user: postgres
   password: postgres
 
@@ -107,8 +107,8 @@ webApi:
       host: ""
       port: 587
       enableSsl: true
-      username: 
-      password: 
+      username: ""
+      password: ""
     # Mailgun config, in case you are using Mailgun for sending emails.
     mailgun:
       apiKey: ""
@@ -119,11 +119,11 @@ webApi:
 
   # Error monitoring
   bugsnag:
-    apiKey: 
+    apiKey: ""
 
   # App metrics
   newRelic:
-    licenseKey: 
+    licenseKey: ""
 
 # SSO config
 sso:
