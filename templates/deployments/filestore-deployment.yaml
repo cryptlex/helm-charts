@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-filestore
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secrets/filestore-secret.yaml") . | sha256sum }}
     spec:
       volumes:
         - name: filestore-volume
@@ -28,17 +30,20 @@ spec:
             - /data
           ports:
             - containerPort: {{ .Values.filestore.port }}
-          env:
-            - name: MINIO_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: FILE_STORE_SECRET_KEY
-                  name: {{ .Release.Name }}-filestore-secret
-            - name: MINIO_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: FILE_STORE_ACCESS_KEY
-                  name: {{ .Release.Name }}-filestore-secret
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-filestore-secret
+          # env:
+          #   - name: MINIO_SECRET_KEY
+          #     valueFrom:
+          #       secretKeyRef:
+          #         key: FILE_STORE_SECRET_KEY
+          #         name: {{ .Release.Name }}-filestore-secret
+          #   - name: MINIO_ACCESS_KEY
+          #     valueFrom:
+          #       secretKeyRef:
+          #         key: FILE_STORE_ACCESS_KEY
+          #         name: {{ .Release.Name }}-filestore-secret
           volumeMounts:
             - mountPath: /data
               name: filestore-volume

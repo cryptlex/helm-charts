@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-database
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secrets/database-secret.yaml") . | sha256sum }}
     spec:
       containers:
         - name: database
@@ -21,19 +23,22 @@ spec:
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-database-secret
           env:
             - name: POSTGRES_DB
               value: {{ .Values.database.db }}
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  key: POSTGRES_USER
-                  name: {{ .Release.Name }}-database-secret
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: POSTGRES_PASSWORD
-                  name: {{ .Release.Name }}-database-secret
+            # - name: POSTGRES_USER
+            #   valueFrom:
+            #     secretKeyRef:
+            #       key: POSTGRES_USER
+            #       name: {{ .Release.Name }}-database-secret
+            # - name: POSTGRES_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       key: POSTGRES_PASSWORD
+            #       name: {{ .Release.Name }}-database-secret
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: database-volume

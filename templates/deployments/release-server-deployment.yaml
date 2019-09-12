@@ -14,6 +14,9 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-release-server
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config-maps/release-server-configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secrets/filestore-secret.yaml") . | sha256sum }}
     spec:
       containers:
         - name: release-server
@@ -24,17 +27,19 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-release-server-config
-          env:
-            - name: FILE_STORE_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: FILE_STORE_SECRET_KEY
-                  name: {{ .Release.Name }}-filestore-secret
-            - name: FILE_STORE_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: FILE_STORE_ACCESS_KEY
-                  name: {{ .Release.Name }}-filestore-secret
+            - secretRef:
+                name: {{ .Release.Name }}-filestore-secret
+          # env:
+          #   - name: FILE_STORE_SECRET_KEY
+          #     valueFrom:
+          #       secretKeyRef:
+          #         key: FILE_STORE_SECRET_KEY
+          #         name: {{ .Release.Name }}-filestore-secret
+          #   - name: FILE_STORE_ACCESS_KEY
+          #     valueFrom:
+          #       secretKeyRef:
+          #         key: FILE_STORE_ACCESS_KEY
+          #         name: {{ .Release.Name }}-filestore-secret
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret
