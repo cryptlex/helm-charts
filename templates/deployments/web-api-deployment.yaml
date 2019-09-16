@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-web-api
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config-maps/web-api-configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secrets/web-api-secret.yaml") . | sha256sum }}
     spec:
       containers:
         - name: web-api
@@ -23,37 +26,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-web-api-config
-          env:
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  key: DATABASE_URL
-                  name: {{ .Release.Name }}-web-api-secret
-            - name: RSA_PASSPHRASE
-              valueFrom:
-                secretKeyRef:
-                  key: RSA_PASSPHRASE
-                  name: {{ .Release.Name }}-web-api-secret
-            - name: JWT_RSA_PRIVATEKEY
-              valueFrom:
-                secretKeyRef:
-                  key: JWT_RSA_PRIVATEKEY
-                  name: {{ .Release.Name }}-web-api-secret
-            - name: JWT_RSA_PUBLICKEY
-              valueFrom:
-                secretKeyRef:
-                  key: JWT_RSA_PUBLICKEY
-                  name: {{ .Release.Name }}-web-api-secret
-            - name: SMTP_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: SMTP_USERNAME
-                  name: {{ .Release.Name }}-web-api-secret
-            - name: SMTP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: SMTP_PASSWORD
-                  name: {{ .Release.Name }}-web-api-secret
+            - secretRef:
+                name: {{ .Release.Name }}-web-api-secret
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret

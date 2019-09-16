@@ -29,17 +29,6 @@ spec:
                 name: {{ .Release.Name }}-release-server-config
             - secretRef:
                 name: {{ .Release.Name }}-filestore-secret
-          # env:
-          #   - name: FILE_STORE_SECRET_KEY
-          #     valueFrom:
-          #       secretKeyRef:
-          #         key: FILE_STORE_SECRET_KEY
-          #         name: {{ .Release.Name }}-filestore-secret
-          #   - name: FILE_STORE_ACCESS_KEY
-          #     valueFrom:
-          #       secretKeyRef:
-          #         key: FILE_STORE_ACCESS_KEY
-          #         name: {{ .Release.Name }}-filestore-secret
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret
