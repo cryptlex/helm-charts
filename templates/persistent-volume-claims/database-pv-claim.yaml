@@ -1,13 +1,14 @@
+{{ if not .Values.services.database.external }}
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: {{ .Release.Name }}-data-pv-volume
+  name: {{ .Release.Name }}-database-pv-volume
   labels:
     type: local
 spec:
   storageClassName: manual
   capacity:
-    storage: 5Gi
+    storage: {{ .Values.services.database.storage }}
   accessModes:
     - ReadWriteMany
   hostPath:
@@ -16,11 +17,12 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ .Release.Name }}-data-pv-claim
+  name: {{ .Release.Name }}-database-pv-claim
 spec:
   storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 5Gi
+      storage: {{ .Values.services.database.storage }}
+{{ end }}
