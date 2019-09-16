@@ -31,6 +31,7 @@ services:
   database:
     # Set this to true in case you are using an external database.
     external: false
+    storage: 1Gi
   geoip:
     # Set this to true in case you are using an external geoip service.
     external: false
