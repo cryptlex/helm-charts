@@ -32,7 +32,6 @@ script:
 
       # Useful URLs
       REPO_URL=`git config remote.origin.url`
-      SSH_REPO=${REPO_URL/https:\/\/github.com\//git@github.com:}
       SHA=`git rev-parse --verify HEAD`
 
       # Push temporary directory to the stack
@@ -78,6 +77,6 @@ script:
        git status
        git commit -m "Travis deploy ${SHA}"
        # We can push.
-       git push ${SSH_REPO}
+       git push
       fi
     fi
