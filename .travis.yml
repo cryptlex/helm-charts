@@ -4,11 +4,10 @@ language: python
 env:
   global:
     - HELM_URL=https://storage.googleapis.com/kubernetes-helm
-    - HELM_TGZ=helm-v2.4.1-linux-amd64.tar.gz
+    - HELM_TGZ=helm-v2.14.3-linux-amd64.tar.gz
     - TARGET_BR=gh-pages
-    - REPO_DIR=/home/travis/build/kubenow/helm-charts
-    - GH_URL=https://kubenow.github.io/helm-charts
-    - YAMLLINT_VERSION=1.8.1
+    - REPO_DIR=/home/travis/build/cryptlex/helm-charts
+    - GH_URL=https://cryptlex.github.io/helm-charts
 
 install:
   # Installing Helm
@@ -16,37 +15,16 @@ install:
   - tar xzfv ${HELM_TGZ}
   - PATH=`pwd`/linux-amd64/:$PATH
   - helm init --client-only
-  # Installig pip deps
-  - sudo pip install yamllint=="${YAMLLINT_VERSION}"
-
-before_script:
-  # Decrypt key
-  - >
-    openssl aes-256-cbc
-    -K $encrypted_1f5633e62941_key
-    -iv $encrypted_1f5633e62941_iv
-    -in .ssh-keys/travis.enc
-    -out .ssh-keys/travis
-    -d
-
-  # Add the keypair to the agent
-  - chmod 600 .ssh-keys/travis
-  - eval "$(ssh-agent -s)"
-  - ssh-add .ssh-keys/travis
 
 script:
   # Check charts format
   - >
-     for dir in `ls ${REPO_DIR}/kubenow`; do
-      helm lint ${REPO_DIR}/kubenow/$dir
+     for dir in `ls ${REPO_DIR}/cryptlex`; do
+      helm lint ${REPO_DIR}/cryptlex/$dir
       if [ $? != 0 ]; then
        travis_terminate 1
       fi
      done
-  # Check YAML styling
-  - yamllint -c .yamllint.yml -s .travis.yml .yamllint.yml
-  - yamllint -c .yamllint.yml -s $(find . -type f -name "Chart.yaml")
-  - yamllint -c .yamllint.yml -s $(find . -type f -name "values.yaml")
 
 after_success:
   - >
@@ -63,9 +41,9 @@ after_success:
       pushd $BUILD_DIR
 
       # Iterate over all charts are package them
-      for dir in `ls ${REPO_DIR}/kubenow`; do
-       helm dep update ${REPO_DIR}/kubenow/$dir
-       helm package ${REPO_DIR}/kubenow/$dir
+      for dir in `ls ${REPO_DIR}/cryptlex`; do
+       helm dep update ${REPO_DIR}/cryptlex/$dir
+       helm package ${REPO_DIR}/cryptlex/$dir
       done
 
       # Indexing of charts
