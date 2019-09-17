@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  cryptlex-enterprise:
+  - apiVersion: v1
+    appVersion: 3.0.0
+    created: "2019-09-17T08:01:21.876566082Z"
+    description: A Helm chart for Cryptlex Enterprise Kubernetes
+    digest: 88db6a36ef0ce84bbb258f52070e0596d629f7f1443c14234d56fff81a7e7dec
+    name: cryptlex-enterprise
+    urls:
+    - https://cryptlex.github.io/helm-charts/cryptlex-enterprise-3.0.0.tgz
+    version: 3.0.0
+generated: "2019-09-17T08:01:21.874910551Z"
