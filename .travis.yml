@@ -8,6 +8,7 @@ env:
     - TARGET_BR=gh-pages
     - REPO_DIR=/home/travis/build/cryptlex/helm-charts
     - GH_URL=https://cryptlex.github.io/helm-charts
+    - GITHUB_TOKEN=$GITHUB_TOKEN
 
 install:
   # Installing Helm
