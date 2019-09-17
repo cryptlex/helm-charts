@@ -1,0 +1,128 @@
+---
+language: python
+
+env:
+  global:
+    - HELM_URL=https://storage.googleapis.com/kubernetes-helm
+    - HELM_TGZ=helm-v2.4.1-linux-amd64.tar.gz
+    - TARGET_BR=gh-pages
+    - REPO_DIR=/home/travis/build/kubenow/helm-charts
+    - GH_URL=https://kubenow.github.io/helm-charts
+    - YAMLLINT_VERSION=1.8.1
+
+install:
+  # Installing Helm
+  - wget -q ${HELM_URL}/${HELM_TGZ}
+  - tar xzfv ${HELM_TGZ}
+  - PATH=`pwd`/linux-amd64/:$PATH
+  - helm init --client-only
+  # Installig pip deps
+  - sudo pip install yamllint=="${YAMLLINT_VERSION}"
+
+before_script:
+  # Decrypt key
+  - >
+    openssl aes-256-cbc
+    -K $encrypted_1f5633e62941_key
+    -iv $encrypted_1f5633e62941_iv
+    -in .ssh-keys/travis.enc
+    -out .ssh-keys/travis
+    -d
+
+  # Add the keypair to the agent
+  - chmod 600 .ssh-keys/travis
+  - eval "$(ssh-agent -s)"
+  - ssh-add .ssh-keys/travis
+
+script:
+  # Check charts format
+  - >
+     for dir in `ls ${REPO_DIR}/kubenow`; do
+      helm lint ${REPO_DIR}/kubenow/$dir
+      if [ $? != 0 ]; then
+       travis_terminate 1
+      fi
+     done
+  # Check YAML styling
+  - yamllint -c .yamllint.yml -s .travis.yml .yamllint.yml
+  - yamllint -c .yamllint.yml -s $(find . -type f -name "Chart.yaml")
+  - yamllint -c .yamllint.yml -s $(find . -type f -name "values.yaml")
+
+after_success:
+  - >
+    if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
+      # Temporary dir for storing new packaged charts and index files
+      BUILD_DIR=$(mktemp -d)
+
+      # Useful URLs
+      REPO_URL=`git config remote.origin.url`
+      SSH_REPO=${REPO_URL/https:\/\/github.com\//git@github.com:}
+      SHA=`git rev-parse --verify HEAD`
+
+      # Push temporary directory to the stack
+      pushd $BUILD_DIR
+
+      # Iterate over all charts are package them
+      for dir in `ls ${REPO_DIR}/kubenow`; do
+       helm dep update ${REPO_DIR}/kubenow/$dir
+       helm package ${REPO_DIR}/kubenow/$dir
+      done
+
+      # Indexing of charts
+      if [ -f index.yaml ]; then
+       helm repo index --url ${GH_URL} --merge index.yaml .
+      else
+       helm repo index --url ${GH_URL} .
+      fi
+
+      # Pop temporary directory from the stack
+      popd
+
+      # List all the contents that we will push
+      ls ${BUILD_DIR}
+
+      # Clone repository and empty target branch
+      git clone ${REPO_URL} out
+      cd out
+      git checkout ${TARGET_BR} || git checkout --orphan ${TARGET_BR}
+      cd ..
+      rm -rf out/* || exit 0
+
+      # Copying contents of BUILD_DIR to out folder
+      cp $BUILD_DIR/* out/
+      cd out
+
+      # Deploy if there are some changes
+      git diff --quiet
+      if [ $? != 0 ]; then
+       # Add all new files to staging phase and commit the changes
+       git config user.name "Travis CI"
+       git config user.email "travis@travis-ci.org"
+       git add -A .
+       git status
+       git commit -m "Travis deploy ${SHA}"
+       # We can push.
+       git push ${SSH_REPO}
+      fi
+    fi
+
+notifications:
+  email: true
+  slack:
+    on_success: change # default: always
+    on_failure: always # default: always
+    secure: >
+      Ge4Vs7+Qpf0dBSr7IMMUqF9jwz+fcpSwkhLN/2de23HkKYndLy8
+      uI1AXUbBfhlw9/9722E2Pljad6xJ95WqMc8rKNx4Ys59q8vB0Tg
+      m9ppqvMRzhmtiht2zwEVOuu5nj5pqefhijGLrmKFKtUuS0vxllt
+      4S5SY8/em14N3S4X+5z31KuSCUtdVPYATraXrA0/g0tu1EaCgOz
+      f5LkpPx8HOUQxyrMNZL06GDd5aWSEJ6bIpOMvAHv+gW0SJmOECsl
+      TxvXULKN4y923+xxZX9sQuWjVQVAZN6OKq737SMYLlcqY1JgRfRa
+      R1w5C0xPvfkCCgK8mQdvg20kij4ytZCjWE3ncFfvfl7efJiZeZ0b
+      /Ob7p/YI3pEJaZkvLlfdxvv4fgL3RDW0Fr8GvK2Ctq6zCxF8Ar1F
+      7Eq6+9Z6K4R9q363RGGtwFBjYPphZeSSiLG7elUbE8d7cSbzT7OH
+      BfxLQmgiOQhfGRpUXwO/5dXFCQTHaIMWK1nm3heibsAr+l1KUT01
+      W+57CTum2RgfdTsFtxQbIe2j5/Sb/NsuruOlf0CCgCK6bSAPYSAE
+      4dsqTMKRRmfjWpscO0qsyHNBFbLmD2dwH2ecyTgPiadZ9U+cZnQI
+      VxoxED6MbEcspOX+Zc00l12bszfcrSfibEInfgAOdYkGgHFGdefy
+      sfFMp4nUwOQ=
