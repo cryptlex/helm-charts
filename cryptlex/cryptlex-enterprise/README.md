@@ -4,7 +4,7 @@
 You can install the Chart via Helm CLI:
 
 ```console
-$ helm install --name cryptlex-enterprise --namespace cryptlex cryptlex/cryptlex-enterprise
+$ helm upgrade --install cryptlex-enterprise --values <values file> --namespace cryptlex --version <version> cryptlex/cryptlex-enterprise
 ```
 
 ## Uninstalling the Chart
