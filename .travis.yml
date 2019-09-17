@@ -8,7 +8,6 @@ env:
     - TARGET_BR=gh-pages
     - REPO_DIR=/home/travis/build/cryptlex/helm-charts
     - GH_URL=https://cryptlex.github.io/helm-charts
-    - GITHUB_TOKEN=$GITHUB_TOKEN
 
 install:
   # Installing Helm
@@ -78,6 +77,8 @@ script:
        git status
        git commit -m "Travis deploy ${SHA}"
        # We can push.
+       git remote add origin-pages https://${GITHUB_TOKEN}@github.com/cryptlex/helm-charts.git > /dev/null 2>&1
+       git push --quiet --set-upstream origin-pages gh-pages 
        git push
       fi
     fi
