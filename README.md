@@ -1,6 +1,6 @@
-This repository contains Helm packages that are tested and maintained by the Cryptlex. The packages are hosted by GitHub pages, and we provide a fully automated release of charts using Travis CI.
+This repository contains Helm packages that are tested and maintained by the Cryptlex team. The packages are hosted by GitHub pages, and we provide a fully automated release of charts using Travis CI.
 
-[![Build Status](https://travis-ci.org/kubenow/helm-charts.svg?branch=master)](https://travis-ci.org/kubenow/helm-charts)
+[![Build Status](https://travis-ci.org/cryptlex/helm-charts.svg?branch=master)](https://travis-ci.org/cryptlex/helm-charts)
 
 ## Getting started
 
