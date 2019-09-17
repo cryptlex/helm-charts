@@ -25,10 +25,7 @@ script:
        travis_terminate 1
       fi
      done
-
-after_success:
-  - >
-    if [ $TRAVIS_BRANCH = 'master' ] ; then
+     if [ $TRAVIS_BRANCH = 'master' ] ; then
       # Temporary dir for storing new packaged charts and index files
       BUILD_DIR=$(mktemp -d)
 
@@ -84,8 +81,60 @@ after_success:
       fi
     fi
 
-notifications:
-  email: true
-  slack:
-    on_success: change # default: always
-    on_failure: always # default: always
+# after_success:
+#   - >
+#     if [ $TRAVIS_BRANCH = 'master' ] ; then
+#       # Temporary dir for storing new packaged charts and index files
+#       BUILD_DIR=$(mktemp -d)
+
+#       # Useful URLs
+#       REPO_URL=`git config remote.origin.url`
+#       SSH_REPO=${REPO_URL/https:\/\/github.com\//git@github.com:}
+#       SHA=`git rev-parse --verify HEAD`
+
+#       # Push temporary directory to the stack
+#       pushd $BUILD_DIR
+
+#       # Iterate over all charts are package them
+#       for dir in `ls ${REPO_DIR}/cryptlex`; do
+#        helm dep update ${REPO_DIR}/cryptlex/$dir
+#        helm package ${REPO_DIR}/cryptlex/$dir
+#       done
+
+#       # Indexing of charts
+#       if [ -f index.yaml ]; then
+#        helm repo index --url ${GH_URL} --merge index.yaml .
+#       else
+#        helm repo index --url ${GH_URL} .
+#       fi
+
+#       # Pop temporary directory from the stack
+#       popd
+
+#       # List all the contents that we will push
+#       ls ${BUILD_DIR}
+
+#       # Clone repository and empty target branch
+#       git clone ${REPO_URL} out
+#       cd out
+#       git checkout ${TARGET_BR} || git checkout --orphan ${TARGET_BR}
+#       cd ..
+#       rm -rf out/* || exit 0
+
+#       # Copying contents of BUILD_DIR to out folder
+#       cp $BUILD_DIR/* out/
+#       cd out
+
+#       # Deploy if there are some changes
+#       git diff --quiet
+#       if [ $? != 0 ]; then
+#        # Add all new files to staging phase and commit the changes
+#        git config user.name "Travis CI"
+#        git config user.email "travis@travis-ci.org"
+#        git add -A .
+#        git status
+#        git commit -m "Travis deploy ${SHA}"
+#        # We can push.
+#        git push ${SSH_REPO}
+#       fi
+#     fi
