@@ -17,7 +17,7 @@ install:
   - helm init --client-only
 
 script:
-  # Check charts format
+  # Check charts format1
   - >
      for dir in `ls ${REPO_DIR}/cryptlex`; do
       helm lint ${REPO_DIR}/cryptlex/$dir
