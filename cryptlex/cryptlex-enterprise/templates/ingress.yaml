@@ -18,7 +18,7 @@ spec:
         {{ if .Values.services.filestore.enabled }}
         - {{ .Values.ingress.hosts.releaseServerHost }}
         {{ end }}
-      secretName: {{ .Release.Name }}-{{ .Values.ingress.hosts.webApiHost }}-{{.Values.ingress.hosts.dashboardHost }}-letsencrypt-tls-secret
+      secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.dashboardHost | sha256sum | trunc 63}}
   rules:
     - host: {{ .Values.ingress.hosts.webApiHost }}
       http:
