@@ -85,6 +85,8 @@ geoip:
 webApi:
   # Set this to 3 for production environment.
   replicaCount: 1
+  # This name appears in email body and 2FA secret url.
+  applicationName: MyCompany
   # The license key which you get after you purchase the license for the Cryptlex Enterprise (on-premise).
   serverLicenseKey: PASTE_LICENSE_KEY
   # The database connection string, only required in case you are using an external database.
