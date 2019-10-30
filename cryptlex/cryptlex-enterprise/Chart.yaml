@@ -3,3 +3,4 @@ appVersion: "3.1.0"
 description: A Helm chart for Cryptlex Enterprise Kubernetes
 name: cryptlex-enterprise
 version: 3.1.0
+icon: https://cryptlex.com/images/cryptlex_icon.png
