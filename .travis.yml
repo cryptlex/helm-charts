@@ -4,7 +4,7 @@ language: python
 env:
   global:
     - HELM_URL=https://storage.googleapis.com/kubernetes-helm
-    - HELM_TGZ=helm-v2.14.3-linux-amd64.tar.gz
+    - HELM_TGZ=helm-v2.16.1-linux-amd64.tar.gz
     - TARGET_BR=gh-pages
     - REPO_DIR=/home/travis/build/cryptlex/helm-charts
     - GH_URL=https://cryptlex.github.io/helm-charts
