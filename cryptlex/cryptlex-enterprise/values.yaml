@@ -97,6 +97,10 @@ webApi:
   jwtRsaPublicKey: "PASTE_SINGLE_LINE_RSA_PUBLIC_KEY"
   # The passphrase which was used to encrypt the JWT RSA private key.
   rsaPassphrase: PASTE_RSA_SECRET
+  # IP rate limiting options.
+  ipRateLimitOptions:
+    rateLimit: 50
+    ipWhitelist: []
 
   # Mail settings
   email:  
