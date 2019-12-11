@@ -10,7 +10,7 @@ data:
   JWT_AUDIENCE: https://{{ .Values.ingress.hosts.webApiHost }}
   REDIS_URL: redis://{{ .Release.Name }}-cache-service:6379
   GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId }}
-  IPRATELIMITOPTIONS_IPWHITELIST: {{ .Values.webApi.ipRateLimitOptions.ipWhitelist | toJson }}
+  IPRATELIMITOPTIONS_IPWHITELIST: {{ .Values.webApi.ipRateLimitOptions.ipWhitelist | toJson | quote }}
   IPRATELIMITOPTIONS_GENERALRULES_0_LIMIT: {{ .Values.webApi.ipRateLimitOptions.rateLimit | quote }}
   {{ if .Values.services.geoip.external }}
   GEOIPSERVER_APIKEY: {{ .Values.geoip.serverUrl }}
