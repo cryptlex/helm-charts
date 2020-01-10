@@ -1,6 +1,6 @@
 apiVersion: v1
-appVersion: "3.2.4"
+appVersion: "3.2.5"
 description: A Helm chart for Cryptlex Enterprise
 name: cryptlex-enterprise
-version: 3.2.4
+version: 3.2.5
 icon: https://cryptlex.com/images/cryptlex_icon.png
