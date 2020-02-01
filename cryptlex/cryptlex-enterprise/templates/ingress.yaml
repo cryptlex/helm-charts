@@ -1,7 +1,8 @@
 {{ if .Values.ingress.enabled }}
 {{- $fullName := include "cryptlex-enterprise.fullname" . -}}
 
-apiVersion: networking.k8s.io/v1beta1
+#apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
