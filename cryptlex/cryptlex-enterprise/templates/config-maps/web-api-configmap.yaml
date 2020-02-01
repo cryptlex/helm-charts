@@ -13,8 +13,8 @@ data:
   IPRATELIMITOPTIONS_IPWHITELIST: {{ .Values.webApi.ipRateLimitOptions.ipWhitelist | toJson | quote }}
   IPRATELIMITOPTIONS_GENERALRULES_0_LIMIT: {{ .Values.webApi.ipRateLimitOptions.rateLimit | quote }}
   {{ if .Values.services.geoip.external }}
-  GEOIPSERVER_URL: {{ .Values.geoip.serverUrl }}
-  GEOIPSERVER_APIKEY: {{ .Values.geoip.apiKey }}
+  GEOIPSERVER_URL: {{ .Values.geoip.serverUrl | quote }}
+  GEOIPSERVER_APIKEY: {{ .Values.geoip.apiKey | quote }}
   {{ else }}
   GEOIPSERVER_URL: http://{{ .Release.Name }}-geoip-service:8080/json
   {{ end }}
