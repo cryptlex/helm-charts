@@ -1,6 +1,15 @@
-apiVersion: v1
-appVersion: "3.3.0"
-description: A Helm chart for Cryptlex Enterprise
+apiVersion: v2
 name: cryptlex-enterprise
-version: 3.3.0
+description: A Helm chart for Cryptlex Enterprise
+type: application
+kubeVersion: ">= 1.14.0"
+home: https://cryptlex.com
 icon: https://cryptlex.com/images/cryptlex_icon.png
+
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+version: 3.4.0
+
+# This is the version number of the application being deployed. This version number should be
+# incremented each time you make changes to the application.
+appVersion: 3.4.0

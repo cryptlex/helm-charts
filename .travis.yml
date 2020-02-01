@@ -3,8 +3,8 @@ language: python
 
 env:
   global:
-    - HELM_URL=https://storage.googleapis.com/kubernetes-helm
-    - HELM_TGZ=helm-v2.16.1-linux-amd64.tar.gz
+    - HELM_URL=https://get.helm.sh
+    - HELM_TGZ=helm-v3.0.3-linux-amd64.tar.gz
     - TARGET_BR=gh-pages
     - REPO_DIR=/home/travis/build/cryptlex/helm-charts
     - GH_URL=https://cryptlex.github.io/helm-charts
@@ -14,7 +14,6 @@ install:
   - wget -q ${HELM_URL}/${HELM_TGZ}
   - tar xzfv ${HELM_TGZ}
   - PATH=`pwd`/linux-amd64/:$PATH
-  - helm init --client-only
 
 script:
   # Check charts format

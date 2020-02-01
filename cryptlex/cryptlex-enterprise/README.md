@@ -11,5 +11,5 @@ $ helm upgrade --install cryptlex-enterprise --values <values file> --namespace 
 You can uninstall the Chart via Helm CLI:
 
 ```console
-$ helm del --purge cryptlex-enterprise
+$ helm uninstall cryptlex-enterprise
 ```
