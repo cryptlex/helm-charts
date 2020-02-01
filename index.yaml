@@ -2,8 +2,21 @@ apiVersion: v1
 entries:
   cryptlex-enterprise:
   - apiVersion: v2
+    appVersion: 3.4.4
+    created: "2020-02-01T11:56:23.930636977Z"
+    description: A Helm chart for Cryptlex Enterprise
+    digest: 58d308018bea9719894888219e06265468786a6916348f8ebe712eefa32725b3
+    home: https://cryptlex.com
+    icon: https://cryptlex.com/images/cryptlex_icon.png
+    kubeVersion: '>= 1.14.0'
+    name: cryptlex-enterprise
+    type: application
+    urls:
+    - https://cryptlex.github.io/helm-charts/cryptlex-enterprise-3.4.4.tgz
+    version: 3.4.4
+  - apiVersion: v2
     appVersion: 3.4.3
-    created: "2020-02-01T11:48:40.856019108Z"
+    created: "2020-02-01T11:56:23.929801978Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: dad1f4a5c2c3ae6cb7315b5cc722a65ae7d7b654ddd5fb037a5d2fe9a99d8251
     home: https://cryptlex.com
@@ -16,7 +29,7 @@ entries:
     version: 3.4.3
   - apiVersion: v2
     appVersion: 3.4.2
-    created: "2020-02-01T11:48:40.853874126Z"
+    created: "2020-02-01T11:56:23.928931925Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 66613dfec0ad84dc8d774e013821a06aea5e690d30963f93160a9d5b8eec1469
     home: https://cryptlex.com
@@ -29,7 +42,7 @@ entries:
     version: 3.4.2
   - apiVersion: v2
     appVersion: 3.4.1
-    created: "2020-02-01T11:48:40.852564853Z"
+    created: "2020-02-01T11:56:23.928131635Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 48abc9e0a505c3b84bf2be8a4b256a89a43e2d3e299e87b5152f01736f80a308
     home: https://cryptlex.com
@@ -42,7 +55,7 @@ entries:
     version: 3.4.1
   - apiVersion: v2
     appVersion: 3.4.0
-    created: "2020-02-01T11:48:40.851696708Z"
+    created: "2020-02-01T11:56:23.927303402Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 3cffabe5d19753f8949ca87b41fb6296fa68e874c62cc2473270b435065d4d01
     home: https://cryptlex.com
@@ -55,7 +68,7 @@ entries:
     version: 3.4.0
   - apiVersion: v1
     appVersion: 3.3.0
-    created: "2020-02-01T11:48:40.850808394Z"
+    created: "2020-02-01T11:56:23.926485753Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 433cea418710779d603c540c4606cf27d14b70548ebd2c55b3bf16cf393ca284
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -65,7 +78,7 @@ entries:
     version: 3.3.0
   - apiVersion: v1
     appVersion: 3.2.8
-    created: "2020-02-01T11:48:40.849971578Z"
+    created: "2020-02-01T11:56:23.925668835Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: acf16244e1fd96c463772e61adbcbfe2d22d06d4e9175b261a0a92cba18e4d53
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -75,7 +88,7 @@ entries:
     version: 3.2.8
   - apiVersion: v1
     appVersion: 3.2.7
-    created: "2020-02-01T11:48:40.849109978Z"
+    created: "2020-02-01T11:56:23.924868842Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: d9b7fc7b3b01605590aa12e07ba3c9265a3e621e149a281da8713c5c8f9d86a6
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -85,7 +98,7 @@ entries:
     version: 3.2.7
   - apiVersion: v1
     appVersion: 3.2.6
-    created: "2020-02-01T11:48:40.848217441Z"
+    created: "2020-02-01T11:56:23.924047415Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 184bbb787b63dcac98386de0c79c8e1ab1c043f113cf76660381a0b3909e63e8
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -95,7 +108,7 @@ entries:
     version: 3.2.6
   - apiVersion: v1
     appVersion: 3.2.5
-    created: "2020-02-01T11:48:40.847108906Z"
+    created: "2020-02-01T11:56:23.923252916Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: d413e9da1859946eecc624d71544af84b71b0c86ab53ae305cfe64df1c3e7693
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -105,7 +118,7 @@ entries:
     version: 3.2.5
   - apiVersion: v1
     appVersion: 3.2.4
-    created: "2020-02-01T11:48:40.846268865Z"
+    created: "2020-02-01T11:56:23.921705334Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 758a99bdfdb4783e7bdc59962ae2cb8f60e39290d56a342cf2f262e22fc49f76
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -115,7 +128,7 @@ entries:
     version: 3.2.4
   - apiVersion: v1
     appVersion: 3.2.3
-    created: "2020-02-01T11:48:40.845448522Z"
+    created: "2020-02-01T11:56:23.920013671Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 9a8b56712672b42241950000454e0939d79fb8c082e1df08343576051792fbaa
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -125,7 +138,7 @@ entries:
     version: 3.2.3
   - apiVersion: v1
     appVersion: 3.2.2
-    created: "2020-02-01T11:48:40.844611022Z"
+    created: "2020-02-01T11:56:23.917850206Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 73eea37c080bf9ee3fc5993d711b0f0793af2fb4f1eaf6dddcc96eb0b556feaa
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -135,7 +148,7 @@ entries:
     version: 3.2.2
   - apiVersion: v1
     appVersion: 3.2.1
-    created: "2020-02-01T11:48:40.843729354Z"
+    created: "2020-02-01T11:56:23.915865545Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: eb3b69c3aba91c87dd522bf0ffee28bda8257113cef87e11a93fc2b8bd7f3988
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -145,7 +158,7 @@ entries:
     version: 3.2.1
   - apiVersion: v1
     appVersion: 3.2.0
-    created: "2020-02-01T11:48:40.841836527Z"
+    created: "2020-02-01T11:56:23.914694112Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: 9c00c73fedbc4071e3d391673a1274062c63d1f62dbb96c309797909b56dacb8
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -155,7 +168,7 @@ entries:
     version: 3.2.0
   - apiVersion: v1
     appVersion: 3.1.0
-    created: "2020-02-01T11:48:40.839896372Z"
+    created: "2020-02-01T11:56:23.913848972Z"
     description: A Helm chart for Cryptlex Enterprise
     digest: daa25c9738949f7f5df01c7ad96e549c48c55130f7aeb18f91513f8654928b26
     icon: https://cryptlex.com/images/cryptlex_icon.png
@@ -165,7 +178,7 @@ entries:
     version: 3.1.0
   - apiVersion: v1
     appVersion: 3.0.9
-    created: "2020-02-01T11:48:40.838641925Z"
+    created: "2020-02-01T11:56:23.912969933Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: 7198ebb84cec8c1f8349b5b9689ac82f789eec2b673735545ab57027fa25d703
     name: cryptlex-enterprise
@@ -174,7 +187,7 @@ entries:
     version: 3.0.9
   - apiVersion: v1
     appVersion: 3.0.8
-    created: "2020-02-01T11:48:40.837764104Z"
+    created: "2020-02-01T11:56:23.912146456Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: 8ae77ad845741b3599afaa10a8d3aeb79df777f9336fdce739925b5399083495
     name: cryptlex-enterprise
@@ -183,7 +196,7 @@ entries:
     version: 3.0.8
   - apiVersion: v1
     appVersion: 3.0.7
-    created: "2020-02-01T11:48:40.836929716Z"
+    created: "2020-02-01T11:56:23.911280428Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: 748582b6bb22a8bcf0844655c3f27858c8a122579518984a187fd17b2543d7ef
     name: cryptlex-enterprise
@@ -192,7 +205,7 @@ entries:
     version: 3.0.7
   - apiVersion: v1
     appVersion: 3.0.6
-    created: "2020-02-01T11:48:40.83607113Z"
+    created: "2020-02-01T11:56:23.910444127Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: 00ff08810469737c96bc8ec3eb8214e8289e338b6b4e42767472c2a281163f2a
     name: cryptlex-enterprise
@@ -201,7 +214,7 @@ entries:
     version: 3.0.6
   - apiVersion: v1
     appVersion: 3.0.5
-    created: "2020-02-01T11:48:40.835124786Z"
+    created: "2020-02-01T11:56:23.909543091Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: d7abebe818aa3f03a3c5f0d0ac8b0cdc46e796fe5dfb63d68488d05ec44d072c
     name: cryptlex-enterprise
@@ -210,7 +223,7 @@ entries:
     version: 3.0.5
   - apiVersion: v1
     appVersion: 3.0.4
-    created: "2020-02-01T11:48:40.834291888Z"
+    created: "2020-02-01T11:56:23.90874781Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: 216d27a474efc8c538274543899407798cc98e45f20c6d749bd3bbbb47585c76
     name: cryptlex-enterprise
@@ -219,7 +232,7 @@ entries:
     version: 3.0.4
   - apiVersion: v1
     appVersion: 3.0.3
-    created: "2020-02-01T11:48:40.8334768Z"
+    created: "2020-02-01T11:56:23.90798746Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: 6fbbb1db87db30a919bb50390cf460327dc617b7666e1ec3b6ab02e667ba1531
     name: cryptlex-enterprise
@@ -228,7 +241,7 @@ entries:
     version: 3.0.3
   - apiVersion: v1
     appVersion: 3.0.2
-    created: "2020-02-01T11:48:40.832614765Z"
+    created: "2020-02-01T11:56:23.907171962Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: 7b9287272a8ed06657a850b857fb4451a3f2a421bb811604e268233ad0f2c0a4
     name: cryptlex-enterprise
@@ -237,11 +250,11 @@ entries:
     version: 3.0.2
   - apiVersion: v1
     appVersion: 3.0.1
-    created: "2020-02-01T11:48:40.831550597Z"
+    created: "2020-02-01T11:56:23.906347835Z"
     description: A Helm chart for Cryptlex Enterprise Kubernetes
     digest: 68ff57dfd5903e68ef03c3cc1b8c7c39faca42ad8495b07d7672de8575e72831
     name: cryptlex-enterprise
     urls:
     - https://cryptlex.github.io/helm-charts/cryptlex-enterprise-3.0.1.tgz
     version: 3.0.1
-generated: "2020-02-01T11:48:40.830403583Z"
+generated: "2020-02-01T11:56:23.90496265Z"
