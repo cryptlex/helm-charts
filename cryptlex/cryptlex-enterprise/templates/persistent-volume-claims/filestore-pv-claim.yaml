@@ -1,27 +1,11 @@
 {{ if and .Values.services.filestore.enabled (not .Values.services.filestore.external) }}
-kind: PersistentVolume
 apiVersion: v1
-metadata:
-  name: {{ .Release.Name }}-filestore-pv-volume
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: {{ .Values.services.filestore.storage }}
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/mnt/data"
----
 kind: PersistentVolumeClaim
-apiVersion: v1
 metadata:
   name: {{ .Release.Name }}-filestore-pv-claim
 spec:
-  storageClassName: manual
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: {{ .Values.services.filestore.storage }}

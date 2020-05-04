@@ -1,27 +1,11 @@
 {{ if not .Values.services.database.external }}
-kind: PersistentVolume
 apiVersion: v1
-metadata:
-  name: {{ .Release.Name }}-database-pv-volume
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: {{ .Values.services.database.storage }}
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/mnt/data"
----
 kind: PersistentVolumeClaim
-apiVersion: v1
 metadata:
   name: {{ .Release.Name }}-database-pv-claim
 spec:
-  storageClassName: manual
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: {{ .Values.services.database.storage }}
