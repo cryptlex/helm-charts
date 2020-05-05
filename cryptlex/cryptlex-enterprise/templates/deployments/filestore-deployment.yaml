@@ -27,7 +27,7 @@ spec:
           imagePullPolicy: "IfNotPresent"
           args:
             - server
-            - /data
+            - /var/minio/data
           ports:
             - containerPort: {{ .Values.filestore.port }}
           env:
@@ -42,6 +42,6 @@ spec:
                   key: FILE_STORE_ACCESS_KEY
                   name: {{ .Release.Name }}-filestore-secret
           volumeMounts:
-            - mountPath: /data
+            - mountPath:  /var/minio/data
               name: filestore-volume
 {{ end }}
