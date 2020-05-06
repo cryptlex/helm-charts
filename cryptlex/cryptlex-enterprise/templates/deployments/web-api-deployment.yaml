@@ -28,6 +28,11 @@ spec:
                 name: {{ .Release.Name }}-web-api-config
             - secretRef:
                 name: {{ .Release.Name }}-web-api-secret
+          resources:
+            requests:
+              memory: "400Mi"
+            limits:
+              memory: "600Mi"
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret
