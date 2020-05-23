@@ -18,6 +18,7 @@ imageCredentials:
 # Ingress config
 ingress:
   enabled: true
+  enableLegacyTls: true
   hosts:
     # Hostname of the Cryptlex Web API server.
     webApiHost: cryptlex-api.mycompany.com
