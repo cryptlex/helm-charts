@@ -31,7 +31,7 @@ services:
   database:
     # Set this to true in case you are using an external database.
     external: false
-    storage: 5Gi
+    storage: 10Gi
   geoip:
     # Set this to true in case you are using an external geoip service.
     external: false
@@ -40,7 +40,7 @@ services:
     enabled: true
     # Set this to true in case you are using an external filestore like AWS S3, Azure Minio etc.
     external: false
-    storage: 5Gi
+    storage: 10Gi
 
 # Database config (ignored in case you are using an external database)
 database:
