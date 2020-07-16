@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-cache
+  labels:
+    app: {{ .Release.Name }}-cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-cache
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-cache
+    spec:
+      containers:
+        - name: cache
+          image: redis:6-apline
+          imagePullPolicy: "IfNotPresent"
+          command: ["redis-server", "/config/redis.conf"]
+          volumeMounts:
+            - name: cache-volume
+              mountPath: /config
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 256Mi
+          ports:
+            - containerPort: 6379
+      restartPolicy: Always
+      volumes:
+        - name: cache-volume
+          configMap:
+            name: {{ .Release.Name }}-cache-config
+            items:
+              - key: redis-config
+                path: redis.conf

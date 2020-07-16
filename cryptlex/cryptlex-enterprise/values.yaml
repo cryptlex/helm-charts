@@ -92,10 +92,10 @@ webApi:
   # The database connection string, only required in case you are using an external database.
   databaseUrl: postgres://{user}:{password}@{hostname}:{port}/{database-name}
   # Single line RSA private key.
-  jwtRsaPrivateKey: "PASTE_SINGLE_LINE_RSA_PRIVATE_KEY"
+  jwtRsaPrivateKey: ""
   # Single line RSA public key.
-  jwtRsaPublicKey: "PASTE_SINGLE_LINE_RSA_PUBLIC_KEY"
-  # The passphrase which was used to encrypt the JWT RSA private key.
+  jwtRsaPublicKey: ""
+  # The passphrase to encrypt the RSA private keys.
   rsaPassphrase: PASTE_RSA_SECRET
   # IP rate limiting options.
   ipRateLimitOptions:

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: release-server
-          image: cryptlex/cryptlex-release-server:3.2.0
+          image: cryptlex/cryptlex-release-server:3.2.3
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 3000

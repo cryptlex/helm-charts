@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-cache-config
+data:
+  redis-config: |
+    maxmemory 256mb
+    maxmemory-policy allkeys-lru
