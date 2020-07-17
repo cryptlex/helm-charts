@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cache
-          image: redis:6-apline
+          image: redis:6-alpine
           imagePullPolicy: "IfNotPresent"
           command: ["redis-server", "/config/redis.conf"]
           volumeMounts:
