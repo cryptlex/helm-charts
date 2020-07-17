@@ -1,6 +1,3 @@
-{{ if .Values.ingress.enabled }}
-{{- $fullName := include "cryptlex-enterprise.fullname" . -}}
-
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -42,4 +39,3 @@ spec:
               serviceName: {{ .Release.Name }}-release-server-service
               servicePort: 3000
     {{ end }}
-{{ end }}

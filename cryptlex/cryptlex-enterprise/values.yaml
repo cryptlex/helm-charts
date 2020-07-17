@@ -2,6 +2,7 @@
 
 # Certmanager letsencrypt config
 certmanager:
+  enabled: true
   issuer:
     # Set this to your company email.
     email: support@mycompany.com
@@ -17,7 +18,6 @@ imageCredentials:
 
 # Ingress config
 ingress:
-  enabled: true
   hosts:
     # Hostname of the Cryptlex Web API server.
     webApiHost: cryptlex-api.mycompany.com
