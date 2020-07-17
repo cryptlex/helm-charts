@@ -29,9 +29,9 @@ spec:
             httpGet:
                path: /status
                port: 4200
-               initialDelaySeconds: 5
-               periodSeconds: 5
-               successThreshold: 1
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret
