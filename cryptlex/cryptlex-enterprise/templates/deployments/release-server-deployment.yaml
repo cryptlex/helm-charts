@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: release-server
-          image: cryptlex/cryptlex-release-server:3.2.3
+          image: cryptlex/cryptlex-release-server:3.2.4
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 3000
@@ -29,6 +29,13 @@ spec:
                 name: {{ .Release.Name }}-release-server-config
             - secretRef:
                 name: {{ .Release.Name }}-filestore-secret
+          readinessProbe:
+            httpGet:
+               path: /v3/status
+               port: 3000
+               initialDelaySeconds: 5
+               periodSeconds: 5
+               successThreshold: 1
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret

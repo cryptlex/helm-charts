@@ -33,6 +33,13 @@ spec:
               memory: "500Mi"
             limits:
               memory: "900Mi"
+          readinessProbe:
+            httpGet:
+               path: /v3/status
+               port: 5000
+               initialDelaySeconds: 5
+               periodSeconds: 5
+               successThreshold: 1
       restartPolicy: Always
       imagePullSecrets:
         - name: {{ .Release.Name }}-docker-secret
