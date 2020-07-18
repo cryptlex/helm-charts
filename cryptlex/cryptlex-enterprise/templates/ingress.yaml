@@ -10,6 +10,7 @@ metadata:
     cert-manager.io/issuer: {{ .Release.Name }}-letsencrypt-staging
     {{ end }}
 spec:
+  {{ if .Values.certmanager.enabled }}
   tls:
     - hosts:
         - {{ .Values.ingress.hosts.webApiHost }}
@@ -18,6 +19,7 @@ spec:
         - {{ .Values.ingress.hosts.releaseServerHost }}
         {{ end }}
       secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.dashboardHost | sha256sum | trunc 30}}-tls-secret
+  {{ end }}
   rules:
     - host: {{ .Values.ingress.hosts.webApiHost }}
       http:
