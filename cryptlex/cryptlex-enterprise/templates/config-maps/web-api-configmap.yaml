@@ -7,7 +7,11 @@ data:
   APPLICATION_LICENSE_KEY: {{ .Values.webApi.serverLicenseKey }}
   FORCEHTTPS: "false"
   PORT: "5000"
+  {{ if .Values.certmanager.enabled }}
   JWT_AUDIENCE: https://{{ .Values.ingress.hosts.webApiHost }}
+  {{ else }}
+  JWT_AUDIENCE: http://{{ .Values.ingress.hosts.webApiHost }}
+  {{ end }}
   REDIS_URL: redis://{{ .Release.Name }}-cache-service:6379
   GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId | quote }}
   IPRATELIMITOPTIONS_IPWHITELIST: {{ .Values.webApi.ipRateLimitOptions.ipWhitelist | toJson | quote }}
