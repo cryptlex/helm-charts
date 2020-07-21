@@ -38,3 +38,4 @@ data:
 
   # App metrics
   NEW_RELIC_LICENSE_KEY: {{ .Values.webApi.newRelic.licenseKey | quote }}
+  NEW_RELIC_APP_NAME: {{ .Values.webApi.newRelic.applicationName | quote }}

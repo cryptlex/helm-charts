@@ -132,6 +132,7 @@ webApi:
   # App metrics
   newRelic:
     licenseKey: ""
+    applicationName: "Cryptlex Web API"
 
 # SSO config
 sso:
