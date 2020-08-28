@@ -4,6 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-filestore-pv-claim
 spec:
+  storageClassName: {{ .Values.services.filestore.storageClass }}
   accessModes:
     - ReadWriteOnce
   resources:

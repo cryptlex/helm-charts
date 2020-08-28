@@ -4,6 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-database-pv-claim
 spec:
+  storageClassName: {{ .Values.services.database.storageClass }}
   accessModes:
     - ReadWriteOnce
   resources:
