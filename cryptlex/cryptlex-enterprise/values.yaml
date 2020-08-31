@@ -32,8 +32,8 @@ services:
     # Set this to true in case you are using an external database.
     external: false
     storage: 10Gi
-    # Allows setting a different Kubernetes storage class
-    storageClass: default
+    # Leave empty to use default Kubernetes storage class
+    storageClass: 
   geoip:
     # Set this to true in case you are using an external geoip service.
     external: false
@@ -43,8 +43,8 @@ services:
     # Set this to true in case you are using an external filestore like AWS S3, Azure Minio etc.
     external: false
     storage: 10Gi
-    # Allows setting a different Kubernetes storage class
-    storageClass: default
+    # Leave empty to use default Kubernetes storage class
+    storageClass: 
 
 # Database config (ignored in case you are using an external database)
 database:

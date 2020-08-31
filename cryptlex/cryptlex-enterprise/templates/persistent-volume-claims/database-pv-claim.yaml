@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-database-pv-claim
 spec:
-  {{ if not (eq .Values.services.database.storageClass "default") }}
+  {{ if .Values.services.database.storageClass }}
   storageClassName: {{ .Values.services.database.storageClass }}
   {{ end }}
   accessModes:

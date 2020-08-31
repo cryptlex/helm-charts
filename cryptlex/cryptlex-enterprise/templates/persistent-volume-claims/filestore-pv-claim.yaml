@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-filestore-pv-claim
 spec:
-  {{ if not (eq .Values.services.filestore.storageClass "default") }}
+  {{ if .Values.services.filestore.storageClass }}
   storageClassName: {{ .Values.services.filestore.storageClass }}
   {{ end }}
   accessModes:
