@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: web-api
-          image: cryptlex/cryptlex-web-api-enterprise:3.31.16
+          image: cryptlex/cryptlex-web-api-enterprise:3.31.17
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5000
