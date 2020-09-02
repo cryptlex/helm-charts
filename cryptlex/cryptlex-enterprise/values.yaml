@@ -18,6 +18,7 @@ imageCredentials:
 
 # Ingress config
 ingress:
+  forceHttpsRedirect: false
   hosts:
     # Hostname of the Cryptlex Web API server.
     webApiHost: cryptlex-api.mycompany.com
@@ -25,6 +26,7 @@ ingress:
     dashboardHost: cryptlex-app.mycompany.com
     # Hostname of the Cryptlex Release server.
     releaseServerHost: cryptlex-releases.mycompany.com
+  
 
 # Configure Cryptlex services
 services:

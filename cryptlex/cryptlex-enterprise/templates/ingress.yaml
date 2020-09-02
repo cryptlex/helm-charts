@@ -4,6 +4,9 @@ metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
+    {{ if .Values.ingress.forceHttpsRedirect }}
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    {{ end }}
     {{ if .Values.certmanager.issuer.production }}
     cert-manager.io/issuer: {{ .Release.Name }}-letsencrypt-production
     {{ else}}
