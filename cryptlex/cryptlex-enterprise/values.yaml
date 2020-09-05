@@ -39,6 +39,7 @@ services:
   geoip:
     # Set this to true in case you are using an external geoip service.
     external: false
+    image: cryptlex/freegeoip:3.7.3
   filestore:
     # Set this to false in case you are not using Cryptlex release management feature.
     enabled: true
@@ -47,6 +48,10 @@ services:
     storage: 10Gi
     # Leave empty to use default Kubernetes storage class
     storageClass: 
+  dashboard:
+    image: cryptlex/cryptlex-web-dashboard:3.29.18
+  webApi:
+    image: cryptlex/cryptlex-web-api-enterprise:3.31.17
 
 # Database config (ignored in case you are using an external database)
 database:

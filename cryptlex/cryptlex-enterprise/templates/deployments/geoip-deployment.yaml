@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: geoip
-          image: cryptlex/freegeoip:3.7.3
+          image: {{ .Values.services.geoip.image }}
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 8080
