@@ -7,7 +7,7 @@ data:
   APPLICATION_LICENSE_KEY: {{ .Values.webApi.serverLicenseKey }}
   FORCEHTTPS: "false"
   PORT: "5000"
-  {{ if if or .Values.certmanager.enabled .Values.ingress.forceHttpsRedirect }}
+  {{ if or .Values.certmanager.enabled .Values.ingress.forceHttpsRedirect }}
   JWT_AUDIENCE: https://{{ .Values.ingress.hosts.webApiHost }}
   {{ else }}
   JWT_AUDIENCE: http://{{ .Values.ingress.hosts.webApiHost }}
