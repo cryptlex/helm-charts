@@ -36,9 +36,15 @@ services:
     storage: 10Gi
     # Leave empty to use default Kubernetes storage class
     storageClass: 
+    image:
+      repository: postgres
+      tag: 12.3-alpine
   geoip:
     # Set this to true in case you are using an external geoip service.
     external: false
+    image:
+      repository: cryptlex/freegeoip
+      tag: 3.7.3
   filestore:
     # Set this to false in case you are not using Cryptlex release management feature.
     enabled: true
@@ -47,6 +53,25 @@ services:
     storage: 10Gi
     # Leave empty to use default Kubernetes storage class
     storageClass: 
+    image:
+      repository: minio/minio
+      tag: RELEASE.2020-07-14T19-14-30Z
+  dashboard:
+    image:
+      repository: cryptlex/cryptlex-web-dashboard
+      tag: 3.29.22
+  webApi:
+    image:
+      repository: cryptlex/cryptlex-web-api-enterprise
+      tag: 3.31.19
+  releaseServer:
+    image:
+      repository: cryptlex/cryptlex-release-server
+      tag: 3.2.4
+  cache:
+    image:
+      repository: redis
+      tag: 6-alpine
 
 # Database config (ignored in case you are using an external database)
 database:

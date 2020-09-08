@@ -18,15 +18,7 @@ spec:
     spec:
       containers:
         - name: dashboard
-          {{ if .Values.services.dashboard }}
-          {{ if .Values.services.dashboard.image }}
-          image: {{ .Values.services.dashboard.image }}:3.29.22
-          {{ else}}
-          image: cryptlex/cryptlex-web-dashboard:3.29.22
-          {{ end }}
-          {{ else}}
-          image: cryptlex/cryptlex-web-dashboard:3.29.22
-          {{ end }}
+          image: "{{ .Values.services.dashboard.image.repository }}:{{ .Values.services.dashboard.image.tag }}"
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 4200

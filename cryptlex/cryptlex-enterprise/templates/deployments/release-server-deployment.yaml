@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: release-server
-          image: cryptlex/cryptlex-release-server:3.2.4
+          image: "{{ .Values.services.releaseServer.image.repository }}:{{ .Values.services.releaseServer.image.tag }}"
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 3000

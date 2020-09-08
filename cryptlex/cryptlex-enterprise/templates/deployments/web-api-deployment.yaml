@@ -23,15 +23,7 @@ spec:
     spec:
       containers:
         - name: web-api
-          {{ if .Values.services.webApi }}
-          {{ if .Values.services.webApi.image }}
-          image: {{ .Values.services.webApi.image }}:3.31.19
-          {{ else}}
-          image: cryptlex/cryptlex-web-api-enterprise:3.31.19
-          {{ end }}
-          {{ else}}
-          image: cryptlex/cryptlex-web-api-enterprise:3.31.19
-          {{ end }}
+          image: "{{ .Values.services.webApi.image.repository }}:{{ .Values.services.webApi.image.tag }}"
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5000
