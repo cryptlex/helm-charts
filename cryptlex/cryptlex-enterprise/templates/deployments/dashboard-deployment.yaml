@@ -18,8 +18,12 @@ spec:
     spec:
       containers:
         - name: dashboard
+          {{ if .Values.services.dashboard }}
           {{ if .Values.services.dashboard.image }}
           image: {{ .Values.services.dashboard.image }}:3.29.22
+          {{ else}}
+          image: cryptlex/cryptlex-web-dashboard:3.29.22
+          {{ end }}
           {{ else}}
           image: cryptlex/cryptlex-web-dashboard:3.29.22
           {{ end }}
@@ -29,6 +33,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-dashboard-config
+            - secretRef:
+                name: {{ .Release.Name }}-dashboard-secret
           readinessProbe:
             httpGet:
                path: /status

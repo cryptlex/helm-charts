@@ -30,12 +30,5 @@ data:
   SMTP_PORT: {{ .Values.webApi.email.smtp.port | quote}}
   SMTP_ENABLESSL: {{ .Values.webApi.email.smtp.enableSsl | quote}}
   MAILGUN_DOMAIN: {{ .Values.webApi.email.mailgun.domain | quote }}
-  MAILGUN_APIKEY: {{ .Values.webApi.email.mailgun.apiKey | quote }}
-  SENDGRID_APIKEY: {{ .Values.webApi.email.sendgrid.apiKey | quote }}
-
-  # Error monitoring
-  BUGSNAG_APIKEY: {{ .Values.webApi.bugsnag.apiKey | quote }}
-
   # App metrics
-  NEW_RELIC_LICENSE_KEY: {{ .Values.webApi.newRelic.licenseKey | quote }}
   NEW_RELIC_APP_NAME: {{ .Values.webApi.newRelic.applicationName | quote }}

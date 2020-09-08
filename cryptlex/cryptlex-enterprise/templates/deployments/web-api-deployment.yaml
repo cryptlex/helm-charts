@@ -23,10 +23,14 @@ spec:
     spec:
       containers:
         - name: web-api
+          {{ if .Values.services.webApi }}
           {{ if .Values.services.webApi.image }}
-          image: {{ .Values.services.webApi.image }}:3.31.18
+          image: {{ .Values.services.webApi.image }}:3.31.19
           {{ else}}
-          image: cryptlex/cryptlex-web-api-enterprise:3.31.18
+          image: cryptlex/cryptlex-web-api-enterprise:3.31.19
+          {{ end }}
+          {{ else}}
+          image: cryptlex/cryptlex-web-api-enterprise:3.31.19
           {{ end }}
           imagePullPolicy: "IfNotPresent"
           ports:

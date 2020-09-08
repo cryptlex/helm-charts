@@ -39,8 +39,6 @@ services:
   geoip:
     # Set this to true in case you are using an external geoip service.
     external: false
-    # Leave empty to use default image
-    image:
   filestore:
     # Set this to false in case you are not using Cryptlex release management feature.
     enabled: true
@@ -49,12 +47,6 @@ services:
     storage: 10Gi
     # Leave empty to use default Kubernetes storage class
     storageClass: 
-  dashboard:
-    # Leave empty to use default image
-    image:
-  webApi:
-    # Leave empty to use default image
-    image:
 
 # Database config (ignored in case you are using an external database)
 database:
@@ -88,6 +80,7 @@ dashboard:
   # Google analytics key.
   googleAnalyticsKey: UA-XXXXXXXX-X
 
+
 # Geo IP config (only required in case you are using an external service like ipstack.com or ipdata.co)
 geoip:
   # The geo ip server url.
@@ -105,9 +98,7 @@ webApi:
   serverLicenseKey: PASTE_LICENSE_KEY
   # The database connection string, only required in case you are using an external database.
   databaseUrl: postgres://{user}:{password}@{hostname}:{port}/{database-name}
-  # Single line RSA private key.
-  jwtRsaPrivateKey: ""
-  # Single line RSA public key.
+  # Single line RSA public key (Deprecated).
   jwtRsaPublicKey: ""
   # The passphrase to encrypt the RSA private keys.
   rsaPassphrase: PASTE_RSA_SECRET
