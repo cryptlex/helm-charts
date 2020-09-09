@@ -34,7 +34,7 @@ jobs:
         uses: test-room-7/action-update-file@v1
         with:
           file-path: |
-              ./cryptlex/cryptlex-enterprise/Chart.yaml
-              ./cryptlex/cryptlex-enterprise/values.yaml
+              cryptlex/cryptlex-enterprise/Chart.yaml
+              cryptlex/cryptlex-enterprise/values.yaml
           commit-msg: Updated images
           github-token: ${{ secrets.GITHUB_TOKEN }}
