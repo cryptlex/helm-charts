@@ -1,4 +1,4 @@
-name: Update image tags
+name: Update chart image tags
 
 on:
   repository_dispatch:
