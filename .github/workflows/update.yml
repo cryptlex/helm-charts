@@ -17,14 +17,14 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       
       - name: Install yq
-        run: sudo apt install yq -y
+        run: sudo snap install yq
       
       - name: Update dashboard image tag
-        if: ${{ github.event.client_payload.dashboard.tag != '' }}
+        if: ${{ github.event.client_payload.dashboard }}
         run: yq w -i cryptlex/cryptlex-enterprise/values.yaml 'services.dashboard.image.tag' ${{ github.event.client_payload.dashboard.tag }}
       
       - name: Update web api image tag
-        if: ${{ github.event.client_payload.webApi.tag != '' }}
+        if: ${{ github.event.client_payload.webApi }}
         run: yq w -i cryptlex/cryptlex-enterprise/values.yaml 'services.webApi.image.tag' ${{ github.event.client_payload.webApi.tag }}
 
       # - name: Update chart version
