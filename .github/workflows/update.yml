@@ -2,7 +2,7 @@ name: Update image tags
 
 on:
   repository_dispatch:
-    types: [update-image-tag]
+    types: [update-helm-chart]
 
 jobs:
   release:
