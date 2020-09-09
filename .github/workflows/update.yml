@@ -49,4 +49,4 @@ jobs:
               cryptlex/cryptlex-enterprise/Chart.yaml
               cryptlex/cryptlex-enterprise/values.yaml
           commit-msg: Updated images
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.REPO_ACCESS_TOKEN }}
