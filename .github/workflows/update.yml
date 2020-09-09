@@ -27,8 +27,20 @@ jobs:
         if: ${{ github.event.client_payload.webApi }}
         run: yq w -i cryptlex/cryptlex-enterprise/values.yaml 'services.webApi.image.tag' ${{ github.event.client_payload.webApi.tag }}
 
-      # - name: Update chart version
-      #   run: ./scripts/fetch-resources.sh
+      - name: Get current chart version
+        id: chartVersion
+        run: echo "##[set-output name=version;]$(yq r cryptlex/cryptlex-enterprise/Chart.yaml 'version')"
+
+      - name: Get next minor version
+        id: semvers
+        uses: "WyriHaximus/github-action-next-semvers@v1"
+        with:
+          version: ${{ steps.chartVersion.outputs.version }}
+      
+      - name: Update chart version
+        run: |
+          yq w -i cryptlex/cryptlex-enterprise/Chart.yaml 'version' ${{ steps.semvers.outputs.patch }}
+          yq w -i cryptlex/cryptlex-enterprise/Chart.yaml 'appVersion' ${{ steps.semvers.outputs.patch }}
            
       - name: Commit and push updates
         uses: test-room-7/action-update-file@v1
