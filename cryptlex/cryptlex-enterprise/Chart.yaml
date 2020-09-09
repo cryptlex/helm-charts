@@ -4,11 +4,9 @@ description: A Helm chart for Cryptlex Enterprise
 type: application
 home: https://cryptlex.com
 icon: https://cryptlex.com/images/cryptlex_icon.png
-
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 3.8.1
-
+version: 3.8.2
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 3.8.1
+appVersion: 3.8.2
