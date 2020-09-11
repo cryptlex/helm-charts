@@ -21,6 +21,9 @@ spec:
         {{ if .Values.services.filestore.enabled }}
         - {{ .Values.ingress.hosts.releaseServerHost }}
         {{ end }}
+        {{ if .Values.services.grafana.enabled }}
+        - {{ .Values.ingress.hosts.grafanaHost }}
+        {{ end }}
       secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.dashboardHost | sha256sum | trunc 30}}-tls-secret
   {{ end }}
   rules:
@@ -43,4 +46,12 @@ spec:
           - backend:
               serviceName: {{ .Release.Name }}-release-server-service
               servicePort: 3000
+    {{ end }}
+    {{ if .Values.services.grafana.enabled }}
+    - host: {{ .Values.ingress.hosts.grafanaHost }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Values.services.grafana.serviceName }}
+              servicePort: 80
     {{ end }}
