@@ -24,8 +24,6 @@ ingress:
     dashboardHost: cryptlex-app.mycompany.com
     # Hostname of the Cryptlex Release server.
     releaseServerHost: cryptlex-releases.mycompany.com
-    # Hostname of the Grafana server
-    grafanaHost: grafana.mycompany.com
 # Configure Cryptlex services
 services:
   database:
@@ -70,11 +68,6 @@ services:
     image:
       repository: redis
       tag: 6-alpine
-  grafana:
-    # Set this to true if you have installed Grafana and want to access it through ingress.
-    enabled: false
-    # Service name would be <grafanaServiceName>.<grafanaNamespace>.svc.cluster.local
-    serviceName: grafana.grafana.svc.cluster.local
 # Database config (ignored in case you are using an external database)
 database:
   name: cryptlex
