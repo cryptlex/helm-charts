@@ -59,7 +59,7 @@ services:
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
-      tag: 3.31.30
+      tag: 3.31.31
   releaseServer:
     image:
       repository: cryptlex/cryptlex-release-server
@@ -119,7 +119,7 @@ webApi:
   ipRateLimitOptions:
     rateLimit: 50
     ipWhitelist: []
-    realIpHeader: 
+    realIpHeader:
   # Mail settings
   email:
     # From email for password reset email.
