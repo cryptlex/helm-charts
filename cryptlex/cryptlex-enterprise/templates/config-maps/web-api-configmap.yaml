@@ -15,6 +15,9 @@ data:
   REDIS_URL: redis://{{ .Release.Name }}-cache-service:6379
   GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId | quote }}
   IPRATELIMITOPTIONS_IPWHITELIST: {{ .Values.webApi.ipRateLimitOptions.ipWhitelist | toJson | quote }}
+  {{ if .Values.webApi.ipRateLimitOptions.realIpHeader }}
+  IPRATELIMITOPTIONS_REALIPHEADER: {{ .Values.webApi.ipRateLimitOptions.realIpHeader | quote }}
+  {{ end }}
   IPRATELIMITOPTIONS_GENERALRULES_0_LIMIT: {{ .Values.webApi.ipRateLimitOptions.rateLimit | quote }}
   {{ if .Values.services.geoip.external }}
   GEOIPSERVER_URL: {{ .Values.geoip.serverUrl | quote }}

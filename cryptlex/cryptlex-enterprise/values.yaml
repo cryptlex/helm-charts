@@ -119,6 +119,7 @@ webApi:
   ipRateLimitOptions:
     rateLimit: 50
     ipWhitelist: []
+    realIpHeader: 
   # Mail settings
   email:
     # From email for password reset email.
