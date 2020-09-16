@@ -37,11 +37,14 @@ jobs:
           yq w -i cryptlex/cryptlex-enterprise/Chart.yaml 'version' ${{ steps.semvers.outputs.patch }}
           yq w -i cryptlex/cryptlex-enterprise/Chart.yaml 'appVersion' ${{ steps.semvers.outputs.patch }}
            
-      - name: Commit and push updates
-        uses: test-room-7/action-update-file@v1
+      - name: Commit files
+        run: |
+          git add ./cryptlex/cryptlex-enterprise/*.yaml
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Updated images" -a | exit 0
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          file-path: |
-              cryptlex/cryptlex-enterprise/Chart.yaml
-              cryptlex/cryptlex-enterprise/values.yaml
-          commit-msg: Updated images
-          github-token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
