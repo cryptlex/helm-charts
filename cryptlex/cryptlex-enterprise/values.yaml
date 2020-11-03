@@ -113,6 +113,8 @@ webApi:
   serverLicenseKey: PASTE_LICENSE_KEY
   # The database connection string, only required in case you are using an external database.
   databaseUrl: postgres://{user}:{password}@{hostname}:{port}/{database-name}
+  # The read only database connection string, only required in case you are using an external database.
+  databaseReadOnlyUrl: ""
   # The passphrase to encrypt the RSA private keys.
   rsaPassphrase: PASTE_RSA_SECRET
   # IP rate limiting options.
