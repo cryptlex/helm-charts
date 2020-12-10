@@ -65,6 +65,8 @@ services:
       repository: cryptlex/cryptlex-release-server
       tag: 3.2.4
   cache:
+    # Set this to true in case you are using an external Redis database.
+    external: false
     image:
       repository: redis
       tag: 6-alpine
@@ -115,6 +117,10 @@ webApi:
   databaseUrl: postgres://{user}:{password}@{hostname}:{port}/{database-name}
   # The read only database connection string, only required in case you are using an external database.
   databaseReaderUrl: ""
+  # The Redis connection string, only required in case you are using an external Redis database.
+  redisUrl: ""
+  # Enable or disable database caching through Redis.
+  enableDatabaseCaching: false
   # The passphrase to encrypt the RSA private keys.
   rsaPassphrase: PASTE_RSA_SECRET
   # IP rate limiting options.
