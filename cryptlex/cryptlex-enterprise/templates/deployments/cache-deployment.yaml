@@ -1,3 +1,4 @@
+{{ if not .Values.services.cache.external }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,3 +39,4 @@ spec:
             items:
               - key: redis-config
                 path: redis.conf
+{{ end }}
