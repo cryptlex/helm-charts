@@ -12,7 +12,8 @@ data:
   {{ else }}
   JWT_AUDIENCE: http://{{ .Values.ingress.hosts.webApiHost }}
   {{ end }}
-  REDIS_ENABLEDATABASECACHING: {{ .Values.webApi.enableDatabaseCaching | quote }}
+  REDIS_ENABLESSL: {{ .Values.webApi.redis.enableSsl | quote }}
+  REDIS_ENABLEDATABASECACHING: {{ .Values.webApi.redis.enableDatabaseCaching | quote }}
   GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId | quote }}
   IPRATELIMITOPTIONS_IPWHITELIST: {{ .Values.webApi.ipRateLimitOptions.ipWhitelist | toJson | quote }}
   {{ if .Values.webApi.ipRateLimitOptions.realIpHeader }}

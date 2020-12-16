@@ -117,10 +117,6 @@ webApi:
   databaseUrl: postgres://{user}:{password}@{hostname}:{port}/{database-name}
   # The read only database connection string, only required in case you are using an external database.
   databaseReaderUrl: ""
-  # The Redis connection string, only required in case you are using an external Redis database.
-  redisUrl: ""
-  # Enable or disable database caching through Redis.
-  enableDatabaseCaching: false
   # The passphrase to encrypt the RSA private keys.
   rsaPassphrase: PASTE_RSA_SECRET
   # IP rate limiting options.
@@ -128,6 +124,14 @@ webApi:
     rateLimit: 50
     ipWhitelist: []
     realIpHeader:
+  # Redis settings
+  redis:
+    # The Redis connection string, only required in case you are using an external Redis database.
+    url: ""
+    # Enable or disable SSL for Redis.
+    enableSsl: false
+    # Enable or disable database caching through Redis.
+    enableDatabaseCaching: false
   # Mail settings
   email:
     # From email for password reset email.
