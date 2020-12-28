@@ -16,15 +16,15 @@ jobs:
       
       - name: Update dashboard image tag
         if: ${{ github.event.client_payload.dashboard_tag }}
-        run: yq w -i cryptlex/cryptlex-enterprise/values.yaml 'services.dashboard.image.tag' ${{ github.event.client_payload.dashboard_tag }}
+        run: yq e '.services.dashboard.image.tag = ${{ github.event.client_payload.dashboard_tag }}' -i cryptlex/cryptlex-enterprise/values.yaml
       
       - name: Update web api image tag
         if: ${{ github.event.client_payload.web_api_tag }}
-        run: yq w -i cryptlex/cryptlex-enterprise/values.yaml 'services.webApi.image.tag' ${{ github.event.client_payload.web_api_tag }}
+        run: yq e '.services.webApi.image.tag = ${{ github.event.client_payload.web_api_tag }}' -i cryptlex/cryptlex-enterprise/values.yaml 
 
       - name: Get current chart version
         id: chartVersion
-        run: echo "##[set-output name=version;]$(yq r cryptlex/cryptlex-enterprise/Chart.yaml 'version')"
+        run: echo "##[set-output name=version;]$(yq e '.version' cryptlex/cryptlex-enterprise/Chart.yaml)"
 
       - name: Get next minor version
         id: semvers
@@ -34,8 +34,8 @@ jobs:
       
       - name: Update chart version
         run: |
-          yq w -i cryptlex/cryptlex-enterprise/Chart.yaml 'version' ${{ steps.semvers.outputs.patch }}
-          yq w -i cryptlex/cryptlex-enterprise/Chart.yaml 'appVersion' ${{ steps.semvers.outputs.patch }}
+          yq e '.version = ${{ steps.semvers.outputs.patch }}' -i cryptlex/cryptlex-enterprise/Chart.yaml 
+          yq e '.appVersion = ${{ steps.semvers.outputs.patch }}' -i cryptlex/cryptlex-enterprise/Chart.yaml
            
       - name: Commit files
         run: |
