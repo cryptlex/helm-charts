@@ -161,6 +161,10 @@ webApi:
   newRelic:
     licenseKey: ""
     applicationName: "Cryptlex Web API"
+  # Hangfire dashboard
+  hangfireDashboard:
+    username: ""
+    password: ""
 # SSO config
 sso:
   google:
