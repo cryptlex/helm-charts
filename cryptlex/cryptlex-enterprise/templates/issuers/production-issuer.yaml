@@ -1,4 +1,4 @@
-{{ if .Values.certmanager.enabled }}
+# {{ if .Values.certmanager.enabled }}
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
@@ -17,4 +17,4 @@ spec:
     - http01:
        ingress:
          class: nginx
-{{ end }}
+# {{ end }}
