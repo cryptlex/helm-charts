@@ -20,7 +20,11 @@ jobs:
       
       - name: Update web api image tag
         if: ${{ github.event.client_payload.web_api_tag }}
-        run: yq e '.services.webApi.image.tag = "${{ github.event.client_payload.web_api_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml 
+        run: yq e '.services.webApi.image.tag = "${{ github.event.client_payload.web_api_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml
+        
+      - name: Update release server image tag
+        if: ${{ github.event.client_payload.release_server_tag }}
+        run: yq e '.services.releaseServer.image.tag = "${{ github.event.client_payload.release_server_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml 
 
       - name: Get current chart version
         id: chartVersion
