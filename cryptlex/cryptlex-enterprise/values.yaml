@@ -63,7 +63,7 @@ services:
   releaseServer:
     image:
       repository: cryptlex/cryptlex-release-server
-      tag: 3.2.4
+      tag: 3.2.5
   cache:
     # Set this to true in case you are using an external Redis database.
     external: false
