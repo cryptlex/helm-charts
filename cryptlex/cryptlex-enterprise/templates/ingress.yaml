@@ -1,4 +1,8 @@
+{{- if (semverCompare "<1.19.0" .Capabilities.KubeVersion.Version) }}
 apiVersion: networking.k8s.io/v1beta1
+{{ else}}
+apiVersion: networking.k8s.io/v1
+{{- end }}
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
@@ -30,19 +34,43 @@ spec:
       http:
         paths:
           - backend:
+            {{- if (semverCompare "<1.19.0" .Capabilities.KubeVersion.Version) }}
               serviceName: {{ .Release.Name }}-web-api-service
               servicePort: 5000
+            {{ else}}
+              service:
+                name: {{ .Release.Name }}-web-api-service
+                port: 
+                  number: 5000
+            pathType: ImplementationSpecific 
+            {{- end }}
     - host: {{ .Values.ingress.hosts.dashboardHost }}
       http:
         paths:
           - backend:
+            {{- if (semverCompare "<1.19.0" .Capabilities.KubeVersion.Version) }}
               serviceName: {{ .Release.Name }}-dashboard-service
               servicePort: 4200
+            {{ else}}
+              service:
+                name: {{ .Release.Name }}-dashboard-service
+                port: 
+                  number: 4200
+            pathType: ImplementationSpecific 
+            {{- end }}
     {{ if .Values.services.filestore.enabled }}
     - host: {{ .Values.ingress.hosts.releaseServerHost }}
       http:
         paths:
           - backend:
+            {{- if (semverCompare "<1.19.0" .Capabilities.KubeVersion.Version) }}
               serviceName: {{ .Release.Name }}-release-server-service
               servicePort: 3000
+            {{ else}}
+              service:
+                name: {{ .Release.Name }}-release-server-service
+                port: 
+                  number: 3000
+            pathType: ImplementationSpecific 
+            {{- end }}
     {{ end }}
