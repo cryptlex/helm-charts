@@ -29,8 +29,10 @@ spec:
           env:
             - name: POSTGRES_DB
               value: {{ .Values.database.db }}
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           volumeMounts:
-            - mountPath: /var/lib/postgresql
+            - mountPath: /var/lib/postgresql/data
               name: database-volume
       volumes:
         - name: database-volume
