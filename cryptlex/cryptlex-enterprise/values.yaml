@@ -55,7 +55,7 @@ services:
   dashboard:
     image:
       repository: cryptlex/cryptlex-web-dashboard
-      tag: 3.35.1
+      tag: 3.35.2
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
