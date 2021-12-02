@@ -7,7 +7,7 @@ data:
   COMPANY_WEBSITE: {{ .Values.dashboard.companyWebsite }}
   COMPANY_LOGO_URL: {{ .Values.dashboard.companyLogoUrl }}
   COMPANY_FAVICON_URL: {{ .Values.dashboard.companyFaviconUrl }}
-  DISABLE_SERVICE_WORKER_CACHE: {{ .Values.dashboard.disableServiceWorkerCache }}
+  DISABLE_SERVICE_WORKER_CACHE: {{ .Values.dashboard.disableServiceWorkerCache | quote}}
   GOOGLE_ANALYTICS_KEY: {{ .Values.dashboard.googleAnalyticsKey | quote }}
   {{ if or .Values.certmanager.enabled .Values.ingress.forceHttpsRedirect }}
   WEB_API_BASE_URL: https://{{ .Values.ingress.hosts.webApiHost }}
