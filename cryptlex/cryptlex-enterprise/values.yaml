@@ -99,6 +99,8 @@ dashboard:
   companyFaviconUrl: https://mycompany.com/favicon.ico
   # Google analytics key.
   googleAnalyticsKey: UA-XXXXXXXX-X
+  # Disable server worker caching.
+  disableServiceWorkerCache: false
 # Geo IP config (only required in case you are using an external service like ipstack.com or ipdata.co)
 geoip:
   # The geo ip server url.
