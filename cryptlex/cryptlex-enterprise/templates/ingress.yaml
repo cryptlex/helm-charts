@@ -7,18 +7,24 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: {{ .Values.ingress.className }}
     nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
     nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     {{ if .Values.ingress.forceHttpsRedirect }}
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
     {{ end }}
+    {{ if .Values.certmanager.enabled }}
     {{ if .Values.certmanager.issuer.production }}
     cert-manager.io/issuer: {{ .Release.Name }}-letsencrypt-production
     {{ else}}
     cert-manager.io/issuer: {{ .Release.Name }}-letsencrypt-staging
     {{ end }}
+    {{ end }}
 spec:
+  ingressClassName: {{ .Values.ingress.className }}
   {{ if .Values.certmanager.enabled }}
   tls:
     - hosts:
