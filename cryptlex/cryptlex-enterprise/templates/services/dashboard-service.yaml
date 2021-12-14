@@ -5,6 +5,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}-dashboard-service
 spec:
+  type: NodePort
   ports:
     - protocol: TCP
       port: 4200
