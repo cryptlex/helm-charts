@@ -12,6 +12,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
     alb.ingress.kubernetes.io/scheme: "internet-facing"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/target-type: 'ip'
     {{ if .Values.ingress.forceHttpsRedirect }}
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     alb.ingress.kubernetes.io/ssl-redirect: "443"
