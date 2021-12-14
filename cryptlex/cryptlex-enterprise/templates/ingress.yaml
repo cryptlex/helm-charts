@@ -11,7 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
     nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
     alb.ingress.kubernetes.io/scheme: "internet-facing"
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
     alb.ingress.kubernetes.io/group.name: cryptlex-alb-group
     {{ if .Values.ingress.forceHttpsRedirect }}
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
