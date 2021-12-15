@@ -17,6 +17,7 @@ imageCredentials:
 # Ingress config
 ingress:
   forceHttpsRedirect: true
+  # Supported values are: nginx and alb
   className: nginx
   hosts:
     # Hostname of the Cryptlex Web API server.

@@ -5,7 +5,9 @@ metadata:
   labels:
     app: {{ .Release.Name }}-web-api-service
 spec:
+  {{ if eq .Values.ingress.className "alb" }}
   type: NodePort
+  {{ end }}
   ports:
     - protocol: TCP
       port: 5000

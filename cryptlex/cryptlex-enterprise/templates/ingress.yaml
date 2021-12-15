@@ -1,21 +1,22 @@
-{{- if (semverCompare "<1.19.0" .Capabilities.KubeVersion.Version) }}
-apiVersion: networking.k8s.io/v1beta1
-{{ else}}
 apiVersion: networking.k8s.io/v1
-{{- end }}
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
     kubernetes.io/ingress.class: {{ .Values.ingress.className }}
-    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
-    nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
+    {{ if eq .Values.ingress.className "alb" }}
     alb.ingress.kubernetes.io/scheme: "internet-facing"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
     alb.ingress.kubernetes.io/group.name: cryptlex-alb-group
     {{ if .Values.ingress.forceHttpsRedirect }}
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     alb.ingress.kubernetes.io/ssl-redirect: "443"
+    {{ end }}
+    {{ else if eq .Values.ingress.className "nginx" }}
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
+    {{ if .Values.ingress.forceHttpsRedirect }}
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    {{ end }}
     {{ end }}
     {{ if .Values.certmanager.enabled }}
     {{ if .Values.certmanager.issuer.production }}
@@ -41,43 +42,28 @@ spec:
       http:
         paths:
           - backend:
-            {{- if (semverCompare "<1.19.0" .Capabilities.KubeVersion.Version) }}
-              serviceName: {{ .Release.Name }}-web-api-service
-              servicePort: 5000
-            {{ else}}
               service:
                 name: {{ .Release.Name }}-web-api-service
                 port: 
                   number: 5000
             pathType: ImplementationSpecific 
-            {{- end }}
     - host: {{ .Values.ingress.hosts.dashboardHost }}
       http:
         paths:
           - backend:
-            {{- if (semverCompare "<1.19.0" .Capabilities.KubeVersion.Version) }}
-              serviceName: {{ .Release.Name }}-dashboard-service
-              servicePort: 4200
-            {{ else}}
               service:
                 name: {{ .Release.Name }}-dashboard-service
                 port: 
                   number: 4200
             pathType: ImplementationSpecific 
-            {{- end }}
     {{ if .Values.services.filestore.enabled }}
     - host: {{ .Values.ingress.hosts.releaseServerHost }}
       http:
         paths:
           - backend:
-            {{- if (semverCompare "<1.19.0" .Capabilities.KubeVersion.Version) }}
-              serviceName: {{ .Release.Name }}-release-server-service
-              servicePort: 3000
-            {{ else}}
               service:
                 name: {{ .Release.Name }}-release-server-service
                 port: 
                   number: 3000
             pathType: ImplementationSpecific 
-            {{- end }}
     {{ end }}
