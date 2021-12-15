@@ -2,7 +2,6 @@
 
 # Certmanager letsencrypt config
 certmanager:
-  enabled: true
   issuer:
     # Set this to your company email.
     email: support@cryptlex.com
