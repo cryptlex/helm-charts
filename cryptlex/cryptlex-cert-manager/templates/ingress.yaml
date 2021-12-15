@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+  annotations:
+    kubernetes.io/ingress.class: ingress
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    {{ if .Values.certmanager.issuer.production }}
+    cert-manager.io/issuer: {{ .Release.Name }}-letsencrypt-production
+    {{ else}}
+    cert-manager.io/issuer: {{ .Release.Name }}-letsencrypt-staging
+    {{ end }}
+spec:
+  ingressClassName: ingress
+  tls:
+    - hosts:
+        - {{ .Values.ingress.hosts.webApiHost }}
+        - {{ .Values.ingress.hosts.dashboardHost }}
+      secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.dashboardHost | sha256sum | trunc 30}}-tls-secret
+  rules:
+    - host: {{ .Values.ingress.hosts.webApiHost }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ .Release.Name }}-web-api-external-service
+                port: 
+                  number: 443
+            pathType: ImplementationSpecific 
+    - host: {{ .Values.ingress.hosts.dashboardHost }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ .Release.Name }}-dashboard-external-service
+                port: 
+                  number: 443
+            pathType: ImplementationSpecific 

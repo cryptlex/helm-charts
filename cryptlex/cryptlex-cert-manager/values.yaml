@@ -1,0 +1,19 @@
+# Default values for cryptlex-cert-manager.
+
+# Certmanager letsencrypt config
+certmanager:
+  enabled: true
+  issuer:
+    # Set this to your company email.
+    email: support@cryptlex.com
+    # Set this to true once staging certificates are issued successfully.
+    # Otherwise you may run into rate-limiting issues.
+    production: false
+# Ingress config
+ingress:
+  forceHttpsRedirect: true
+  hosts:
+    # Hostname of the Cryptlex Web API server.
+    webApiHost: cryptlex-api.flareget.com
+    # Hostname of the Cryptlex Web Dashboard server.
+    dashboardHost: cryptlex-app.flareget.com
