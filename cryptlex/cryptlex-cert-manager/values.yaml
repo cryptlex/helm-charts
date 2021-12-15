@@ -14,6 +14,6 @@ ingress:
   forceHttpsRedirect: true
   hosts:
     # Hostname of the Cryptlex Web API server.
-    webApiHost: cryptlex-api.flareget.com
+    webApiHost: cryptlex-api.example.com
     # Hostname of the Cryptlex Web Dashboard server.
-    dashboardHost: cryptlex-app.flareget.com
+    dashboardHost: cryptlex-app.example.com
