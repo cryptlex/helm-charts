@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   cryptlex-cert-manager:
   - apiVersion: v2
+    appVersion: 1.0.4
+    created: "2021-12-16T06:50:15.888333126Z"
+    description: A Helm chart for Cryptlex Cert Manager
+    digest: 4fc1f0c583e5efde562ff02eebd5ea2a955381903e5c3baa41a3408a26f5807b
+    home: https://cryptlex.com
+    icon: https://cryptlex.com/images/cryptlex_icon.png
+    name: cryptlex-cert-manager
+    type: application
+    urls:
+    - https://github.com/cryptlex/helm-charts/releases/download/cryptlex-cert-manager-1.0.4/cryptlex-cert-manager-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v2
     appVersion: 1.0.3
     created: "2021-12-16T05:40:46.875500315Z"
     description: A Helm chart for Cryptlex Cert Manager
