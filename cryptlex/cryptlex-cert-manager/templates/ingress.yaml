@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
-    kubernetes.io/ingress.class: ingress
     nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
     nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -14,7 +13,7 @@ metadata:
     cert-manager.io/issuer: {{ .Release.Name }}-letsencrypt-staging
     {{ end }}
 spec:
-  ingressClassName: ingress
+  ingressClassName: nginx
   tls:
     - hosts:
         - {{ .Values.ingress.hosts.webApiHost }}
