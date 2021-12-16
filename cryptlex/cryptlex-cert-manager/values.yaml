@@ -10,9 +10,12 @@ certmanager:
     production: false
 # Ingress config
 ingress:
-  forceHttpsRedirect: true
   hosts:
-    # Hostname of the Cryptlex Web API server.
-    webApiHost: cryptlex-api.example.com
-    # Hostname of the Cryptlex Web Dashboard server.
-    dashboardHost: cryptlex-app.example.com
+    # Hostnames of the Cryptlex Web API server.
+    webApiHosts: 
+      - cryptlex-api1.example.com
+      - cryptlex-api2.example.com
+    # Hostnames of the Cryptlex Web Dashboard server.
+    dashboardHosts: 
+      - cryptlex-app1.example.com
+      - cryptlex-app2.example.com
