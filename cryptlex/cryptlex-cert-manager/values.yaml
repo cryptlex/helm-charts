@@ -13,9 +13,5 @@ ingress:
   hosts:
     # Hostnames of the Cryptlex Web API server.
     webApiHosts: 
-      - cryptlex-api1.example.com
-      - cryptlex-api2.example.com
     # Hostnames of the Cryptlex Web Dashboard server.
     dashboardHosts: 
-      - cryptlex-app1.example.com
-      - cryptlex-app2.example.com
