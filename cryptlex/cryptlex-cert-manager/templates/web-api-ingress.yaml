@@ -1,17 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-ingress
+  name: {{ .Release.Name }}-web-api-ingress
   annotations:
     nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
     nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
-    # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    # nginx.ingress.kubernetes.io/secure-backends: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    # nginx.ingress.kubernetes.io/upstream-vhost: "api.cryptlex.com"
-    # nginx.ingress.kubernetes.io/server-snippet: |
-    #   proxy_ssl_name api.cryptlex.com;
-    #   proxy_ssl_server_name on;
+    nginx.ingress.kubernetes.io/upstream-vhost: "api.cryptlex.com"
     {{ if .Values.certmanager.issuer.production }}
     cert-manager.io/issuer: {{ .Release.Name }}-letsencrypt-production
     {{ else}}
@@ -22,8 +18,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.ingress.hosts.webApiHost }}
-        - {{ .Values.ingress.hosts.dashboardHost }}
-      secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.dashboardHost | sha256sum | trunc 30}}-tls-secret
+      secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost | sha256sum | trunc 30}}-tls-secret
   rules:
     - host: {{ .Values.ingress.hosts.webApiHost }}
       http:
@@ -31,15 +26,6 @@ spec:
           - backend:
               service:
                 name: {{ .Release.Name }}-web-api-external-service
-                port: 
-                  number: 443
-            pathType: ImplementationSpecific 
-    - host: {{ .Values.ingress.hosts.dashboardHost }}
-      http:
-        paths:
-          - backend:
-              service:
-                name: {{ .Release.Name }}-dashboard-external-service
                 port: 
                   number: 443
             pathType: ImplementationSpecific 
