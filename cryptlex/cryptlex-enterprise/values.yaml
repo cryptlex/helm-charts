@@ -19,6 +19,7 @@ ingress:
   forceHttpsRedirect: true
   # Supported values are: nginx and alb
   className: nginx
+  internal: false
   hosts:
     # Hostname of the Cryptlex Web API server.
     webApiHost: cryptlex-api.mycompany.com
