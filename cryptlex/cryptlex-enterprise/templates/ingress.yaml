@@ -68,3 +68,12 @@ spec:
                   number: 3000
             pathType: ImplementationSpecific 
     {{ end }}
+    - http:
+        paths:
+          - path: /v3/status
+            backend:
+              service:
+                name: {{ .Release.Name }}-web-api-service
+                port: 
+                  number: 5000
+            pathType: ImplementationSpecific 
