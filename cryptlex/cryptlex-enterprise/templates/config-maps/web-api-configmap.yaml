@@ -15,7 +15,9 @@ data:
   REDIS_ENABLESSL: {{ .Values.webApi.redis.enableSsl | quote }}
   REDIS_ENABLEDATABASECACHING: {{ .Values.webApi.redis.enableDatabaseCaching | quote }}
   GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId | quote }}
-  IPRATELIMITOPTIONS_IPWHITELIST: {{ .Values.webApi.ipRateLimitOptions.ipWhitelist | toJson | quote }}
+  {{ range $index, $value := .Values.webApi.ipRateLimitOptions.ipWhitelist }}
+  IPRATELIMITOPTIONS_IPWHITELIST_{{$index}}: {{ $value | quote }}
+  {{ end }}
   {{ if .Values.webApi.ipRateLimitOptions.realIpHeader }}
   IPRATELIMITOPTIONS_REALIPHEADER: {{ .Values.webApi.ipRateLimitOptions.realIpHeader | quote }}
   {{ end }}
