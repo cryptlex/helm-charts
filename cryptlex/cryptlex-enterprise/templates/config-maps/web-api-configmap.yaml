@@ -14,6 +14,7 @@ data:
   {{ end }}
   REDIS_ENABLESSL: {{ .Values.webApi.redis.enableSsl | quote }}
   REDIS_ENABLEDATABASECACHING: {{ .Values.webApi.redis.enableDatabaseCaching | quote }}
+  RABBITMQ_ENABLED: {{ .Values.webApi.rabbitMq.enabled | quote }}
   GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId | quote }}
   {{ range $index, $value := .Values.webApi.ipRateLimitOptions.ipWhitelist }}
   IPRATELIMITOPTIONS_IPWHITELIST_{{$index}}: {{ $value | quote }}

@@ -137,6 +137,14 @@ webApi:
     enableSsl: false
     # Enable or disable database caching through Redis.
     enableDatabaseCaching: false
+  # RabbitMQ settings
+  rabbitMq:
+    # Enable or disable RabbitMQ.
+    enabled: false
+    # The RabbitMQ connection string.
+    url: ""
+    username: ""
+    password: ""
   # Mail settings
   email:
     # From email for password reset email.
