@@ -181,6 +181,9 @@ webApi:
   hangfireDashboard:
     username: ""
     password: ""
+  # Postmark
+  postmark:
+    accountToken: ""
 # SSO config
 sso:
   google:
