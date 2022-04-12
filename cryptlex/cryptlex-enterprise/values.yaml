@@ -55,6 +55,14 @@ services:
     image:
       repository: minio/minio
       tag: RELEASE.2020-07-14T19-14-30Z
+  rabbitMq:
+    # Set this to false in case you are not using RabbitMQ.
+    enabled: false
+    # Set this to true in case you are using an external RabbitMQ instance.
+    external: false
+    storage: 5Gi
+    # Leave empty to use default Kubernetes storage class
+    storageClass:
   dashboard:
     image:
       repository: cryptlex/cryptlex-web-dashboard
@@ -78,6 +86,11 @@ database:
   name: cryptlex
   user: postgres
   password: postgres
+# RabbitMQ config (ignored in case you are using an external RabbitMQ instance)
+rabbitMq:
+  username: rabbitmq-admin
+  password: rabbitmq
+  replicaCount: 1
 # Filestore config
 filestore:
   accessKey: minio
@@ -139,9 +152,7 @@ webApi:
     enableDatabaseCaching: false
   # RabbitMQ settings
   rabbitMq:
-    # Enable or disable RabbitMQ.
-    enabled: false
-    # The RabbitMQ connection string.
+    # The RabbitMQ connection string, only required in case you are using an external RabbitMQ instance.
     url: ""
     username: ""
     password: ""
