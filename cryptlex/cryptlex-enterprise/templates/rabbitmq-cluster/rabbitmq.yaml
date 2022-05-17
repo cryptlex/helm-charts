@@ -16,6 +16,8 @@ spec:
       cpu: 1000m
       memory: "1Gi"
   rabbitmq:
+    additionalPlugins:
+      - rabbitmq_delayed_message_exchange
     additionalConfig: |
       default_user = {{ .Values.rabbitMq.username }}
       default_pass = {{ .Values.rabbitMq.password }}
