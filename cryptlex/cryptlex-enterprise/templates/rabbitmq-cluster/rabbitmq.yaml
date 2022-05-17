@@ -6,6 +6,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}-rabbitmq
 spec:
+  image: masstransit/rabbitmq:3.9.15
   replicas: {{ .Values.rabbitMq.replicaCount }}
   resources:
     requests:

@@ -58,6 +58,8 @@ services:
   rabbitMq:
     # Set this to false in case you are not using RabbitMQ.
     enabled: false
+    # Set this to true in case the "Delayed Message Plugin" is enabled in RabbitMQ instance.
+    delayedMessagePluginEnabled: false
     # Set this to true in case you are using an external RabbitMQ instance.
     external: false
     storage: 5Gi
