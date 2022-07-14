@@ -10,8 +10,8 @@ spec:
   replicas: {{ .Values.rabbitMq.replicaCount }}
   resources:
     requests:
-      cpu: 100m
-      memory: "300Mi"
+      cpu: 200m
+      memory: "500Mi"
     limits:
       cpu: 1000m
       memory: "1Gi"
