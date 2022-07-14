@@ -23,6 +23,7 @@ spec:
       default_pass = {{ .Values.rabbitMq.password }}
       cluster_partition_handling = pause_minority
       vm_memory_high_watermark_paging_ratio = 0.99
+      vm_memory_high_watermark.relative = 0.7
       disk_free_limit.relative = 1.0
       collect_statistics_interval = 10000
   persistence:
