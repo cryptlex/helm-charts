@@ -14,7 +14,7 @@ spec:
       memory: "500Mi"
     limits:
       cpu: 1000m
-      memory: "1Gi"
+      memory: "2Gi"
   rabbitmq:
     additionalPlugins:
       - rabbitmq_delayed_message_exchange
