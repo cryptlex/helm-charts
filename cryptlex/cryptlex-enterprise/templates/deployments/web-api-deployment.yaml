@@ -34,9 +34,10 @@ spec:
                 name: {{ .Release.Name }}-web-api-secret
           resources:
             requests:
+              cpu: 200m
               memory: "500Mi"
             limits:
-              memory: "900Mi"
+              memory: "1.5Gi"
           readinessProbe:
             httpGet:
                path: /v3/status
