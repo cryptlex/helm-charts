@@ -135,6 +135,18 @@ entries:
     version: 1.0.0
   cryptlex-enterprise:
   - apiVersion: v2
+    appVersion: 3.15.96
+    created: "2022-09-09T12:22:20.585617616Z"
+    description: A Helm chart for Cryptlex Enterprise
+    digest: ae546286b6e819643e46be68f33c33dba50562e84e53b2fef5e4f08c56814d3d
+    home: https://cryptlex.com
+    icon: https://cryptlex.com/images/cryptlex_icon.png
+    name: cryptlex-enterprise
+    type: application
+    urls:
+    - https://github.com/cryptlex/helm-charts/releases/download/cryptlex-enterprise-3.15.96/cryptlex-enterprise-3.15.96.tgz
+    version: 3.15.96
+  - apiVersion: v2
     appVersion: 3.15.95
     created: "2022-09-09T11:19:10.655955225Z"
     description: A Helm chart for Cryptlex Enterprise
