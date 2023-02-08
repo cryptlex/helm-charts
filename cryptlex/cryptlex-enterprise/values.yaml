@@ -74,7 +74,7 @@ services:
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
-      tag: 3.56.5
+      tag: 3.57.0
   releaseServer:
     image:
       repository: cryptlex/cryptlex-release-server
