@@ -70,7 +70,7 @@ services:
   dashboard:
     image:
       repository: cryptlex/cryptlex-web-dashboard
-      tag: 3.39.9
+      tag: 3.40.0
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
