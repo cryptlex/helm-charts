@@ -6,5 +6,5 @@ metadata:
 data:
   redis-config: |
     maxmemory 256mb
-    maxmemory-policy allkeys-lru
+    maxmemory-policy volatile-lru
 {{ end }}
