@@ -5,6 +5,6 @@ metadata:
   name: {{ .Release.Name }}-cache-config
 data:
   redis-config: |
-    maxmemory 256mb
+    maxmemory 1gb
     maxmemory-policy volatile-lru
 {{ end }}
