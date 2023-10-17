@@ -84,7 +84,7 @@ services:
     external: false
     image:
       repository: redis
-      tag: 6-alpine
+      tag: 7-alpine
 # Database config (ignored in case you are using an external database)
 database:
   name: cryptlex
