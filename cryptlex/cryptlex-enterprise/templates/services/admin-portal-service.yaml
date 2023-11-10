@@ -1,0 +1,18 @@
+{{ if .Values.services.adminPortal.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-admin-portal-service
+  labels:
+    app: {{ .Release.Name }}-admin-portal-service
+spec:
+  {{ if eq .Values.ingress.className "alb" }}
+  type: NodePort
+  {{ end }}
+  ports:
+    - protocol: TCP
+      port: 4400
+      targetPort: 4400
+  selector:
+    app: {{ .Release.Name }}-admin-portal
+{{ end }}

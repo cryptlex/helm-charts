@@ -20,7 +20,7 @@ spec:
       containers:
         - name: database
           image: "{{ .Values.services.database.image.repository }}:{{ .Values.services.database.image.tag }}"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: {{ .Values.services.database.image.pullPolicy }}
           ports:
             - containerPort: 5432
           envFrom:

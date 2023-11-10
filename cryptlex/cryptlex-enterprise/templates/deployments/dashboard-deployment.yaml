@@ -19,7 +19,7 @@ spec:
       containers:
         - name: dashboard
           image: "{{ .Values.services.dashboard.image.repository }}:{{ .Values.services.dashboard.image.tag }}"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: {{ .Values.services.dashboard.image.pullPolicy }}
           ports:
             - containerPort: 4200
           envFrom:

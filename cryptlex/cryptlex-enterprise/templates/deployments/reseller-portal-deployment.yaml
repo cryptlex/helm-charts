@@ -1,0 +1,41 @@
+{{ if .Values.services.resellerPortal.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-reseller-portal
+  labels:
+    app: {{ .Release.Name }}-reseller-portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-reseller-portal
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-reseller-portal
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config-maps/web-portals-configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: reseller-portal
+          image: "{{ .Values.services.resellerPortal.image.repository }}:{{ .Values.services.resellerPortal.image.tag }}"
+          imagePullPolicy: {{ .Values.services.resellerPortal.image.pullPolicy }}
+          ports:
+            - containerPort: 4402
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-web-portals-config
+            - secretRef:
+                name: {{ .Release.Name }}-web-portals-secret
+          readinessProbe:
+            httpGet:
+               path: /status
+               port: 4402
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-docker-secret
+{{ end }}

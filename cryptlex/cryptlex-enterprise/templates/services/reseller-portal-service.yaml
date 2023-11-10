@@ -1,0 +1,18 @@
+{{ if .Values.services.resellerPortal.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-reseller-portal-service
+  labels:
+    app: {{ .Release.Name }}-reseller-portal-service
+spec:
+  {{ if eq .Values.ingress.className "alb" }}
+  type: NodePort
+  {{ end }}
+  ports:
+    - protocol: TCP
+      port: 4402
+      targetPort: 4402
+  selector:
+    app: {{ .Release.Name }}-reseller-portal
+{{ end }}

@@ -23,10 +23,16 @@ ingress:
   hosts:
     # Hostname of the Cryptlex Web API server.
     webApiHost: cryptlex-api.mycompany.com
-    # Hostname of the Cryptlex Web Dashboard server.
-    dashboardHost: cryptlex-app.mycompany.com
+    # Hostname of the Cryptlex Admin Portal server
+    adminPortalHost: cryptlex-app.mycompany.com
+    # Hostname of the Cryptlex Customer Portal server
+    customerPortalHost: cryptlex-customer.mycompany.com
+    # Hostname of the Cryptlex Reseller Portal server
+    resellerPortalHost: cryptlex-reseller.mycompany.com
     # Hostname of the Cryptlex Release server.
     releaseServerHost: cryptlex-releases.mycompany.com
+    # Hostname of the Cryptlex Web Dashboard server. (Deprecated in favor of admin portal)
+    dashboardHost: cryptlex-app-legacy.mycompany.com
 # Configure Cryptlex services
 services:
   database:
@@ -38,12 +44,14 @@ services:
     image:
       repository: postgres
       tag: 12.3-alpine
+      pullPolicy: IfNotPresent
   geoip:
     # Set this to true in case you are using an external geoip service.
     external: false
     image:
       repository: cryptlex/freegeoip
       tag: 3.7.3
+      pullPolicy: IfNotPresent
   filestore:
     # Set this to false in case you are not using Cryptlex release management feature.
     enabled: true
@@ -55,6 +63,7 @@ services:
     image:
       repository: minio/minio
       tag: RELEASE.2020-07-14T19-14-30Z
+      pullPolicy: IfNotPresent
   rabbitMq:
     # Set this to false in case you are not using RabbitMQ.
     enabled: false
@@ -71,20 +80,42 @@ services:
     image:
       repository: cryptlex/cryptlex-web-dashboard
       tag: 3.43.12
+      pullPolicy: IfNotPresent
+  adminPortal:
+    enabled: false
+    image:
+      repository: cryptlex/admin-portal
+      tag: 5.0.0
+      pullPolicy: IfNotPresent
+  customerPortal:
+    enabled: false
+    image:
+      repository: cryptlex/customer-portal
+      tag: 5.0.0
+      pullPolicy: IfNotPresent
+  resellerPortal:
+    enabled: false
+    image:
+      repository: cryptlex/reseller-portal
+      tag: 5.0.0
+      pullPolicy: IfNotPresent
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
       tag: 3.67.58
+      pullPolicy: IfNotPresent
   releaseServer:
     image:
       repository: cryptlex/cryptlex-release-server
       tag: 3.2.6
+      pullPolicy: IfNotPresent
   cache:
     # Set this to true in case you are using an external Redis database.
     external: false
     image:
       repository: redis
       tag: 7-alpine
+      pullPolicy: IfNotPresent
 # Database config (ignored in case you are using an external database)
 database:
   name: cryptlex
@@ -107,7 +138,7 @@ filestore:
   region: us-east-1
   # Set this to true in case you are using an external filestore like AWS S3, Azure Minio etc.
   useSsl: false
-# Dashboard config
+# Dashboard config (Deprecated)
 dashboard:
   # Your company name. This shows up in the browser title.
   companyName: My Company
@@ -119,8 +150,18 @@ dashboard:
   companyFaviconUrl: https://mycompany.com/favicon.ico
   # Google analytics key.
   googleAnalyticsKey: UA-XXXXXXXX-X
-  # Disable server worker caching.
-  disableServiceWorkerCache: false
+# Web Portals - admin, customer and reseller portals config
+webPortals:
+  # Your company name. This shows up in the browser title.
+  companyName: My Company
+  # Your company website.
+  companyWebsite: https://mycompany.com
+  # Logo to be displayed. It must have a transparent background.
+  companyLogoUrl: https://mycompany.com/logo.png
+  # Favicon URL.
+  companyFaviconUrl: https://mycompany.com/favicon.ico
+  # Google analytics key.
+  googleAnalyticsKey: UA-XXXXXXXX-X
 # Geo IP config (only required in case you are using an external service like ipstack.com or ipdata.co)
 geoip:
   # The geo ip server url.

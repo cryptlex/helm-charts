@@ -1,0 +1,18 @@
+{{ if .Values.services.customerPortal.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-customer-portal-service
+  labels:
+    app: {{ .Release.Name }}-customer-portal-service
+spec:
+  {{ if eq .Values.ingress.className "alb" }}
+  type: NodePort
+  {{ end }}
+  ports:
+    - protocol: TCP
+      port: 4401
+      targetPort: 4401
+  selector:
+    app: {{ .Release.Name }}-customer-portal
+{{ end }}

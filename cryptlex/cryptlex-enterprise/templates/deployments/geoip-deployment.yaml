@@ -18,7 +18,7 @@ spec:
       containers:
         - name: geoip
           image: "{{ .Values.services.geoip.image.repository }}:{{ .Values.services.geoip.image.tag }}"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: {{ .Values.services.geoip.image.pullPolicy }}
           ports:
             - containerPort: 8080
       restartPolicy: Always

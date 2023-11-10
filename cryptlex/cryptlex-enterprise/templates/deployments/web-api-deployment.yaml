@@ -24,7 +24,7 @@ spec:
       containers:
         - name: web-api
           image: "{{ .Values.services.webApi.image.repository }}:{{ .Values.services.webApi.image.tag }}"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: {{ .Values.services.webApi.image.pullPolicy }}
           ports:
             - containerPort: 5000
           envFrom:

@@ -21,7 +21,7 @@ spec:
       containers:
         - name: release-server
           image: "{{ .Values.services.releaseServer.image.repository }}:{{ .Values.services.releaseServer.image.tag }}"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: {{ .Values.services.releaseServer.image.pullPolicy }}
           ports:
             - containerPort: 3000
           envFrom:

@@ -24,7 +24,7 @@ spec:
       containers:
         - name: filestore
           image: "{{ .Values.services.filestore.image.repository }}:{{ .Values.services.filestore.image.tag }}"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: {{ .Values.services.filestore.image.pullPolicy }}
           args:
             - server
             - /var/minio/data

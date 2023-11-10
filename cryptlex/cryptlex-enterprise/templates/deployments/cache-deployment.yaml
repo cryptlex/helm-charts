@@ -18,7 +18,7 @@ spec:
       containers:
         - name: cache
           image: "{{ .Values.services.cache.image.repository }}:{{ .Values.services.cache.image.tag }}"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: {{ .Values.services.cache.image.pullPolicy }}
           command: ["redis-server", "/config/redis.conf"]
           volumeMounts:
             - name: cache-volume

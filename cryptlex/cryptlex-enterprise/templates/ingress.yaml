@@ -34,10 +34,19 @@ spec:
     - hosts:
         - {{ .Values.ingress.hosts.webApiHost }}
         - {{ .Values.ingress.hosts.dashboardHost }}
+        {{ if .Values.services.adminPortal.enabled }}
+        - {{ .Values.ingress.hosts.adminPortalHost }}
+        {{ end }}
+        {{ if .Values.services.customerPortal.enabled }}
+        - {{ .Values.ingress.hosts.customerPortalHost }}
+        {{ end }}
+        {{ if .Values.services.resellerPortal.enabled }}
+        - {{ .Values.ingress.hosts.resellerPortalHost }}
+        {{ end }}
         {{ if .Values.services.filestore.enabled }}
         - {{ .Values.ingress.hosts.releaseServerHost }}
         {{ end }}
-      secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.dashboardHost | sha256sum | trunc 30}}-tls-secret
+      secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.dashboardHost .Values.ingress.hosts.adminPortalHost | sha256sum | trunc 30}}-tls-secret
   {{ end }}
   rules:
     - host: {{ .Values.ingress.hosts.webApiHost }}
@@ -58,6 +67,39 @@ spec:
                 port: 
                   number: 4200
             pathType: ImplementationSpecific 
+    {{ if .Values.services.adminPortal.enabled }}
+    - host: {{ .Values.ingress.hosts.adminPortalHost }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ .Release.Name }}-admin-portal-service
+                port: 
+                  number: 4400
+            pathType: ImplementationSpecific 
+    {{ end }}
+    {{ if .Values.services.customerPortal.enabled }}
+    - host: {{ .Values.ingress.hosts.customerPortalHost }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ .Release.Name }}-customer-portal-service
+                port: 
+                  number: 4401
+            pathType: ImplementationSpecific 
+    {{ end }}
+    {{ if .Values.services.resellerPortal.enabled }}
+    - host: {{ .Values.ingress.hosts.resellerPortalHost }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ .Release.Name }}-reseller-portal-service
+                port: 
+                  number: 4402
+            pathType: ImplementationSpecific 
+    {{ end }}
     {{ if .Values.services.filestore.enabled }}
     - host: {{ .Values.ingress.hosts.releaseServerHost }}
       http:

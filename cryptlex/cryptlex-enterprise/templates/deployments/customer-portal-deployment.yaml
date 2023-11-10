@@ -1,0 +1,41 @@
+{{ if .Values.services.customerPortal.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-customer-portal
+  labels:
+    app: {{ .Release.Name }}-customer-portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-customer-portal
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-customer-portal
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config-maps/web-portals-configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: customer-portal
+          image: "{{ .Values.services.customerPortal.image.repository }}:{{ .Values.services.customerPortal.image.tag }}"
+          imagePullPolicy: {{ .Values.services.customerPortal.image.pullPolicy }}
+          ports:
+            - containerPort: 4401
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-web-portals-config
+            - secretRef:
+                name: {{ .Release.Name }}-web-portals-secret
+          readinessProbe:
+            httpGet:
+               path: /status
+               port: 4401
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-docker-secret
+{{ end }}
