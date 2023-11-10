@@ -5,7 +5,7 @@ metadata:
 data:
   APPLICATION_NAME: {{ .Values.webApi.applicationName }}
   APPLICATION_LICENSE_KEY: {{ .Values.webApi.serverLicenseKey }}
-  APPLICATION_REGION: {{ .Values.webApi.region }}
+  APPLICATION_REGION: {{ .Values.webApi.region | quote}}
   FORCEHTTPS: "false"
   PORT: "5000"
   DATABASE_MAXIMUMPOOLSIZE: {{ .Values.webApi.databaseMaximumPoolSize | quote}}
