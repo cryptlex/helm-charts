@@ -5,6 +5,9 @@ metadata:
 data:
   APPLICATION_NAME: {{ .Values.webApi.applicationName }}
   APPLICATION_LICENSE_KEY: {{ .Values.webApi.serverLicenseKey }}
+  {{ if .Values.webApi.environment }}
+  ASPNETCORE_ENVIRONMENT: {{ .Values.webApi.environment }}
+  {{ end }}
   {{ if .Values.webApi.region }}
   APPLICATION_REGION: {{ .Values.webApi.region}}
   {{ end }}
@@ -34,6 +37,11 @@ data:
   GEOIPSERVER_APIKEY: {{ .Values.geoip.apiKey | quote }}
   {{ else }}
   GEOIPSERVER_URL: http://{{ .Release.Name }}-geoip-service:8080/json
+  {{ end }}
+  {{ if .Values.webApi.paddle }}
+  {{ if .Values.webApi.paddle.apiUrl }}
+  PADDLE_APIURL: {{ .Values.webApi.paddle.apiUrl | quote }}
+  {{ end }}
   {{ end }}
   # Mail settings
   EMAIL_FROMADDRESS: {{ .Values.webApi.email.fromAddress }}
