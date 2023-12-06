@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-web-portals-config
 data:
+  {{ if .Values.webPortals.releasedAt }}
+  APPLICATION_RELEASEDAT: {{ .Values.webPortals.releasedAt }}
+  {{ end }}
   COMPANY_NAME: {{ .Values.webPortals.companyName }}
   COMPANY_WEBSITE: {{ .Values.webPortals.companyWebsite }}
   COMPANY_LOGO_URL: {{ .Values.webPortals.companyLogoUrl }}

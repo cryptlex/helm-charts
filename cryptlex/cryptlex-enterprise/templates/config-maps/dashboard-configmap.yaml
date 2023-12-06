@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-dashboard-config
 data:
+  {{ if .Values.dashboard.releasedAt }}
+  APPLICATION_RELEASEDAT: {{ .Values.dashboard.releasedAt }}
+  {{ end }}
   COMPANY_NAME: {{ .Values.dashboard.companyName }}
   COMPANY_WEBSITE: {{ .Values.dashboard.companyWebsite }}
   COMPANY_LOGO_URL: {{ .Values.dashboard.companyLogoUrl }}
