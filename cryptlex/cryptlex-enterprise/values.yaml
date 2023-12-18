@@ -184,6 +184,8 @@ webApi:
   databaseMaximumPoolSize: 300
   # The passphrase to encrypt the RSA private keys.
   rsaPassphrase: PASTE_RSA_SECRET
+  # Enable maintenance mode during DB major version upgrade.
+  maintenanceModeEnabled: false
   # IP rate limiting options.
   ipRateLimitOptions:
     rateLimit: 50

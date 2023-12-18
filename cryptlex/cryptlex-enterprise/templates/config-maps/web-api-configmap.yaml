@@ -5,6 +5,7 @@ metadata:
 data:
   APPLICATION_NAME: {{ .Values.webApi.applicationName }}
   APPLICATION_LICENSE_KEY: {{ .Values.webApi.serverLicenseKey }}
+  MAINTENANCEMODEENABLED: {{ .Values.webApi.maintenanceModeEnabled }}
   {{ if .Values.webApi.releasedAt }}
   APPLICATION_RELEASEDAT: {{ .Values.webApi.releasedAt }}
   {{ end }}
