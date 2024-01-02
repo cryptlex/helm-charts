@@ -18,6 +18,18 @@ jobs:
         if: ${{ github.event.client_payload.dashboard_tag }}
         run: yq e '.services.dashboard.image.tag = "${{ github.event.client_payload.dashboard_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml
       
+      - name: Update admin portal image tag
+        if: ${{ github.event.client_payload.web_portal_tag }}
+        run: yq e '.services.adminPortal.image.tag = "${{ github.event.client_payload.web_portal_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml
+     
+      - name: Update customer portal image tag
+        if: ${{ github.event.client_payload.web_portal_tag }}
+        run: yq e '.services.customerPortal.image.tag = "${{ github.event.client_payload.web_portal_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml
+      
+      - name: Update reseller portal image tag
+        if: ${{ github.event.client_payload.web_portal_tag }}
+        run: yq e '.services.resellerPortal.image.tag = "${{ github.event.client_payload.web_portal_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml
+
       - name: Update web api image tag
         if: ${{ github.event.client_payload.web_api_tag }}
         run: yq e '.services.webApi.image.tag = "${{ github.event.client_payload.web_api_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml
