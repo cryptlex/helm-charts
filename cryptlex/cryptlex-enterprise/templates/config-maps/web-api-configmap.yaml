@@ -46,6 +46,9 @@ data:
   {{ if .Values.webApi.paddle.apiUrl }}
   PADDLE_APIURL: {{ .Values.webApi.paddle.apiUrl | quote }}
   {{ end }}
+  {{ if .Values.webApi.paddle.apiUrlLegacy }}
+  PADDLE_APIURLLEGACY: {{ .Values.webApi.paddle.apiUrlLegacy | quote }}
+  {{ end }}
   {{ end }}
   # Mail settings
   EMAIL_FROMADDRESS: {{ .Values.webApi.email.fromAddress }}
