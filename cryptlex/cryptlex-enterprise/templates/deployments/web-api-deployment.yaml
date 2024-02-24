@@ -40,7 +40,7 @@ spec:
               memory: "1.5Gi"
           readinessProbe:
             httpGet:
-               path: /v3/status
+               path: /healthz
                port: 5000
             initialDelaySeconds: 10
             periodSeconds: 10
