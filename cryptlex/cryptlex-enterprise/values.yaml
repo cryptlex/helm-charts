@@ -85,19 +85,19 @@ services:
     enabled: false
     image:
       repository: cryptlex/admin-portal
-      tag: 5.0.0-beta12
+      tag: 5.0.0-beta13
       pullPolicy: IfNotPresent
   customerPortal:
     enabled: false
     image:
       repository: cryptlex/customer-portal
-      tag: 5.0.0-beta12
+      tag: 5.0.0-beta13
       pullPolicy: IfNotPresent
   resellerPortal:
     enabled: false
     image:
       repository: cryptlex/reseller-portal
-      tag: 5.0.0-beta12
+      tag: 5.0.0-beta13
       pullPolicy: IfNotPresent
   webApi:
     image:
