@@ -119,4 +119,7 @@ spec:
                 name: {{ .Release.Name }}-web-api-service
                 port: 
                   number: 5000
-            pathType: ImplementationSpecific 
+            pathType: ImplementationSpecific
+            {{- if .Values.ingress.hosts.webApiHostStatus }}
+            host: "{{ .Values.ingress.hosts.webApiHostStatus }}"
+            {{- end }}
