@@ -23,6 +23,8 @@ ingress:
   hosts:
     # Hostname of the Cryptlex Web API server.
     webApiHost: cryptlex-api.mycompany.com
+    # Optional hostname of the Cryptlex /v3/status path.
+    webApiHostStatus: 
     # Hostname of the Cryptlex Admin Portal server
     adminPortalHost: cryptlex-app.mycompany.com
     # Hostname of the Cryptlex Customer Portal server
