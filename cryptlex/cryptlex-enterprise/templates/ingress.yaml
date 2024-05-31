@@ -112,6 +112,7 @@ spec:
                   number: 3000
             pathType: ImplementationSpecific 
     {{ end }}
+    {{ if .Values.ingress.enableStatusPath }}
     - http:
         paths:
           - path: /v3/status
@@ -121,3 +122,4 @@ spec:
                 port: 
                   number: 5000
             pathType: ImplementationSpecific 
+    {{ end }}
