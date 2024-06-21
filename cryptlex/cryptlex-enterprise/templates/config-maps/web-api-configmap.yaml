@@ -60,3 +60,4 @@ data:
   MAILGUN_DOMAIN: {{ .Values.webApi.email.mailgun.domain | quote }}
   # App metrics
   NEW_RELIC_APP_NAME: {{ .Values.webApi.newRelic.applicationName | quote }}
+  OTEL_EXPORTER_OTLP_ENDPOINT: {{ .Values.webApi.openTelemetry.otlpEndpoint | quote }}

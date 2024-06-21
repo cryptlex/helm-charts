@@ -238,6 +238,11 @@ webApi:
   newRelic:
     licenseKey: ""
     applicationName: "Cryptlex Web API"
+  # OpenTelemetry
+  openTelemetry:
+    apiKey: ""
+    applicationName: ""
+    otlpEndpoint: ""
   # Hangfire dashboard
   hangfireDashboard:
     username: ""
