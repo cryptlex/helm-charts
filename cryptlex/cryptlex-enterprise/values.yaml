@@ -250,6 +250,8 @@ webApi:
   # Postmark
   postmark:
     accountToken: ""
+  googleAnalytics:
+    key: "G-XXXXXXX"
 # SSO config
 sso:
   google:
