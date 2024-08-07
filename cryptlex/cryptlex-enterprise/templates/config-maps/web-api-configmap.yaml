@@ -29,7 +29,7 @@ data:
   RABBITMQ_PREFETCHCOUNT: {{ .Values.services.rabbitMq.prefetchCount | quote }}
   RABBITMQ_DELAYEDMESSAGEPLUGINENABLED: {{ .Values.services.rabbitMq.delayedMessagePluginEnabled | quote }}
   GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId | quote }}
-  GOOGLE_ANALYTICS_KEY: {{.Values.webApi.googleAnalytics.key | quote}}
+  GOOGLE_ANALYTICS_KEY: {{.Values.google.analytics.key | quote}}
 
   {{ range $index, $value := .Values.webApi.ipRateLimitOptions.ipWhitelist }}
   IPRATELIMITOPTIONS_IPWHITELIST_{{$index}}: {{ $value | quote }}

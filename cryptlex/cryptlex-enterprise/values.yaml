@@ -228,9 +228,6 @@ webApi:
     # Sendgrid config, in case you are using Sendgrid for sending emails.
     sendgrid:
       apiKey: ""
-  # Google reCAPTCHA
-  googleRecaptcha:
-    secretKey: ""
   # Error monitoring
   bugsnag:
     apiKey: ""
@@ -250,10 +247,15 @@ webApi:
   # Postmark
   postmark:
     accountToken: ""
-  googleAnalytics:
-    key: ""  # G-XXXXXXX
 # SSO config
 sso:
   google:
     # Refer to following for enabling Google SSO: https://docs.cryptlex.com/user-management/google-sso
     clientId: ""
+ # Google
+  google:
+    recaptcha:
+       secretKey: ""
+    analytics:
+       # G-XXXXXXX
+       key: ""
