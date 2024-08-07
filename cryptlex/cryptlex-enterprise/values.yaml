@@ -86,24 +86,24 @@ services:
     enabled: false
     image:
       repository: cryptlex/admin-portal
-      tag: 5.0.0
+      tag: 5.0.5
       pullPolicy: IfNotPresent
   customerPortal:
     enabled: false
     image:
       repository: cryptlex/customer-portal
-      tag: 5.0.0
+      tag: 5.0.5
       pullPolicy: IfNotPresent
   resellerPortal:
     enabled: false
     image:
       repository: cryptlex/reseller-portal
-      tag: 5.0.0
+      tag: 5.0.5
       pullPolicy: IfNotPresent
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
-      tag: 3.72.16
+      tag: 3.72.19
       pullPolicy: IfNotPresent
   releaseServer:
     image:
