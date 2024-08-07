@@ -251,7 +251,7 @@ webApi:
   postmark:
     accountToken: ""
   googleAnalytics:
-    key: "G-XXXXXXX"
+    key: ""  # G-XXXXXXX
 # SSO config
 sso:
   google:
