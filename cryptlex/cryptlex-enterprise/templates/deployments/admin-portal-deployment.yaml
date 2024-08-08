@@ -26,8 +26,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-web-portals-config
-            - secretRef:
-                name: {{ .Release.Name }}-web-portals-secret
           readinessProbe:
             httpGet:
                path: /status
