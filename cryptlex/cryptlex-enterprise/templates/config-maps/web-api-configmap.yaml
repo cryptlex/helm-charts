@@ -28,8 +28,8 @@ data:
   RABBITMQ_ENABLED: {{ .Values.services.rabbitMq.enabled | quote }}
   RABBITMQ_PREFETCHCOUNT: {{ .Values.services.rabbitMq.prefetchCount | quote }}
   RABBITMQ_DELAYEDMESSAGEPLUGINENABLED: {{ .Values.services.rabbitMq.delayedMessagePluginEnabled | quote }}
-  GOOGLE_CLIENT_ID: {{ .Values.google.sso.clientId | quote }}
-  GOOGLE_ANALYTICS_KEY: {{.Values.google.analytics.key | quote}}
+  GOOGLE_CLIENT_ID: {{ .Values.webApi.google.sso.clientId | quote }}
+  GOOGLE_ANALYTICS_KEY: {{.Values.webApi.google.analytics.key | quote}}
 
   {{ range $index, $value := .Values.webApi.ipRateLimitOptions.ipWhitelist }}
   IPRATELIMITOPTIONS_IPWHITELIST_{{$index}}: {{ $value | quote }}

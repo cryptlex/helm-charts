@@ -247,13 +247,13 @@ webApi:
   # Postmark
   postmark:
     accountToken: ""
-# Google
-google:
-  recaptcha:
-    secretKey: ""
-  analytics:
-    # G-XXXXXXX
-    key: ""
-  sso:
-    # Refer to following for enabling Google SSO: https://docs.cryptlex.com/user-management/google-sso
-    clientId: ""
+  # Google
+  google:
+    recaptcha:
+      secretKey: ""
+    analytics:
+      # G-XXXXXXX
+      key: ""
+    sso:
+      # Refer to following for enabling Google SSO: https://docs.cryptlex.com/user-management/google-sso
+      clientId: ""
