@@ -6,11 +6,6 @@ data:
   {{ if .Values.webPortals.releasedAt }}
   APPLICATION_RELEASEDAT: {{ .Values.webPortals.releasedAt }}
   {{ end }}
-  COMPANY_NAME: {{ .Values.webPortals.companyName }}
-  COMPANY_WEBSITE: {{ .Values.webPortals.companyWebsite }}
-  COMPANY_LOGO_URL: {{ .Values.webPortals.companyLogoUrl }}
-  COMPANY_FAVICON_URL: {{ .Values.webPortals.companyFaviconUrl }}
-  GOOGLE_ANALYTICS_KEY: {{ .Values.webPortals.googleAnalyticsKey | quote }}
   {{ if or .Values.certmanager.enabled .Values.ingress.forceHttpsRedirect }}
   WEB_API_BASE_URL: https://{{ .Values.ingress.hosts.webApiHost }}
   RELEASE_SERVER_BASE_URL: https://{{ .Values.ingress.hosts.releaseServerHost }}
@@ -18,4 +13,3 @@ data:
   WEB_API_BASE_URL: http://{{ .Values.ingress.hosts.webApiHost }}
   RELEASE_SERVER_BASE_URL: http://{{ .Values.ingress.hosts.releaseServerHost }}
   {{ end }}
-  GOOGLE_CLIENT_ID: {{ .Values.webApi.google.sso.clientId | quote }}

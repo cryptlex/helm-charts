@@ -151,18 +151,7 @@ dashboard:
   companyFaviconUrl: https://mycompany.com/favicon.ico
   # Google analytics key.
   googleAnalyticsKey: UA-XXXXXXXX-X
-# Web Portals - admin, customer and reseller portals config
-webPortals:
-  # Your company name. This shows up in the browser title.
-  companyName: My Company
-  # Your company website.
-  companyWebsite: https://mycompany.com
-  # Logo to be displayed. It must have a transparent background.
-  companyLogoUrl: https://mycompany.com/logo.png
-  # Favicon URL.
-  companyFaviconUrl: https://mycompany.com/favicon.ico
-  # Google analytics key.
-  googleAnalyticsKey: UA-XXXXXXXX-X
+
 # Geo IP config (only required in case you are using an external service like ipstack.com or ipdata.co)
 geoip:
   # The geo ip server url.
