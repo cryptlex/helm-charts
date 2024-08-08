@@ -18,4 +18,4 @@ data:
   WEB_API_BASE_URL: http://{{ .Values.ingress.hosts.webApiHost }}
   RELEASE_SERVER_BASE_URL: http://{{ .Values.ingress.hosts.releaseServerHost }}
   {{ end }}
-  GOOGLE_CLIENT_ID: {{ .Values.sso.google.clientId | quote }}
+  GOOGLE_CLIENT_ID: {{ .Values.webApi.google.sso.clientId | quote }}
