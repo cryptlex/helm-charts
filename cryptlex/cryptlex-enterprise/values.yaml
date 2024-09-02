@@ -225,9 +225,8 @@ webApi:
     applicationName: "Cryptlex Web API"
   # OpenTelemetry
   openTelemetry:
-    apiKey: ""
-    applicationName: ""
     otlpEndpoint: ""
+    otlpHeaders: ""
   # Hangfire dashboard
   hangfireDashboard:
     username: ""
