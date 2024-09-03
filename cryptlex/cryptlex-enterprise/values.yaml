@@ -226,7 +226,8 @@ webApi:
   # OpenTelemetry
   openTelemetry:
     otlpEndpoint: ""
-    otlpHeaders: ""
+    otlpHeaders: []
+
   # Hangfire dashboard
   hangfireDashboard:
     username: ""
