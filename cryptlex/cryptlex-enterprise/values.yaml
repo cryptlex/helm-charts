@@ -80,7 +80,7 @@ services:
   dashboard:
     image:
       repository: cryptlex/cryptlex-web-dashboard
-      tag: 3.45.5
+      tag: 3.45.6
       pullPolicy: IfNotPresent
   adminPortal:
     enabled: false
@@ -103,7 +103,7 @@ services:
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
-      tag: 3.73.11
+      tag: 3.73.13
       pullPolicy: IfNotPresent
   releaseServer:
     image:
