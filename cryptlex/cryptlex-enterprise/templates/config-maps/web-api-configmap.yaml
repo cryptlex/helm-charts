@@ -30,9 +30,9 @@ data:
   RABBITMQ_DELAYEDMESSAGEPLUGINENABLED: {{ .Values.services.rabbitMq.delayedMessagePluginEnabled | quote }}
   GOOGLE_CLIENT_ID: {{ .Values.webApi.google.sso.clientId | quote }}
   GOOGLE_ANALYTICS_KEY: {{.Values.webApi.google.analytics.key | quote}}
-  HOST_ADMINPORTAL: {{ .Values.ingress.hosts.adminPortalHost}}
-  HOST_CUSTOMERPORTAL: {{ .Values.ingress.hosts.customerPortalHost}}
-  HOST_RESELLERPORTAL: {{ .Values.ingress.hosts.resellerPortalHost}}
+  WEBPORTALS_ADMINPORTALDOMAIN: {{ .Values.ingress.hosts.adminPortalHost}}
+  WEBPORTALS_CUSTOMERPORTALDOMAIN: {{ .Values.ingress.hosts.customerPortalHost}}
+  WEBPORTALS_RESELLERPORTALDOMAIN: {{ .Values.ingress.hosts.resellerPortalHost}}
 
   {{ range $index, $value := .Values.webApi.ipRateLimitOptions.ipWhitelist }}
   IPRATELIMITOPTIONS_IPWHITELIST_{{$index}}: {{ $value | quote }}
