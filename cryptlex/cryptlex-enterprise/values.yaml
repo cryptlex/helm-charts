@@ -80,7 +80,7 @@ services:
   dashboard:
     image:
       repository: cryptlex/cryptlex-web-dashboard
-      tag: 3.45.6
+      tag: 3.45.7
       pullPolicy: IfNotPresent
   adminPortal:
     enabled: false
