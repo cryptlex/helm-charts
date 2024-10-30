@@ -171,7 +171,9 @@ webApi:
   databaseReaderUrl: ""
   # The database connections max pool size.
   databaseMaximumPoolSize: 300
-  # The passphrase to encrypt the RSA private keys.
+  # The encryption key to encrypt the RSA private keys and other secrets.
+  encryptionKey: 
+  # Deprecated, use encryptionKey instead
   rsaPassphrase: PASTE_RSA_SECRET
   # Enable maintenance mode during DB major version upgrade.
   maintenanceModeEnabled: false
