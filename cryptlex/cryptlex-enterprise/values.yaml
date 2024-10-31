@@ -86,19 +86,19 @@ services:
     enabled: false
     image:
       repository: cryptlex/admin-portal
-      tag: 5.2.6
+      tag: 5.2.7
       pullPolicy: IfNotPresent
   customerPortal:
     enabled: false
     image:
       repository: cryptlex/customer-portal
-      tag: 5.2.6
+      tag: 5.2.7
       pullPolicy: IfNotPresent
   resellerPortal:
     enabled: false
     image:
       repository: cryptlex/reseller-portal
-      tag: 5.2.6
+      tag: 5.2.7
       pullPolicy: IfNotPresent
   webApi:
     image:
@@ -172,7 +172,7 @@ webApi:
   # The database connections max pool size.
   databaseMaximumPoolSize: 300
   # The encryption key to encrypt the RSA private keys and other secrets.
-  encryptionKey: 
+  encryptionKey:
   # Deprecated, use encryptionKey instead
   rsaPassphrase: PASTE_RSA_SECRET
   # Enable maintenance mode during DB major version upgrade.
