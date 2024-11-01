@@ -3,8 +3,10 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-web-portals-config
 data:
+  {{ if .Values.webPortals }}
   {{ if .Values.webPortals.releasedAt }}
   APPLICATION_RELEASEDAT: {{ .Values.webPortals.releasedAt }}
+  {{ end }}
   {{ end }}
   {{ if or .Values.certmanager.enabled .Values.ingress.forceHttpsRedirect }}
   WEB_API_BASE_URL: https://{{ .Values.ingress.hosts.webApiHost }}
