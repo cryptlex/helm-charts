@@ -228,6 +228,8 @@ webApi:
   # OpenTelemetry
   openTelemetry:
     otlpEndpoint: ""
+    enableMetrics: true
+    enableTraces: false
     otlpHeaders: []
   # Hangfire dashboard
   hangfireDashboard:

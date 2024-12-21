@@ -66,3 +66,5 @@ data:
   # App metrics
   NEW_RELIC_APP_NAME: {{ .Values.webApi.newRelic.applicationName | quote }}
   OTEL_EXPORTER_OTLP_ENDPOINT: {{ .Values.webApi.openTelemetry.otlpEndpoint | quote }}
+  OTEL_ENABLEMETRICS: {{ .Values.webApi.openTelemetry.enableMetrics | quote }}
+  OTEL_ENABLETRACES: {{ .Values.webApi.openTelemetry.enableTraces | quote }}
