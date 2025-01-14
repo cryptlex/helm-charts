@@ -103,7 +103,7 @@ services:
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
-      tag: 3.75.6
+      tag: 3.76.0
       pullPolicy: IfNotPresent
   releaseServer:
     image:
