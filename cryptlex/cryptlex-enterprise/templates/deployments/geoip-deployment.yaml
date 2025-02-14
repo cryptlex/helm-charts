@@ -21,5 +21,8 @@ spec:
           imagePullPolicy: {{ .Values.services.geoip.image.pullPolicy }}
           ports:
             - containerPort: 8080
+          env:
+            - name: MAXMIND_LICENSE_KEY
+              value: "{{ .Values.webApi.maxmind.licenseKey }}"
       restartPolicy: Always
 {{ end }}

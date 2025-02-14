@@ -235,6 +235,9 @@ webApi:
   hangfireDashboard:
     username: ""
     password: ""
+  # Maxmind GeoLite2-City database
+  maxmind:
+    licenseKey: ""
   # Postmark
   postmark:
     accountToken: ""
