@@ -24,5 +24,7 @@ spec:
           env:
             - name: MAXMIND_LICENSE_KEY
               value: "{{ .Values.webApi.maxmind.licenseKey }}"
+            - name: MAXMIND_ACCOUNT_ID
+              value: "{{ .Values.webApi.maxmind.accountId }}"
       restartPolicy: Always
 {{ end }}

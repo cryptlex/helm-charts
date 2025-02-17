@@ -68,3 +68,4 @@ data:
   OTEL_EXPORTER_OTLP_ENDPOINT: {{ .Values.webApi.openTelemetry.otlpEndpoint | quote }}
   OTEL_ENABLEMETRICS: {{ .Values.webApi.openTelemetry.enableMetrics | quote }}
   OTEL_ENABLETRACES: {{ .Values.webApi.openTelemetry.enableTraces | quote }}
+  MAXMIND_ACCOUNTID: {{ .Values.webApi.maxmind.accountId | quote }}

@@ -237,6 +237,7 @@ webApi:
     password: ""
   # Maxmind GeoLite2-City database
   maxmind:
+    accountId: ""
     licenseKey: ""
   # Postmark
   postmark:
