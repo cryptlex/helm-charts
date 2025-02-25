@@ -51,7 +51,7 @@ services:
     external: false
     image:
       repository: cryptlex/freegeoip
-      tag: 3.7.3
+      tag: 3.7.6
       pullPolicy: IfNotPresent
   filestore:
     # Set this to false in case you are not using Cryptlex release management feature.
