@@ -83,13 +83,13 @@ services:
       tag: 3.45.12
       pullPolicy: IfNotPresent
   adminPortal:
-    enabled: false
+    enabled: true
     image:
       repository: cryptlex/admin-portal
       tag: 5.3.2
       pullPolicy: IfNotPresent
   customerPortal:
-    enabled: false
+    enabled: true
     image:
       repository: cryptlex/customer-portal
       tag: 5.3.2
