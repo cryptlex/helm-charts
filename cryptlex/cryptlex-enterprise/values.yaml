@@ -63,7 +63,7 @@ services:
     storageClass:
     image:
       repository: minio/minio
-      tag: RELEASE.2020-07-14T19-14-30Z
+      tag: RELEASE.2025-03-12T18-04-18Z
       pullPolicy: IfNotPresent
   rabbitMq:
     # Set this to false in case you are not using RabbitMQ.
