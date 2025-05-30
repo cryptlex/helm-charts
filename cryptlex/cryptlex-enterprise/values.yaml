@@ -180,6 +180,20 @@ webApi:
     rateLimit: 50
     ipWhitelist: []
     realIpHeader:
+  # Pod security context
+  podSecurityContext:
+    runAsUser: 1654
+    runAsGroup: 1654
+    runAsNonRoot: true
+  # Container security context
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+
   # Redis settings
   redis:
     # The Redis connection string, only required in case you are using an external Redis database.
@@ -244,3 +258,15 @@ webApi:
     sso:
       # Refer to following for enabling Google SSO: https://docs.cryptlex.com/user-management/google-sso
       clientId: ""
+web-portals:
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true  
