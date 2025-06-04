@@ -88,23 +88,75 @@ services:
       repository: cryptlex/admin-portal
       tag: 5.4.1
       pullPolicy: IfNotPresent
+    # Pod security context
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+    # Container security context
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true  
   customerPortal:
     enabled: true
     image:
       repository: cryptlex/customer-portal
       tag: 5.4.1
       pullPolicy: IfNotPresent
+    # Pod security context
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+    # Container security context
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true  
   resellerPortal:
     enabled: false
     image:
       repository: cryptlex/reseller-portal
       tag: 5.4.1
       pullPolicy: IfNotPresent
+    # Pod security context
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+    # Container security context
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true  
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
       tag: 3.78.4
       pullPolicy: IfNotPresent
+      # Pod security context
+      podSecurityContext:
+        runAsUser: 1654
+        runAsGroup: 1654
+        runAsNonRoot: true
+      # Container security context
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
   releaseServer:
     image:
       repository: cryptlex/cryptlex-release-server

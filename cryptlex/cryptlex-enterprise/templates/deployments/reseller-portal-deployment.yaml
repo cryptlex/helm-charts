@@ -17,10 +17,14 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/config-maps/web-portals-configmap.yaml") . | sha256sum }}
     spec:
+      securityContext:
+        {{ toYaml .Values.services.resellerPortal.podSecurityContext | nindent 8 }}
       containers:
         - name: reseller-portal
           image: "{{ .Values.services.resellerPortal.image.repository }}:{{ .Values.services.resellerPortal.image.tag }}"
           imagePullPolicy: {{ .Values.services.resellerPortal.image.pullPolicy }}
+          securityContext:
+            {{ toYaml .Values.services.resellerPortal.securityContext | nindent 12 }}
           ports:
             - containerPort: 4402
           envFrom:
