@@ -88,23 +88,75 @@ services:
       repository: cryptlex/admin-portal
       tag: 5.2.3
       pullPolicy: IfNotPresent
+    # Pod security context
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+    # Container security context
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true  
   customerPortal:
     enabled: false
     image:
       repository: cryptlex/customer-portal
       tag: 5.2.3
       pullPolicy: IfNotPresent
+    # Pod security context
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+    # Container security context
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true  
   resellerPortal:
     enabled: false
     image:
       repository: cryptlex/reseller-portal
       tag: 5.2.3
       pullPolicy: IfNotPresent
+    # Pod security context
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+    # Container security context
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true  
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
       tag: 3.73.13
       pullPolicy: IfNotPresent
+      # Pod security context
+      podSecurityContext:
+        runAsUser: 1654
+        runAsGroup: 1654
+        runAsNonRoot: true
+      # Container security context
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
   releaseServer:
     image:
       repository: cryptlex/cryptlex-release-server
@@ -180,20 +232,6 @@ webApi:
     rateLimit: 50
     ipWhitelist: []
     realIpHeader:
-  # Pod security context
-  podSecurityContext:
-    runAsUser: 1654
-    runAsGroup: 1654
-    runAsNonRoot: true
-  # Container security context
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-        - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-
   # Redis settings
   redis:
     # The Redis connection string, only required in case you are using an external Redis database.
@@ -258,15 +296,3 @@ webApi:
     sso:
       # Refer to following for enabling Google SSO: https://docs.cryptlex.com/user-management/google-sso
       clientId: ""
-web-portals:
-  podSecurityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
-    runAsNonRoot: true
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-        - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true  
