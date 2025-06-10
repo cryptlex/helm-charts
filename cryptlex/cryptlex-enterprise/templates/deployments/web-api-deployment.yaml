@@ -23,13 +23,13 @@ spec:
         checksum/secret: {{ include (print $.Template.BasePath "/secrets/web-api-secret.yaml") . | sha256sum }}
     spec:
       securityContext:
-        {{ toYaml .Values.services.webApi.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.services.webApi.podSecurityContext | nindent 8 }}
       containers:
         - name: web-api
           image: "{{ .Values.services.webApi.image.repository }}:{{ .Values.services.webApi.image.tag }}"
           imagePullPolicy: {{ .Values.services.webApi.image.pullPolicy }}
           securityContext:
-            {{ toYaml .Values.services.webApi.securityContext | nindent 12 }}
+            {{- toYaml .Values.services.webApi.securityContext | nindent 12 }}
           ports:
             - containerPort: 5000
           envFrom:
