@@ -86,7 +86,7 @@ services:
     enabled: true
     image:
       repository: cryptlex/admin-portal
-      tag: 5.4.1
+      tag: 5.4.2
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
@@ -100,12 +100,12 @@ services:
         drop:
           - ALL
       readOnlyRootFilesystem: true
-      runAsNonRoot: true  
+      runAsNonRoot: true
   customerPortal:
     enabled: true
     image:
       repository: cryptlex/customer-portal
-      tag: 5.4.1
+      tag: 5.4.2
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
@@ -119,12 +119,12 @@ services:
         drop:
           - ALL
       readOnlyRootFilesystem: true
-      runAsNonRoot: true  
+      runAsNonRoot: true
   resellerPortal:
     enabled: true
     image:
       repository: cryptlex/reseller-portal
-      tag: 5.4.1
+      tag: 5.4.2
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
@@ -138,7 +138,7 @@ services:
         drop:
           - ALL
       readOnlyRootFilesystem: true
-      runAsNonRoot: true  
+      runAsNonRoot: true
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
