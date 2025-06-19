@@ -288,6 +288,7 @@ webApi:
     username: ""
     password: ""
   # Maxmind GeoLite2-City database
+  # Sign up for a free MaxMind account and generate your license key here: https://www.maxmind.com/en/geolite2/signup.
   maxmind:
     accountId: ""
     licenseKey: ""
