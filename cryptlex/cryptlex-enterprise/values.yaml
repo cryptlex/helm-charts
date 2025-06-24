@@ -86,7 +86,7 @@ services:
     enabled: true
     image:
       repository: cryptlex/admin-portal
-      tag: 5.4.2
+      tag: 5.4.3
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
@@ -105,7 +105,7 @@ services:
     enabled: true
     image:
       repository: cryptlex/customer-portal
-      tag: 5.4.2
+      tag: 5.4.3
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
@@ -124,7 +124,7 @@ services:
     enabled: true
     image:
       repository: cryptlex/reseller-portal
-      tag: 5.4.2
+      tag: 5.4.3
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
