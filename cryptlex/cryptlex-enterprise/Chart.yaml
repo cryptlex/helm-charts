@@ -3,10 +3,10 @@ name: cryptlex-enterprise
 description: A Helm chart for Cryptlex Enterprise
 type: application
 home: https://cryptlex.com
-icon: https://cryptlex.com/images/cryptlex_icon.png
+icon: https://assets.cryptlex.com/images/logos/cryptlex-icon-logo.svg
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: "3.17.109"
+version: "3.17.110"
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: "3.17.109"
+appVersion: "3.17.110"
