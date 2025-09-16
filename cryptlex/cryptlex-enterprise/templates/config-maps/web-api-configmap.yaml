@@ -29,10 +29,13 @@ data:
   RABBITMQ_PREFETCHCOUNT: {{ .Values.services.rabbitMq.prefetchCount | quote }}
   RABBITMQ_DELAYEDMESSAGEPLUGINENABLED: {{ .Values.services.rabbitMq.delayedMessagePluginEnabled | quote }}
   GOOGLE_CLIENT_ID: {{ .Values.webApi.google.sso.clientId | quote }}
-  GOOGLE_ANALYTICS_KEY: {{.Values.webApi.google.analytics.key | quote}}
-  WEBPORTALS_ADMINPORTALDOMAIN: {{ .Values.ingress.hosts.adminPortalHost | quote}}
-  WEBPORTALS_CUSTOMERPORTALDOMAIN: {{ .Values.ingress.hosts.customerPortalHost | quote}}
-  WEBPORTALS_RESELLERPORTALDOMAIN: {{ .Values.ingress.hosts.resellerPortalHost | quote}}
+  GOOGLE_ANALYTICS_KEY: {{ .Values.webApi.google.analytics.key | quote }}
+  WEBPORTALS_ADMINPORTALDOMAIN: {{ .Values.ingress.hosts.adminPortalHost | quote }}
+  WEBPORTALS_CUSTOMERPORTALDOMAIN: {{ .Values.ingress.hosts.customerPortalHost | quote }}
+  WEBPORTALS_RESELLERPORTALDOMAIN: {{ .Values.ingress.hosts.resellerPortalHost | quote }}
+
+  #  New CORS configuration
+  CorsPolicy__AllowedOrigins: {{ join "," .Values.webApi.cors.allowedOrigins | quote }}
 
   {{ range $index, $value := .Values.webApi.ipRateLimitOptions.ipWhitelist }}
   IPRATELIMITOPTIONS_IPWHITELIST_{{$index}}: {{ $value | quote }}
@@ -60,8 +63,8 @@ data:
   EMAIL_FROMNAME: {{ .Values.webApi.email.fromName }}
   EMAIL_SIGNATURE: {{ .Values.webApi.email.signature }}
   SMTP_HOST: {{ .Values.webApi.email.smtp.host | quote }}
-  SMTP_PORT: {{ .Values.webApi.email.smtp.port | quote}}
-  SMTP_ENABLESSL: {{ .Values.webApi.email.smtp.enableSsl | quote}}
+  SMTP_PORT: {{ .Values.webApi.email.smtp.port | quote }}
+  SMTP_ENABLESSL: {{ .Values.webApi.email.smtp.enableSsl | quote }}
   MAILGUN_DOMAIN: {{ .Values.webApi.email.mailgun.domain | quote }}
   # App metrics
   NEW_RELIC_APP_NAME: {{ .Values.webApi.newRelic.applicationName | quote }}
