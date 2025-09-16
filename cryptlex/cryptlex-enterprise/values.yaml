@@ -4,80 +4,61 @@
 certmanager:
   enabled: false
   issuer:
-    # Set this to your company email.
     email: support@mycompany.com
-    # Set this to true once staging certificates are issued successfully.
-    # Otherwise you may run into rate-limiting issues.
     production: false
+
 # Docker registry credentials
 imageCredentials:
   registry: https://index.docker.io/v1/
   username:
   password:
+
 # Ingress config
 ingress:
   forceHttpsRedirect: true
-  # Supported values are: nginx and alb
   className: nginx
   internal: false
   enableStatusPath: true
-  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html#tls-security-policies
   tlsSecurityPolicy: ELBSecurityPolicy-TLS13-1-2-2021-06
   hosts:
-    # Hostname of the Cryptlex Web API server.
-    webApiHost: cryptlex-api.mycompany.com
-    # Hostname of the Cryptlex Admin Portal server
-    adminPortalHost: cryptlex-app.mycompany.com
-    # Hostname of the Cryptlex Customer Portal server
-    customerPortalHost: cryptlex-customer.mycompany.com
-    # Hostname of the Cryptlex Reseller Portal server
-    resellerPortalHost: cryptlex-reseller.mycompany.com
-    # Hostname of the Cryptlex Release server.
-    releaseServerHost: cryptlex-releases.mycompany.com
-    # Hostname of the Cryptlex Web Dashboard server. (Deprecated in favor of admin portal)
-    dashboardHost: cryptlex-app-legacy.mycompany.com
+    webApiHost: api.cryptlex.com
+    adminPortalHost: app.cryptlex.com
+    customerPortalHost: "*.customer.cryptlex.com"
+    resellerPortalHost: "*.reseller.cryptlex.com"
+    releaseServerHost: releases.cryptlex.com
+    dashboardHost: app-legacy.cryptlex.com
+
 # Configure Cryptlex services
 services:
   database:
-    # Set this to true in case you are using an external database.
     external: false
     storage: 10Gi
-    # Leave empty to use default Kubernetes storage class
     storageClass:
     image:
       repository: postgres
       tag: 12.3-alpine
       pullPolicy: IfNotPresent
   geoip:
-    # Set this to true in case you are using an external geoip service.
     external: false
     image:
       repository: cryptlex/freegeoip
       tag: 3.7.8
       pullPolicy: IfNotPresent
   filestore:
-    # Set this to false in case you are not using Cryptlex release management feature.
     enabled: true
-    # Set this to true in case you are using an external filestore like AWS S3, Azure Minio etc.
     external: false
     storage: 10Gi
-    # Leave empty to use default Kubernetes storage class
     storageClass:
     image:
       repository: minio/minio
       tag: RELEASE.2025-03-12T18-04-18Z
       pullPolicy: IfNotPresent
   rabbitMq:
-    # Set this to false in case you are not using RabbitMQ.
     enabled: false
-    # Set this to true in case the "Delayed Message Plugin" is enabled in RabbitMQ instance.
     delayedMessagePluginEnabled: false
-    # Set the prefetch count
     prefetchCount: 16
-    # Set this to true in case you are using an external RabbitMQ instance.
     external: false
     storage: 5Gi
-    # Leave empty to use default Kubernetes storage class
     storageClass:
   dashboard:
     image:
@@ -90,17 +71,14 @@ services:
       repository: cryptlex/admin-portal
       tag: 5.4.5
       pullPolicy: IfNotPresent
-    # Pod security context
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
       runAsNonRoot: true
-    # Container security context
     securityContext:
       allowPrivilegeEscalation: false
       capabilities:
-        drop:
-          - ALL
+        drop: [ "ALL" ]
       readOnlyRootFilesystem: true
       runAsNonRoot: true
   customerPortal:
@@ -109,17 +87,14 @@ services:
       repository: cryptlex/customer-portal
       tag: 5.4.5
       pullPolicy: IfNotPresent
-    # Pod security context
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
       runAsNonRoot: true
-    # Container security context
     securityContext:
       allowPrivilegeEscalation: false
       capabilities:
-        drop:
-          - ALL
+        drop: [ "ALL" ]
       readOnlyRootFilesystem: true
       runAsNonRoot: true
   resellerPortal:
@@ -128,17 +103,14 @@ services:
       repository: cryptlex/reseller-portal
       tag: 5.4.5
       pullPolicy: IfNotPresent
-    # Pod security context
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
       runAsNonRoot: true
-    # Container security context
     securityContext:
       allowPrivilegeEscalation: false
       capabilities:
-        drop:
-          - ALL
+        drop: [ "ALL" ]
       readOnlyRootFilesystem: true
       runAsNonRoot: true
   webApi:
@@ -146,17 +118,14 @@ services:
       repository: cryptlex/cryptlex-web-api-enterprise
       tag: 3.79.3
       pullPolicy: IfNotPresent
-    # Pod security context
     podSecurityContext:
       runAsUser: 1654
       runAsGroup: 1654
       runAsNonRoot: true
-    # Container security context
     securityContext:
       allowPrivilegeEscalation: false
       capabilities:
-        drop:
-          - ALL
+        drop: [ "ALL" ]
       readOnlyRootFilesystem: true
       runAsNonRoot: true
   releaseServer:
@@ -165,145 +134,117 @@ services:
       tag: 3.2.6
       pullPolicy: IfNotPresent
   cache:
-    # Set this to true in case you are using an external Redis database.
     external: false
     image:
       repository: redis
       tag: 7-alpine
       pullPolicy: IfNotPresent
-# Database config (ignored in case you are using an external database)
+
+# Database config
 database:
   name: cryptlex
   user: postgres
   password: postgres
-# RabbitMQ config (ignored in case you are using an external RabbitMQ instance)
+
+# RabbitMQ config
 rabbitMq:
   username: rabbitmq-admin
   password: rabbitmq
   replicaCount: 1
+
 # Filestore config
 filestore:
   accessKey: minio
   secretKey: minio_secret
-  # Set this to 443 in case you are using an external filestore like AWS S3, Azure Minio etc.
   port: 9000
-  # Name of the bucket where you want to store all your files.
   bucket: releases.mycompany.com
-  # This is required in case you are using AWS S3, otherwise leave the default value as such.
   region: us-east-1
-  # Set this to true in case you are using an external filestore like AWS S3, Azure Minio etc.
   useSsl: false
-# Dashboard config (Deprecated)
+
+# Dashboard config (deprecated)
 dashboard:
-  # Your company name. This shows up in the browser title.
   companyName: My Company
-  # Your company website.
   companyWebsite: https://mycompany.com
-  # Logo to be displayed. It must have a transparent background.
   companyLogoUrl: https://mycompany.com/logo.png
-  # Favicon URL.
   companyFaviconUrl: https://mycompany.com/favicon.ico
-  # Google analytics key.
   googleAnalyticsKey: UA-XXXXXXXX-X
-# Geo IP config (only required in case you are using an external service like ipstack.com or ipdata.co)
+
+# GeoIP config
 geoip:
-  # The geo ip server url.
   serverUrl:
-  # The ipstack access key or ipdata API key.
   apiKey:
-# Web API config
+
+# 🔹 Web API application config
 webApi:
-  # Set this to 3 for production environment.
   replicaCount: 1
-  # This name appears in email body and 2FA secret url.
   applicationName: MyCompany
-  # The license key which you get after you purchase the license for the Cryptlex Enterprise (on-premise).
   serverLicenseKey: PASTE_LICENSE_KEY
-  # The database connection string, only required in case you are using an external database.
   databaseUrl: postgres://{user}:{password}@{hostname}:{port}/{database-name}
-  # The read only database connection string, only required in case you are using an external database.
   databaseReaderUrl: ""
-  # The database connections max pool size.
   databaseMaximumPoolSize: 300
-  # The encryption key to encrypt the RSA private keys and other secrets.
   encryptionKey:
-  # Deprecated, use encryptionKey instead
   rsaPassphrase: PASTE_RSA_SECRET
-  # Enable maintenance mode during DB major version upgrade.
   maintenanceModeEnabled: false
-  # IP rate limiting options.
+
+  # New CORS section
+  cors:
+    allowedOrigins:
+      - https://api.cryptlex.com
+      - https://app-legacy.cryptlex.com
+      - https://releases.cryptlex.com
+      - https://app.cryptlex.com
+      - https://*.customer.cryptlex.com
+      - https://*.reseller.cryptlex.com
+
   ipRateLimitOptions:
     rateLimit: 50
     ipWhitelist: []
     realIpHeader:
-  # Redis settings
   redis:
-    # The Redis connection string, only required in case you are using an external Redis database.
     url: ""
-    # Enable or disable SSL for Redis.
     enableSsl: false
-    # Enable or disable database caching through Redis.
     enableDatabaseCaching: false
-  # RabbitMQ settings
   rabbitMq:
-    # The RabbitMQ connection string, only required in case you are using an external RabbitMQ instance.
     url: ""
     username: ""
     password: ""
-  # Mail settings
   email:
-    # From email for password reset email.
     fromAddress: support@mycompany.com
-    # From name for password reset email.
     fromName: MyCompany Support
-    # Email signature for password reset email.
     signature: <p>Thanks,<br>The MyCompany Team</p>
-    # SMTP config for sending emails.
     smtp:
       host: ""
       port: 587
       enableSsl: true
       username: ""
       password: ""
-    # Mailgun config, in case you are using Mailgun for sending emails.
     mailgun:
       apiKey: ""
       domain: ""
-    # Sendgrid config, in case you are using Sendgrid for sending emails.
     sendgrid:
       apiKey: ""
-  # Error monitoring
   bugsnag:
     apiKey: ""
-  # App metrics
   newRelic:
     licenseKey: ""
     applicationName: "Cryptlex Web API"
-  # OpenTelemetry
   openTelemetry:
     otlpEndpoint: ""
     enableMetrics: true
     enableTraces: false
     otlpHeaders: []
-  # Hangfire dashboard
   hangfireDashboard:
     username: ""
     password: ""
-  # Maxmind GeoLite2-City database
-  # Sign up for a free MaxMind account and generate your license key here: https://www.maxmind.com/en/geolite2/signup.
   maxmind:
     accountId: ""
     licenseKey: ""
-  # Postmark
   postmark:
     accountToken: ""
-  # Google
   google:
     recaptcha:
       secretKey: ""
     analytics:
-      # G-XXXXXXX
       key: ""
     sso:
-      # Refer to following for enabling Google SSO: https://docs.cryptlex.com/user-management/google-sso
       clientId: ""
