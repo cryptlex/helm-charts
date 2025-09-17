@@ -294,6 +294,9 @@ webApi:
   maxmind:
     accountId: ""
     licenseKey: ""
+  # CORS policy: by default, all origins are allowed
+  corsPolicy:
+   allowedOrigins: []  
   # Postmark
   postmark:
     accountToken: ""
