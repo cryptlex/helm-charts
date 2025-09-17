@@ -33,6 +33,7 @@ data:
   WEBPORTALS_ADMINPORTALDOMAIN: {{ .Values.ingress.hosts.adminPortalHost | quote}}
   WEBPORTALS_CUSTOMERPORTALDOMAIN: {{ .Values.ingress.hosts.customerPortalHost | quote}}
   WEBPORTALS_RESELLERPORTALDOMAIN: {{ .Values.ingress.hosts.resellerPortalHost | quote}}
+  CORSPOLICY_ALLOWEDORIGINS: {{ join "," .Values.webApi.corsPolicy.allowedOrigins | quote }}
 
   {{ range $index, $value := .Values.webApi.ipRateLimitOptions.ipWhitelist }}
   IPRATELIMITOPTIONS_IPWHITELIST_{{$index}}: {{ $value | quote }}
