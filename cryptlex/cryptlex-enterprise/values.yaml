@@ -88,7 +88,7 @@ services:
     enabled: true
     image:
       repository: cryptlex/admin-portal
-      tag: 5.4.5
+      tag: 5.5.0
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
@@ -107,7 +107,7 @@ services:
     enabled: true
     image:
       repository: cryptlex/customer-portal
-      tag: 5.4.5
+      tag: 5.5.0
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
@@ -126,7 +126,7 @@ services:
     enabled: true
     image:
       repository: cryptlex/reseller-portal
-      tag: 5.4.5
+      tag: 5.5.0
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
@@ -296,7 +296,7 @@ webApi:
     licenseKey: ""
   # CORS policy: by default, all origins are allowed
   corsPolicy:
-   allowedOrigins: []  
+    allowedOrigins: []
   # Postmark
   postmark:
     accountToken: ""
