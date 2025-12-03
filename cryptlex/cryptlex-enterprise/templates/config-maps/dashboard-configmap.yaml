@@ -1,3 +1,4 @@
+{{ if .Values.services.dashboard.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19,3 +20,4 @@ data:
   RELEASE_SERVER_BASE_URL: http://{{ .Values.ingress.hosts.releaseServerHost }}
   {{ end }}
   GOOGLE_CLIENT_ID: {{ .Values.webApi.google.sso.clientId | quote }}
+{{ end }}
