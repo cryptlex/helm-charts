@@ -80,6 +80,7 @@ services:
     # Leave empty to use default Kubernetes storage class
     storageClass:
   dashboard:
+    enabled: false
     image:
       repository: cryptlex/cryptlex-web-dashboard
       tag: 3.45.13
