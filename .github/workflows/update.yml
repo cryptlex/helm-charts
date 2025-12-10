@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v6
       
       - name: Install yq
         run: sudo snap install yq
@@ -52,20 +52,24 @@ jobs:
         run: |
           yq e '.version = "${{ steps.semvers.outputs.patch }}"' -i cryptlex/cryptlex-enterprise/Chart.yaml 
           yq e '.appVersion = "${{ steps.semvers.outputs.patch }}"' -i cryptlex/cryptlex-enterprise/Chart.yaml
-           
-      - name: Commit files
-        run: |
-          git add ./cryptlex/cryptlex-enterprise/*.yaml
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Updated images" -a | exit 0
-
+        
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        id: cpr
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          commit-message: "Updated images"
-          branch: release/update-images-${{ github.run_id }}
+          commit-message: "Updated image tags"
+          committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: release/update-image-tags
+          delete-branch: true
           title: "Update chart image tags"
           body: "Automated PR to update chart image tags."
-          base: master
+          add-paths: |
+            cryptlex/cryptlex-enterprise/*.yaml
+          labels: |
+            automated pr
+          team-reviewers: |
+            cryptlex/devops-team
+          draft: false
+
