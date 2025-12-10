@@ -60,7 +60,7 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           commit-message: "Updated image tags"
           committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           branch: release/update-image-tags
           delete-branch: true
           title:  "Update chart image tags"
