@@ -71,6 +71,6 @@ jobs:
           labels: |
             automated pr
           team-reviewers: |
-            cryptlex/devops-team 
+            cryptlex/devops-team
           draft: false
 
