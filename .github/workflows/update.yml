@@ -63,7 +63,7 @@ jobs:
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           branch: release/update-image-tags
           delete-branch: true
-          title:  "Update chart image tags"
+          title: "Update chart image tags"
           body: "Automated PR to update chart image tags."
           add-paths: |
             cryptlex/cryptlex-enterprise/*.yaml
