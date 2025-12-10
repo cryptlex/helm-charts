@@ -36,7 +36,9 @@ spec:
   tls:
     - hosts:
         - "{{ .Values.ingress.hosts.webApiHost }}"
+        {{ if .Values.services.dashboardHost.enabled }}
         - "{{ .Values.ingress.hosts.dashboardHost }}"
+        {{ end }}
         {{ if .Values.services.adminPortal.enabled }}
         - "{{ .Values.ingress.hosts.adminPortalHost }}"
         {{ end }}
@@ -61,6 +63,7 @@ spec:
                 port: 
                   number: 5000
             pathType: ImplementationSpecific 
+    {{ if .Values.services.dashboardHost.enabled }}
     - host: "{{ .Values.ingress.hosts.dashboardHost }}"
       http:
         paths:
@@ -69,7 +72,8 @@ spec:
                 name: {{ .Release.Name }}-dashboard-service
                 port: 
                   number: 4200
-            pathType: ImplementationSpecific 
+            pathType: ImplementationSpecific
+    {{ end }} 
     {{ if .Values.services.adminPortal.enabled }}
     - host: "{{ .Values.ingress.hosts.adminPortalHost }}"
       http:
