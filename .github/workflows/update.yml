@@ -62,7 +62,7 @@ jobs:
           committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: release/update-image-tag
+          branch: release/update-image-tags
           delete-branch: true
           title:  "Update chart image tags"
           body: "Automated PR to update chart image tags."
