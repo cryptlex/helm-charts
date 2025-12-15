@@ -32,7 +32,7 @@ data:
   AWSSQS_REGION: {{ .Values.webApi.awsSqs.region | quote }}
   AWSSQS_SCOPE: {{ .Values.webApi.awsSqs.scope | quote }}
   GOOGLE_CLIENT_ID: {{ .Values.webApi.google.sso.clientId | quote }}
-  GOOGLE_ANALYTICS_KEY: {{.Values.webApi.google.analytics.key | quote }}
+  GOOGLE_ANALYTICS_KEY: {{ .Values.webApi.google.analytics.key | quote }}
   WEBPORTALS_ADMINPORTALDOMAIN: {{ .Values.ingress.hosts.adminPortalHost | quote }}
   WEBPORTALS_CUSTOMERPORTALDOMAIN: {{ .Values.ingress.hosts.customerPortalHost | quote }}
   WEBPORTALS_RESELLERPORTALDOMAIN: {{ .Values.ingress.hosts.resellerPortalHost | quote }}
