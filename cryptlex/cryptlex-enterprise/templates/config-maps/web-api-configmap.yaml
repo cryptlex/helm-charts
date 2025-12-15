@@ -28,11 +28,14 @@ data:
   RABBITMQ_ENABLED: {{ .Values.services.rabbitMq.enabled | quote }}
   RABBITMQ_PREFETCHCOUNT: {{ .Values.services.rabbitMq.prefetchCount | quote }}
   RABBITMQ_DELAYEDMESSAGEPLUGINENABLED: {{ .Values.services.rabbitMq.delayedMessagePluginEnabled | quote }}
+  AWSSQS_ENABLED: {{ .Values.webApi.awsSqs.enabled | quote }}
+  AWSSQS_REGION: {{ .Values.webApi.awsSqs.region | quote }}
+  AWSSQS_SCOPE: {{ .Values.webApi.awsSqs.scope | quote }}
   GOOGLE_CLIENT_ID: {{ .Values.webApi.google.sso.clientId | quote }}
-  GOOGLE_ANALYTICS_KEY: {{.Values.webApi.google.analytics.key | quote}}
-  WEBPORTALS_ADMINPORTALDOMAIN: {{ .Values.ingress.hosts.adminPortalHost | quote}}
-  WEBPORTALS_CUSTOMERPORTALDOMAIN: {{ .Values.ingress.hosts.customerPortalHost | quote}}
-  WEBPORTALS_RESELLERPORTALDOMAIN: {{ .Values.ingress.hosts.resellerPortalHost | quote}}
+  GOOGLE_ANALYTICS_KEY: {{.Values.webApi.google.analytics.key | quote }}
+  WEBPORTALS_ADMINPORTALDOMAIN: {{ .Values.ingress.hosts.adminPortalHost | quote }}
+  WEBPORTALS_CUSTOMERPORTALDOMAIN: {{ .Values.ingress.hosts.customerPortalHost | quote }}
+  WEBPORTALS_RESELLERPORTALDOMAIN: {{ .Values.ingress.hosts.resellerPortalHost | quote }}
   CORSPOLICY_ALLOWEDORIGINS: {{ join "," .Values.webApi.corsPolicy.allowedOrigins | quote }}
   LOGGING_LOGLEVEL_DEFAULT: {{ .Values.webApi.logging.logLevel | quote }}
 
