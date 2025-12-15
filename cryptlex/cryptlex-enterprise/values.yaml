@@ -251,6 +251,13 @@ webApi:
     url: ""
     username: ""
     password: ""
+  # AWS SQS/SNS settings (can be used as an alternative to RabbitMQ)
+  awsSqs:
+    accessKey: ""
+    secretKey: ""
+    region: ""
+    scope: "cryptlex"
+    enabled: false
   # Mail settings
   email:
     # From email for password reset email.
