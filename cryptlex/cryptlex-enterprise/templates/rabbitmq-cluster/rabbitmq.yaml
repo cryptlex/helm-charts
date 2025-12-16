@@ -1,4 +1,4 @@
-{{ if and .Values.services.rabbitMq.enabled (not .Values.services.rabbitMq.external) }}
+# {{ if and .Values.services.rabbitMq.enabled (not .Values.services.rabbitMq.external) }}
 apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
 metadata:
@@ -28,4 +28,4 @@ spec:
       collect_statistics_interval = 10000
   persistence:
     storage: {{ .Values.services.rabbitMq.storage }}
-{{ end }}
+# {{ end }}
