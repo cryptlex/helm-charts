@@ -61,7 +61,7 @@ jobs:
           commit-message: "Updated image tags"
           committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          branch: release/update-image-tags
+          branch: ci/update-image-tags
           delete-branch: true
           title: "Update chart image tags"
           body: "Automated PR to update chart image tags."
