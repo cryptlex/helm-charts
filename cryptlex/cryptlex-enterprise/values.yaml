@@ -232,6 +232,8 @@ webApi:
   rsaPassphrase: PASTE_RSA_SECRET
   # Enable maintenance mode during DB major version upgrade.
   maintenanceModeEnabled: false
+  # Enable HSTS header
+  forceHttps: false
   # IP rate limiting options.
   ipRateLimitOptions:
     rateLimit: 50
