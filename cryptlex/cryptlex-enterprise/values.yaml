@@ -145,7 +145,7 @@ services:
   webApi:
     image:
       repository: cryptlex/cryptlex-web-api-enterprise
-      tag: 3.81.4
+      tag: 3.81.5
       pullPolicy: IfNotPresent
     # Pod security context
     podSecurityContext:
