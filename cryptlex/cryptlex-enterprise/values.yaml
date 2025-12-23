@@ -163,7 +163,7 @@ services:
   releaseServer:
     image:
       repository: cryptlex/cryptlex-release-server
-      tag: 3.2.6
+      tag: 3.3.0
       pullPolicy: IfNotPresent
   cache:
     # Set this to true in case you are using an external Redis database.
