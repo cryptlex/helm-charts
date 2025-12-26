@@ -275,6 +275,7 @@ webApi:
       enableSsl: true
       username: ""
       password: ""
+      disableSslCertificateValidation: true
     # Mailgun config, in case you are using Mailgun for sending emails.
     mailgun:
       apiKey: ""

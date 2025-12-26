@@ -67,6 +67,7 @@ data:
   SMTP_HOST: {{ .Values.webApi.email.smtp.host | quote }}
   SMTP_PORT: {{ .Values.webApi.email.smtp.port | quote}}
   SMTP_ENABLESSL: {{ .Values.webApi.email.smtp.enableSsl | quote}}
+  SMTP_DISABLESSLCERTIFICATEVALIDATION: {{ .Values.webApi.email.smtp.disableSslCertificateValidation | quote}}
   MAILGUN_DOMAIN: {{ .Values.webApi.email.mailgun.domain | quote }}
   # App metrics
   NEW_RELIC_APP_NAME: {{ .Values.webApi.newRelic.applicationName | quote }}
