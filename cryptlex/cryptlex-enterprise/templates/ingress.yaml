@@ -12,6 +12,12 @@ metadata:
     alb.ingress.kubernetes.io/group.name: cryptlex-alb-group
     alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=180
     alb.ingress.kubernetes.io/ssl-policy:  {{ .Values.ingress.tlsSecurityPolicy }}
+    {{- if and
+      (eq .Values.ingress.className "alb")
+      (.Values.ingress.restrictToVpn | default false)
+    }}
+    alb.ingress.kubernetes.io/inbound-cidrs: "{{ join "," .Values.ingress.vpnCidrs }}"
+    {{- end }}
     {{ if .Values.ingress.forceHttpsRedirect }}
     alb.ingress.kubernetes.io/ssl-redirect: "443"
     {{ end }}
