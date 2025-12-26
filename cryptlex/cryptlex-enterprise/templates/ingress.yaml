@@ -14,9 +14,9 @@ metadata:
     alb.ingress.kubernetes.io/ssl-policy:  {{ .Values.ingress.tlsSecurityPolicy }}
     {{- if and
       (eq .Values.ingress.className "alb")
-      (.Values.ingress.restrictToVpn | default false)
+      (.Values.ingress.inboundCidrs)
     }}
-    alb.ingress.kubernetes.io/inbound-cidrs: "{{ join "," .Values.ingress.vpnCidrs }}"
+    alb.ingress.kubernetes.io/inbound-cidrs: "{{ join "," .Values.ingress.inboundCidrs }}"
     {{- end }}
     {{ if .Values.ingress.forceHttpsRedirect }}
     alb.ingress.kubernetes.io/ssl-redirect: "443"
