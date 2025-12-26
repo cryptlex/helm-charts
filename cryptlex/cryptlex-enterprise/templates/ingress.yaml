@@ -12,10 +12,7 @@ metadata:
     alb.ingress.kubernetes.io/group.name: cryptlex-alb-group
     alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=180
     alb.ingress.kubernetes.io/ssl-policy:  {{ .Values.ingress.tlsSecurityPolicy }}
-    {{- if and
-      (eq .Values.ingress.className "alb")
-      (.Values.ingress.inboundCidrs)
-    }}
+    {{- if .Values.ingress.inboundCidrs }}
     alb.ingress.kubernetes.io/inbound-cidrs: "{{ join "," .Values.ingress.inboundCidrs }}"
     {{- end }}
     {{ if .Values.ingress.forceHttpsRedirect }}
