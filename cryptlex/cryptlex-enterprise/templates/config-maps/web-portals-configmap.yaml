@@ -8,10 +8,5 @@ data:
   APPLICATION_RELEASEDAT: {{ .Values.webPortals.releasedAt }}
   {{ end }}
   {{ end }}
-  {{ if or .Values.certmanager.enabled .Values.ingress.forceHttpsRedirect }}
   WEB_API_BASE_URL: https://{{ .Values.ingress.hosts.webApiHost }}
   RELEASE_SERVER_BASE_URL: https://{{ .Values.ingress.hosts.releaseServerHost }}
-  {{ else }}
-  WEB_API_BASE_URL: http://{{ .Values.ingress.hosts.webApiHost }}
-  RELEASE_SERVER_BASE_URL: http://{{ .Values.ingress.hosts.releaseServerHost }}
-  {{ end }}

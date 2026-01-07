@@ -22,9 +22,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
     nginx.ingress.kubernetes.io/proxy-body-size: "1g"
     nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
-    {{ if .Values.ingress.forceHttpsRedirect }}
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    {{ end }}
+    nginx.ingress.kubernetes.io/ssl-redirect: "{{ .Values.ingress.forceHttpsRedirect }}"
     {{ end }}
     {{ if .Values.certmanager.enabled }}
     {{ if .Values.certmanager.issuer.production }}
