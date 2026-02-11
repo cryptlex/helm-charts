@@ -38,9 +38,23 @@ jobs:
         if: ${{ github.event.client_payload.release_server_tag }}
         run: yq e '.services.releaseServer.image.tag = "${{ github.event.client_payload.release_server_tag }}"' -i cryptlex/cryptlex-enterprise/values.yaml 
 
+      - name: Determine branch suffix
+        id: branch
+        run: |
+          if [ -n "${{ github.event.client_payload.dashboard_tag }}" ]; then
+            BRANCH_SUFFIX="dashboard"
+          elif [ -n "${{ github.event.client_payload.web_portal_tag }}" ]; then
+            BRANCH_SUFFIX="web-portal"
+          elif [ -n "${{ github.event.client_payload.web_api_tag }}" ]; then
+            BRANCH_SUFFIX="web-api"
+          elif [ -n "${{ github.event.client_payload.release_server_tag }}" ]; then
+            BRANCH_SUFFIX="release-server"
+          fi
+          echo "branch_suffix=$BRANCH_SUFFIX" >> $GITHUB_OUTPUT
+
       - name: Get current chart version
         id: chartVersion
-        run: echo "##[set-output name=version;]$(yq e '.version' cryptlex/cryptlex-enterprise/Chart.yaml)"
+        run: echo "version=$(yq e '.version' cryptlex/cryptlex-enterprise/Chart.yaml)" >> $GITHUB_OUTPUT
 
       - name: Get next minor version
         id: semvers
@@ -61,7 +75,7 @@ jobs:
           commit-message: "Updated image tags"
           committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          branch: ci/update-image-tags
+          branch: ci/update-image-tags-${{ steps.branch.outputs.branch_suffix }}
           delete-branch: true
           title: "Update chart image tags"
           body: "Automated PR to update chart image tags."
