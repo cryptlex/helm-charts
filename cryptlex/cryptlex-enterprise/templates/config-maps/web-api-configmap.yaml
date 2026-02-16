@@ -75,3 +75,4 @@ data:
   OTEL_ENABLEMETRICS: {{ .Values.webApi.openTelemetry.enableMetrics | quote }}
   OTEL_ENABLETRACES: {{ .Values.webApi.openTelemetry.enableTraces | quote }}
   MAXMIND_ACCOUNTID: {{ .Values.webApi.maxmind.accountId | quote }}
+  MAXMIND_DOWNLOADURL: {{ .Values.webApi.maxmind.downloadUrl | quote }}
