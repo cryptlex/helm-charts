@@ -305,6 +305,7 @@ webApi:
   maxmind:
     accountId: ""
     licenseKey: ""
+    downloadUrl: ""
   # CORS policy: by default, all origins are allowed
   corsPolicy:
     allowedOrigins: []
