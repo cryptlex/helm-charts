@@ -31,7 +31,7 @@ spec:
                 name: {{ .Release.Name }}-filestore-secret
           readinessProbe:
             httpGet:
-               path: /v3/status
+               path: /healthz
                port: 3000
             initialDelaySeconds: 5
             periodSeconds: 10

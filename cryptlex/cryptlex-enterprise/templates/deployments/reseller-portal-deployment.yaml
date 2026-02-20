@@ -32,7 +32,7 @@ spec:
                 name: {{ .Release.Name }}-web-portals-config
           readinessProbe:
             httpGet:
-               path: /status
+               path: /healthz
                port: 4402
             initialDelaySeconds: 5
             periodSeconds: 10
