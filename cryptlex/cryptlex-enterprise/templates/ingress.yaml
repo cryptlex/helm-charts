@@ -119,14 +119,4 @@ spec:
                   number: 3000
             pathType: ImplementationSpecific 
     {{ end }}
-    {{ if .Values.ingress.enableStatusPath }}
-    - http:
-        paths:
-          - path: /healthz
-            backend:
-              service:
-                name: {{ .Release.Name }}-web-api-service
-                port: 
-                  number: 5000
-            pathType: ImplementationSpecific 
-    {{ end }}
+    
