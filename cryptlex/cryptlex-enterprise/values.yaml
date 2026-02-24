@@ -20,7 +20,6 @@ ingress:
   # Supported values are: nginx and alb
   className: nginx
   internal: false
-  enableStatusPath: true
   # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html#tls-security-policies
   tlsSecurityPolicy: ELBSecurityPolicy-TLS13-1-2-2021-06
   hosts:
