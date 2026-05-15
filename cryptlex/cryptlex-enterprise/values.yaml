@@ -264,7 +264,9 @@ webApi:
     # From email for password reset email.
     fromAddress: support@mycompany.com
     # From name for password reset email.
-    fromName: MyCompany Support
+    fromName: MyCompany Support 
+    # From Noreply for password reset email
+    fromNoReplyAddress: noreply@mycompany.com
     # Email signature for password reset email.
     signature: <p>Thanks,<br>The MyCompany Team</p>
     # SMTP config for sending emails.

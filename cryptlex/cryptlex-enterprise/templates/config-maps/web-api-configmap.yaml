@@ -63,6 +63,7 @@ data:
   # Mail settings
   EMAIL_FROMADDRESS: {{ .Values.webApi.email.fromAddress }}
   EMAIL_FROMNAME: {{ .Values.webApi.email.fromName }}
+  EMAIL_FROMNOREPLYADDRESS: {{ .Values.webApi.email.fromNoReplyAddress }}
   EMAIL_SIGNATURE: {{ .Values.webApi.email.signature }}
   SMTP_HOST: {{ .Values.webApi.email.smtp.host | quote }}
   SMTP_PORT: {{ .Values.webApi.email.smtp.port | quote}}
