@@ -233,6 +233,8 @@ webApi:
   maintenanceModeEnabled: false
   # Enable HSTS header
   forceHttps: false
+  # Feature Flag for Include Query
+  CheckIncludeAndPermissions: false
   # IP rate limiting options.
   ipRateLimitOptions:
     rateLimit: 50
