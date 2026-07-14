@@ -47,12 +47,6 @@ data:
   IPRATELIMITOPTIONS_REALIPHEADER: {{ .Values.webApi.ipRateLimitOptions.realIpHeader | quote }}
   {{ end }}
   IPRATELIMITOPTIONS_GENERALRULES_0_LIMIT: {{ .Values.webApi.ipRateLimitOptions.rateLimit | quote }}
-  {{ if .Values.services.geoip.external }}
-  GEOIPSERVER_URL: {{ .Values.geoip.serverUrl | quote }}
-  GEOIPSERVER_APIKEY: {{ .Values.geoip.apiKey | quote }}
-  {{ else }}
-  GEOIPSERVER_URL: http://{{ .Release.Name }}-geoip-service:8080/json
-  {{ end }}
   {{ if .Values.webApi.paddle }}
   {{ if .Values.webApi.paddle.apiUrl }}
   PADDLE_APIURL: {{ .Values.webApi.paddle.apiUrl | quote }}
@@ -69,7 +63,6 @@ data:
   SMTP_PORT: {{ .Values.webApi.email.smtp.port | quote}}
   SMTP_ENABLESSL: {{ .Values.webApi.email.smtp.enableSsl | quote}}
   SMTP_DISABLESSLCERTIFICATEVALIDATION: {{ .Values.webApi.email.smtp.disableSslCertificateValidation | quote}}
-  MAILGUN_DOMAIN: {{ .Values.webApi.email.mailgun.domain | quote }}
   # App metrics
   NEW_RELIC_APP_NAME: {{ .Values.webApi.newRelic.applicationName | quote }}
   OTEL_EXPORTER_OTLP_ENDPOINT: {{ .Values.webApi.openTelemetry.otlpEndpoint | quote }}
