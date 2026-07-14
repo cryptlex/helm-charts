@@ -8,7 +8,7 @@ This repository is for high-availability deployments on Kubernetes. For single-s
 
 ```mermaid
 flowchart TB
-    clients([Browsers / SDKs]) -- HTTPS --> ingress["Ingress<br>(NGINX or AWS ALB)"]
+    clients([Browsers / SDKs]) -- HTTPS --> ingress["Ingress<br>(AWS ALB or NGINX)"]
 
     ingress --> api[Web API]
     ingress --> admin[Admin Portal]
@@ -53,45 +53,15 @@ For a highly available deployment, run the Web API with 3 replicas and use exter
 | `cryptlex-reseller-portal.mycompany.com`  | Reseller Portal |
 | `cryptlex-releases.mycompany.com`         | Release Server  |
 
-The chart supports NGINX (`ingress.className: nginx`) and AWS ALB (`ingress.className: alb`) ingress. The steps below use NGINX. With ALB, install the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) instead, skip cert-manager, and terminate TLS at the load balancer using an [ACM](https://aws.amazon.com/certificate-manager/) certificate that matches your hosts; the load balancer is created when the chart is installed, so create the DNS records afterwards.
-
 ## Installation
 
-### 1. Install the NGINX Ingress Controller
+### 1. Install an ingress controller
 
-Skip this step if your cluster already has an ingress controller.
+The chart supports AWS ALB (`ingress.className: alb`) and NGINX (`ingress.className: nginx`) ingress.
 
-Create a file called `ingress.yaml`:
+On AWS, we recommend the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/). TLS terminates at the load balancer using an [ACM](https://aws.amazon.com/certificate-manager/) certificate that matches your hosts, so cert-manager is not needed.
 
-```yaml
-controller:
-  publishService:
-    enabled: true
-  service:
-    enabled: true
-    externalTrafficPolicy: "Local"
-```
-
-Install the controller:
-
-```bash
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --values ingress.yaml
-```
-
-Watch the load balancer become available:
-
-```bash
-kubectl get services -o wide -w ingress-nginx-controller
-```
-
-### 2. Create DNS records
-
-At your DNS provider, create the five records from [Requirements](#requirements) as A or CNAME records, all pointing to the external IP address of the ingress controller from step 1.
-
-### 3. Install cert-manager
-
-[cert-manager](https://cert-manager.io) automatically issues and renews Let's Encrypt SSL certificates for the five domains:
+The [ingress-nginx](https://github.com/kubernetes/ingress-nginx) project is no longer maintained, so prefer ALB or another controller provided by your platform. If you do use NGINX, also install [cert-manager](https://cert-manager.io) so the chart can issue and renew Let's Encrypt SSL certificates for the five domains:
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io --force-update
@@ -100,7 +70,7 @@ helm upgrade --install cert-manager jetstack/cert-manager \
   --set crds.enabled=true
 ```
 
-### 4. Configure values
+### 2. Configure values
 
 Create a `values.yaml` file. The minimal configuration:
 
@@ -109,15 +79,9 @@ imageCredentials:
   username: <docker-username>
   password: <docker-password>
 
-certmanager:
-  # Set to true if you use NGINX with cert-manager.
-  enabled: true
-  issuer:
-    email: you@mycompany.com
-
 ingress:
-  # nginx or alb
-  className: nginx
+  # alb or nginx
+  className: alb
   hosts:
     webApiHost: cryptlex-api.mycompany.com
     adminPortalHost: cryptlex-admin-portal.mycompany.com
@@ -157,6 +121,18 @@ webApi:
       password: <smtp-password>
 ```
 
+With NGINX, set the ingress class and enable cert-manager:
+
+```yaml
+ingress:
+  className: nginx
+
+certmanager:
+  enabled: true
+  issuer:
+    email: you@mycompany.com
+```
+
 For production, use externally managed PostgreSQL and Redis:
 
 ```yaml
@@ -174,7 +150,7 @@ webApi:
 
 See [values.yaml](cryptlex/cryptlex-enterprise/values.yaml) for all options, including external S3-compatible filestores, RabbitMQ or AWS SQS, and MaxMind GeoIP.
 
-### 5. Install the chart
+### 3. Install the chart
 
 ```bash
 helm repo add cryptlex https://cryptlex.github.io/helm-charts --force-update
@@ -188,20 +164,19 @@ Verify that all pods reach the `Running` state:
 kubectl get pods -n cryptlex
 ```
 
-### 6. Switch to production certificates
+### 4. Create DNS records
 
-The chart issues Let's Encrypt staging certificates first to avoid rate limits. Once they are issued successfully, switch to trusted production certificates:
+Get the load balancer address of the ingress:
 
-```yaml
-certmanager:
-  enabled: true
-  issuer:
-    production: true
+```bash
+kubectl get ingress -n cryptlex
 ```
 
-and run the `helm upgrade --install` command from step 5 again.
+At your DNS provider, create the five records from [Requirements](#requirements) as A or CNAME records, all pointing to that address.
 
-### 7. Create your account
+With NGINX and cert-manager, the chart issues Let's Encrypt staging certificates first to avoid rate limits. Once they are issued successfully, set `certmanager.issuer.production: true` in your values file and run the `helm upgrade --install` command from step 3 again to switch to trusted production certificates.
+
+### 5. Create your account
 
 Open `https://<adminPortalHost>/auth/signup` in the browser and sign up. Only one account can be created on an on-premise instance.
 
