@@ -1,4 +1,4 @@
-# Cryptlex Helm Charts
+# Cryptlex Enterprise Helm Chart
 
 Deploy the complete Cryptlex platform (Web API, Web Portals, and Release Server) on Kubernetes with high availability, using the [cryptlex-enterprise](cryptlex/cryptlex-enterprise) Helm chart. It has all the features of SaaS Cryptlex, and regular chart releases keep you up to date.
 
