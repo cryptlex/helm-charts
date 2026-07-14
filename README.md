@@ -154,8 +154,23 @@ See [values.yaml](cryptlex/cryptlex-enterprise/values.yaml) for all options, inc
 
 ```bash
 helm repo add cryptlex https://cryptlex.github.io/helm-charts --force-update
-helm upgrade --install cryptlex-enterprise cryptlex/cryptlex-enterprise \
-  --values values.yaml --namespace cryptlex --create-namespace
+helm upgrade --install cryptlex-enterprise --values values.yaml \
+  --timeout 10m0s --atomic --create-namespace --namespace cryptlex \
+  cryptlex/cryptlex-enterprise
+```
+
+`--atomic` rolls the release back automatically if it does not complete within the timeout.
+
+To keep secrets out of `values.yaml`, for example when deploying from CI, pass them with `--set` instead:
+
+```bash
+helm upgrade --install cryptlex-enterprise --values values.yaml \
+  --timeout 10m0s --atomic --create-namespace --namespace cryptlex \
+  cryptlex/cryptlex-enterprise \
+  --set imageCredentials.password=$DOCKER_PASSWORD \
+  --set database.password=$POSTGRES_PASSWORD \
+  --set webApi.encryptionKey=$ENCRYPTION_KEY \
+  --set webApi.email.smtp.password=$SMTP_PASSWORD
 ```
 
 Verify that all pods reach the `Running` state:
@@ -203,8 +218,9 @@ New chart versions are released automatically as Cryptlex service images are upd
 
 ```bash
 helm repo update
-helm upgrade cryptlex-enterprise cryptlex/cryptlex-enterprise \
-  --values values.yaml --namespace cryptlex
+helm upgrade --install cryptlex-enterprise --values values.yaml \
+  --timeout 10m0s --atomic --namespace cryptlex \
+  cryptlex/cryptlex-enterprise
 ```
 
 Pin a specific chart version with `--version <version>` if you want to control when upgrades happen.
