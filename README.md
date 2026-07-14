@@ -19,7 +19,7 @@ flowchart TB
     api --> db[("PostgreSQL")]
     api --> cache[("Cache<br>(Redis / Valkey)")]
     release --> api
-    release --> store[("MinIO")]
+    release --> store[("Filestore<br>(S3-compatible)")]
 ```
 
 The chart deploys the following workloads:
@@ -33,7 +33,7 @@ The chart deploys the following workloads:
 | Release Server  | Handles upload and download of releases                | Deployed while `services.filestore.enabled` is `true`. Disable it if you don't use [release management](https://cryptlex.com/docs/release-management/overview). |
 | PostgreSQL      | Database storing all Cryptlex data                     | Single pod; use an external database for production (see below).                            |
 | Redis           | Cache                                                  | Single pod; supports an external Redis-compatible cache such as Valkey instead.             |
-| MinIO           | S3-compatible object storage for release files         | Single pod; supports an external S3-compatible store instead.                               |
+| Filestore       | S3-compatible object storage for release files         | Use an external store such as AWS S3; the bundled MinIO runs as a single pod and the MinIO project is in maintenance mode. |
 | RabbitMQ        | Message queue                                          | Disabled by default; requires the [RabbitMQ Cluster Operator](https://www.rabbitmq.com/kubernetes/operator/operator-overview) when enabled in-cluster. |
 
 For a highly available deployment, run the Web API with 3 replicas and use externally managed PostgreSQL and Redis; the in-cluster database, cache, and filestore run as single pods, so they are not highly available.
@@ -133,7 +133,7 @@ certmanager:
     email: you@mycompany.com
 ```
 
-For production, use externally managed PostgreSQL and Redis:
+For production, use externally managed PostgreSQL, Redis, and an S3-compatible filestore such as AWS S3:
 
 ```yaml
 services:
@@ -141,14 +141,21 @@ services:
     external: true
   cache:
     external: true
+  filestore:
+    external: true
 
 webApi:
   databaseUrl: postgres://<user>:<password>@<hostname>:5432/<database-name>
   redis:
     url: redis://<hostname>:6379
+
+filestore:
+  port: 443
+  useSsl: true
+  region: <s3-region>
 ```
 
-See [values.yaml](cryptlex/cryptlex-enterprise/values.yaml) for all options, including external S3-compatible filestores, RabbitMQ or AWS SQS, and MaxMind GeoIP.
+See [values.yaml](cryptlex/cryptlex-enterprise/values.yaml) for all options, including RabbitMQ or AWS SQS, and MaxMind GeoIP.
 
 ### 3. Install the chart
 
@@ -168,7 +175,7 @@ helm upgrade --install cryptlex-enterprise --values values.yaml \
   --timeout 10m0s --atomic --create-namespace --namespace cryptlex \
   cryptlex/cryptlex-enterprise \
   --set imageCredentials.password=$DOCKER_PASSWORD \
-  --set database.password=$POSTGRES_PASSWORD \
+  --set webApi.databaseUrl=$DATABASE_URL \
   --set webApi.encryptionKey=$ENCRYPTION_KEY \
   --set webApi.email.smtp.password=$SMTP_PASSWORD
 ```
