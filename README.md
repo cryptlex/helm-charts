@@ -226,7 +226,8 @@ webApi:
     enableMetrics: true
     # Export traces.
     enableTraces: false
-    # Headers for backend authentication, sent as comma-separated key=value pairs.
+    # Headers for backend authentication, as a list of key: value entries.
+    # The chart sends them to the backend as comma-separated key=value pairs.
     otlpHeaders:
       - api-key: <key>
 ```
