@@ -41,7 +41,7 @@ For a highly available deployment, run the Web API with 3 replicas and use exter
 ## Requirements
 
 - A Cryptlex license key and Docker Hub credentials with access to the private Cryptlex images. If you are installing for the first time, [contact us](https://cryptlex.com/contact) to schedule a guided installation.
-- A Kubernetes 1.28+ cluster with `kubectl` configured to connect to it, and Helm 3.
+- A Kubernetes 1.28+ cluster with `kubectl` configured to connect to it, and Helm 3. We recommend nodes with at least 2 CPU cores and 4 GB memory.
 - A default StorageClass, only needed when running the database or filestore in-cluster.
 - Five sub-domains for the services, for example:
 
@@ -150,6 +150,7 @@ webApi:
     url: redis://<hostname>:6379
 
 filestore:
+  endpoint: s3.<region>.amazonaws.com
   port: 443
   useSsl: true
   region: <s3-region>
