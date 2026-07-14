@@ -37,9 +37,6 @@ spec:
   tls:
     - hosts:
         - "{{ .Values.ingress.hosts.webApiHost }}"
-        {{ if .Values.services.dashboard.enabled }}
-        - "{{ .Values.ingress.hosts.dashboardHost }}"
-        {{ end }}
         {{ if .Values.services.adminPortal.enabled }}
         - "{{ .Values.ingress.hosts.adminPortalHost }}"
         {{ end }}
@@ -52,7 +49,7 @@ spec:
         {{ if .Values.services.filestore.enabled }}
         - "{{ .Values.ingress.hosts.releaseServerHost }}"
         {{ end }}
-      secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.dashboardHost .Values.ingress.hosts.adminPortalHost | sha256sum | trunc 30}}-tls-secret
+      secretName: {{ printf "%s%s%s" .Release.Name .Values.ingress.hosts.webApiHost .Values.ingress.hosts.adminPortalHost | sha256sum | trunc 30}}-tls-secret
   {{ end }}
   rules:
     - host: "{{ .Values.ingress.hosts.webApiHost }}"
@@ -64,17 +61,6 @@ spec:
                 port: 
                   number: 5000
             pathType: ImplementationSpecific 
-    {{ if .Values.services.dashboard.enabled }}
-    - host: "{{ .Values.ingress.hosts.dashboardHost }}"
-      http:
-        paths:
-          - backend:
-              service:
-                name: {{ .Release.Name }}-dashboard-service
-                port: 
-                  number: 4200
-            pathType: ImplementationSpecific
-    {{ end }} 
     {{ if .Values.services.adminPortal.enabled }}
     - host: "{{ .Values.ingress.hosts.adminPortalHost }}"
       http:

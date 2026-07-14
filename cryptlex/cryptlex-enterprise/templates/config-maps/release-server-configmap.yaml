@@ -3,7 +3,11 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-release-server-config
 data:
+  {{ if .Values.services.filestore.external }}
+  FILE_STORE_ENDPOINT: {{ .Values.filestore.endpoint }}
+  {{ else }}
   FILE_STORE_ENDPOINT: {{ .Release.Name }}-filestore-service
+  {{ end }}
   FILE_STORE_PORT: {{ .Values.filestore.port | quote}}
   FILE_STORE_BUCKET: {{ .Values.filestore.bucket }}
   FILE_STORE_REGION: {{ .Values.filestore.region }}
