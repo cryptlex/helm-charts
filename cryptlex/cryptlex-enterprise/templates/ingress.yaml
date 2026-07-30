@@ -18,11 +18,12 @@ metadata:
     {{ if .Values.ingress.forceHttpsRedirect }}
     alb.ingress.kubernetes.io/ssl-redirect: "443"
     {{ end }}
-    {{ else if eq .Values.ingress.className "nginx" }}
-    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
-    nginx.ingress.kubernetes.io/proxy-body-size: "1g"
-    nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
-    nginx.ingress.kubernetes.io/ssl-redirect: "{{ .Values.ingress.forceHttpsRedirect }}"
+    {{ else if eq .Values.ingress.className "haproxy" }}
+    haproxy-ingress.github.io/proxy-body-size: "1g"
+    haproxy-ingress.github.io/ssl-redirect: "{{ .Values.ingress.forceHttpsRedirect }}"
+    haproxy-ingress.github.io/timeout-client: "180s"
+    haproxy-ingress.github.io/timeout-server: "180s"
+    haproxy-ingress.github.io/timeout-connect: "30s"
     {{ end }}
     {{ if .Values.certmanager.enabled }}
     {{ if .Values.certmanager.issuer.production }}
