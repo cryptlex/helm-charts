@@ -23,6 +23,15 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "1g"
     nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
     nginx.ingress.kubernetes.io/ssl-redirect: "{{ .Values.ingress.forceHttpsRedirect }}"
+    {{ else if eq .Values.ingress.className "haproxy" }}
+    haproxy-ingress.github.io/proxy-body-size: "1g"
+    haproxy-ingress.github.io/ssl-redirect: "{{ .Values.ingress.forceHttpsRedirect }}"
+    haproxy-ingress.github.io/timeout-client: "180s"
+    haproxy-ingress.github.io/timeout-server: "180s"
+    haproxy-ingress.github.io/timeout-connect: "30s"
+    {{ if .Values.ingress.inboundCidrs }}
+    haproxy-ingress.github.io/allowlist-source-range: "{{ join "," .Values.ingress.inboundCidrs }}"
+    {{ end }}
     {{ end }}
     {{ if .Values.certmanager.enabled }}
     {{ if .Values.certmanager.issuer.production }}
@@ -105,4 +114,3 @@ spec:
                   number: 3000
             pathType: ImplementationSpecific 
     {{ end }}
-    
