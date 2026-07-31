@@ -18,7 +18,7 @@ imageCredentials:
 ingress:
   forceHttpsRedirect: true
   # Supported values are: haproxy,alb and nginx
-  className: haproxy
+  className: nginx
   internal: false
   # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html#tls-security-policies
   tlsSecurityPolicy: ELBSecurityPolicy-TLS13-1-2-2021-06
