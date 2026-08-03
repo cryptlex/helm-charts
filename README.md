@@ -65,7 +65,7 @@ The chart supports three ingress controllers, selected with `ingress.className`:
 | `haproxy`           | [HAProxy Ingress](https://haproxy-ingress.github.io/)                                  | Recommended everywhere else.                      |
 | `nginx`             | [ingress-nginx](https://github.com/kubernetes/ingress-nginx)                            | **Deprecated.** Supported for existing installs only. |
 
-> **Deprecation notice:** The `ingress-nginx` project is [retired and no longer maintained](https://github.com/kubernetes/ingress-nginx), and it no longer receives security fixes. Support for `ingress.className: nginx` remains in the chart so existing deployments keep working, but it will be removed in a future release. New installations should use `alb` or `haproxy`, and existing NGINX deployments should plan a migration.
+> **Deprecation notice:** The `ingress-nginx` project is [retired and no longer maintained](https://github.com/kubernetes/ingress-nginx), and it no longer receives security fixes. Support for `ingress.className: nginx` remains in the chart so existing deployments keep working, but it will be removed in a future release. New installations should use `alb` or `haproxy`, and existing NGINX deployments should plan a migration. Note that the chart still defaults to `className: nginx` for backward compatibility, so set `ingress.className` explicitly on new installs.
 
 **AWS ALB.** On AWS, we recommend the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/). TLS terminates at the load balancer using an [ACM](https://aws.amazon.com/certificate-manager/) certificate that matches your hosts, so cert-manager is not needed.
 
@@ -152,14 +152,6 @@ certmanager:
 ```
 
 The same applies to the deprecated NGINX controller, with `className: nginx`.
-
-`ingress.inboundCidrs` restricts which source ranges can reach the ingress. It is honoured by the `alb` and `haproxy` classes only:
-
-```yaml
-ingress:
-  inboundCidrs:
-    - 203.0.113.0/24
-```
 
 For production, use externally managed PostgreSQL, Redis, and an S3-compatible filestore such as AWS S3:
 
