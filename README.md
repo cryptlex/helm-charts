@@ -8,7 +8,7 @@ This repository is for high-availability deployments on Kubernetes. For single-s
 
 ```mermaid
 flowchart TB
-    clients([Browsers / SDKs]) -- HTTPS --> ingress["Ingress<br>(AWS ALB or NGINX)"]
+    clients([Browsers / SDKs]) -- HTTPS --> ingress["Ingress<br>(AWS ALB or HAProxy)"]
 
     ingress --> api[Web API]
     ingress --> admin[Admin Portal]
@@ -57,11 +57,29 @@ For a highly available deployment, run the Web API with 3 replicas and use exter
 
 ### 1. Install an ingress controller
 
-The chart supports AWS ALB (`ingress.className: alb`) and NGINX (`ingress.className: nginx`) ingress.
+The chart supports three ingress controllers, selected with `ingress.className`:
 
-On AWS, we recommend the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/). TLS terminates at the load balancer using an [ACM](https://aws.amazon.com/certificate-manager/) certificate that matches your hosts, so cert-manager is not needed.
+| `ingress.className` | Controller                                                                             | Status                                            |
+| ------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `alb`               | [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) | Recommended on AWS.                               |
+| `haproxy`           | [HAProxy Ingress](https://haproxy-ingress.github.io/)                                  | Recommended everywhere else.                      |
+| `nginx`             | [ingress-nginx](https://github.com/kubernetes/ingress-nginx)                            | **Deprecated.** Supported for existing installs only. |
 
-The [ingress-nginx](https://github.com/kubernetes/ingress-nginx) project is no longer maintained, so prefer ALB or another controller provided by your platform. If you do use NGINX, also install [cert-manager](https://cert-manager.io) so the chart can issue and renew Let's Encrypt SSL certificates for the five domains:
+> **Deprecation notice:** The `ingress-nginx` project is [retired and no longer maintained](https://github.com/kubernetes/ingress-nginx), and it no longer receives security fixes. Support for `ingress.className: nginx` remains in the chart so existing deployments keep working, but it will be removed in a future release. New installations should use `alb` or `haproxy`, and existing NGINX deployments should plan a migration.
+
+**AWS ALB.** On AWS, we recommend the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/). TLS terminates at the load balancer using an [ACM](https://aws.amazon.com/certificate-manager/) certificate that matches your hosts, so cert-manager is not needed.
+
+**HAProxy.** Install the [HAProxy Ingress](https://haproxy-ingress.github.io/) controller:
+
+```bash
+helm repo add haproxy-ingress https://haproxy-ingress.github.io/charts --force-update
+helm upgrade --install haproxy-ingress haproxy-ingress/haproxy-ingress \
+  --create-namespace --namespace ingress-controller
+```
+
+The chart writes `haproxy-ingress.github.io/*` annotations, so use this controller rather than another HAProxy-based one that reads a different annotation prefix.
+
+With HAProxy or NGINX, TLS terminates at the ingress controller, so also install [cert-manager](https://cert-manager.io) to let the chart issue and renew Let's Encrypt SSL certificates for the five domains:
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io --force-update
@@ -80,7 +98,7 @@ imageCredentials:
   password: <docker-password>
 
 ingress:
-  # alb or nginx
+  # alb, haproxy, or nginx (deprecated)
   className: alb
   hosts:
     webApiHost: cryptlex-api.mycompany.com
@@ -121,16 +139,26 @@ webApi:
       password: <smtp-password>
 ```
 
-With NGINX, set the ingress class and enable cert-manager:
+With HAProxy, set the ingress class and enable cert-manager:
 
 ```yaml
 ingress:
-  className: nginx
+  className: haproxy
 
 certmanager:
   enabled: true
   issuer:
     email: you@mycompany.com
+```
+
+The same applies to the deprecated NGINX controller, with `className: nginx`.
+
+`ingress.inboundCidrs` restricts which source ranges can reach the ingress. It is honoured by the `alb` and `haproxy` classes only:
+
+```yaml
+ingress:
+  inboundCidrs:
+    - 203.0.113.0/24
 ```
 
 For production, use externally managed PostgreSQL, Redis, and an S3-compatible filestore such as AWS S3:
@@ -197,7 +225,7 @@ kubectl get ingress -n cryptlex
 
 At your DNS provider, create the five records from [Requirements](#requirements) as A or CNAME records, all pointing to that address.
 
-With NGINX and cert-manager, the chart issues Let's Encrypt staging certificates first to avoid rate limits. Once they are issued successfully, set `certmanager.issuer.production: true` in your values file and run the `helm upgrade --install` command from step 3 again to switch to trusted production certificates.
+With HAProxy or NGINX and cert-manager, the chart issues Let's Encrypt staging certificates first to avoid rate limits. Once they are issued successfully, set `certmanager.issuer.production: true` in your values file and run the `helm upgrade --install` command from step 3 again to switch to trusted production certificates.
 
 ### 5. Create your account
 
