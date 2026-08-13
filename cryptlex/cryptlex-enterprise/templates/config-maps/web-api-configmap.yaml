@@ -6,6 +6,7 @@ data:
   APPLICATION_NAME: {{ .Values.webApi.applicationName }}
   APPLICATION_LICENSE_KEY: {{ .Values.webApi.serverLicenseKey }}
   MAINTENANCEMODEENABLED: {{ .Values.webApi.maintenanceModeEnabled | quote }}
+  FIREWALLDISABLED: {{ .Values.webApi.firewallDisabled | quote }}
   {{ if .Values.webApi.releasedAt }}
   APPLICATION_RELEASEDAT: {{ .Values.webApi.releasedAt }}
   {{ end }}
