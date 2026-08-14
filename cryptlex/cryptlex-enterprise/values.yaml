@@ -201,7 +201,7 @@ webApi:
   # Enable maintenance mode during DB major version upgrade.
   maintenanceModeEnabled: false
   # Disable the firewall.
-  firewallDisabled: false
+  firewallDisabled: true
   # Enable HSTS header
   forceHttps: false
   # Feature Flag for Include Query
