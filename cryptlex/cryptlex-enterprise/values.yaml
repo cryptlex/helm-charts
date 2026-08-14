@@ -200,8 +200,6 @@ webApi:
   rsaPassphrase: PASTE_RSA_SECRET
   # Enable maintenance mode during DB major version upgrade.
   maintenanceModeEnabled: false
-  # Disable the firewall.
-  firewallDisabled: true
   # Enable HSTS header
   forceHttps: false
   # Feature Flag for Include Query
