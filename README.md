@@ -43,6 +43,7 @@ For a highly available deployment, run the Web API with 3 replicas and use exter
 - A Cryptlex license key and Docker Hub credentials with access to the private Cryptlex images. If you are installing for the first time, [contact us](https://cryptlex.com/contact) to schedule a guided installation.
 - A Kubernetes 1.28+ cluster with `kubectl` configured to connect to it, and Helm 3. We recommend nodes with at least 2 CPU cores and 4 GB memory.
 - A default StorageClass, only needed when running the database or filestore in-cluster.
+- If you use an externally managed PostgreSQL, the `pg_trgm` extension must be enabled on the database (see [Enable the `pg_trgm` extension](#enable-the-pg_trgm-extension)).
 - Five sub-domains for the services, for example:
 
 | Sub-domain (example)                      | Service         |
@@ -252,6 +253,22 @@ helm upgrade --install cryptlex-enterprise --values values.yaml \
 ```
 
 Pin a specific chart version with `--version <version>` if you want to control when upgrades happen.
+
+### Enable the `pg_trgm` extension
+
+Web API `3.84` (chart `3.20.59`, released 1 July) requires the [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html) PostgreSQL extension. If you are on an earlier version and use an externally managed database, enable the extension **before** upgrading:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+```
+
+Run it against your Cryptlex database as a user with sufficient privileges, for example `rds_superuser` on AWS RDS or Aurora. On Azure Database for PostgreSQL, `pg_trgm` must first be added to the `azure.extensions` server parameter before the statement succeeds. Verify it afterwards with:
+
+```sql
+SELECT extname FROM pg_extension WHERE extname = 'pg_trgm';
+```
+
+The extension ships with the in-cluster PostgreSQL image, so deployments using the bundled database need no action.
 
 > **Note:** The chart pins the in-cluster PostgreSQL version. Once the database has data, moving to a newer major version requires a database migration.
 
