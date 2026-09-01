@@ -142,7 +142,7 @@ services:
       capabilities:
         drop:
           - ALL
-      readOnlyRootFilesystem: false
+      readOnlyRootFilesystem: true
       runAsNonRoot: true
   releaseServer:
     image:
