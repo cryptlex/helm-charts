@@ -21,6 +21,11 @@ data:
   FORCEHTTPS: {{ .Values.webApi.forceHttps | quote }}
   CHECKINCLUDEANDPERMISSIONS: {{ .Values.webApi.CheckIncludeAndPermissions | quote }}
   PORT: "5000"
+  {{- if hasKey .Values.webApi "serverGarbageCollection" }}
+  DOTNET_gcServer: {{ if .Values.webApi.serverGarbageCollection }}"1"{{ else }}"0"{{ end }}
+  {{- else }}
+  DOTNET_gcServer: "1"
+  {{- end }}
   DATABASE_MAXIMUMPOOLSIZE: {{ .Values.webApi.databaseMaximumPoolSize | quote }}
   {{ if or .Values.certmanager.enabled .Values.ingress.forceHttpsRedirect }}
   JWT_AUDIENCE: https://{{ .Values.ingress.hosts.webApiHost }}
